@@ -1,0 +1,108 @@
+/* Footer.css */
+*{
+  font-family: Arial, sans-serif;
+}
+/* Estilos principales del footer */
+.footer {
+  background-color: #131F2B; /* Color de fondo oscuro */
+  border-top: 1px solid #2a3441; /* Línea sutil más clara que el fondo */
+  padding: 40px 20px 20px; /* Padding: arriba, lados, abajo */
+  margin-top: auto; /* Para que el footer se mantenga abajo si usas flexbox en el body */
+  width: 100%;
+}
+
+/* Contenedor principal que centra el contenido */
+.footer-container {
+  max-width: 1200px; /* Ancho máximo del contenido */
+  margin: 0 auto; /* Centra horizontalmente */
+  text-align: center; /* Centra el texto */
+}
+
+/* Contenedor de la información de contacto */
+.contact-info {
+  display: flex;
+  flex-direction: row; /* Los elementos van horizontalmente */
+  justify-content: space-between; /* Distribución espaciada entre elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 20px; /* Espaciado entre cada elemento de contacto */
+  margin-bottom: 30px;
+}
+
+/* Cada elemento individual de contacto (email, dirección, teléfono) */
+.contact-item {
+  display: flex;
+  flex-direction: column; /* Label arriba, info abajo */
+  align-items: center;
+  gap: 5px; /* Pequeño espacio entre label e info */
+}
+
+/* Etiquetas (Email:, Dirección:, Teléfono:) */
+.contact-label {
+  font-weight: 600; /* Texto semi-bold */
+  font-size: 14px;
+  color: #a8b3c1; /* Color gris claro para texto en fondo oscuro */
+  text-transform: uppercase; /* Convierte a mayúsculas */
+  letter-spacing: 0.5px; /* Espaciado entre letras */
+}
+
+/* Texto normal para toda la información de contacto */
+.contact-text {
+  font-size: 16px;
+  color: #ffffff; /* Texto blanco para contrastar con fondo oscuro */
+  line-height: 1.5;
+}
+
+/* Línea divisoria opcional */
+.footer-divider {
+  height: 1px;
+  background-color: #2a3441; /* Color más claro que el fondo oscuro */
+  margin: 20px auto; /* Margen automático para centrar */
+  width: 60%; /* Ancho de la línea */
+  max-width: 300px; /* Ancho máximo */
+}
+
+/* Sección de copyright */
+.footer-copyright {
+  margin-top: 20px;
+}
+
+.footer-copyright p {
+  margin: 0; /* Quita el margen por defecto del párrafo */
+  font-size: 14px;
+  color: #a8b3c1; /* Color gris claro para texto en fondo oscuro */
+  text-align: center;
+}
+
+/* Responsivo para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 15px 15px; /* Reduce el padding en móviles */
+  }
+  
+  .contact-info {
+    flex-direction: column; /* Cambia a vertical en pantallas medianas */
+    gap: 15px; /* Reduce el espaciado entre elementos */
+  }
+  
+  .contact-text {
+    font-size: 15px; /* Texto ligeramente más pequeño */
+  }
+  
+  .footer-divider {
+    width: 80%; /* Línea divisoria más ancha en móviles */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 25px 10px 10px; /* Padding aún menor para pantallas muy pequeñas */
+  }
+  
+  .contact-text {
+    font-size: 14px;
+  }
+  
+  .contact-label {
+    font-size: 13px;
+  }
+}

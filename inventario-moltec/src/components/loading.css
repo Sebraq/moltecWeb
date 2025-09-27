@@ -1,0 +1,90 @@
+/* Agregar a tu App.css o crear un archivo separado */
+
+/* Loading spinner */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f7fafc;
+}
+
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Spinner pequeño para botón */
+.login-button .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Dashboard styles */
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logout-btn {
+    padding: 0.5rem 1rem;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background: #c53030;
+}
+
+.user-info-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.user-info-card h2 {
+    margin-bottom: 1rem;
+    color: #2d3748;
+}
+
+.user-info-card p {
+    margin: 0.5rem 0;
+    color: #4a5568;
+}
+
+.admin-section {
+    background: #e6f3ff;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    border-left: 4px solid #3182ce;
+}

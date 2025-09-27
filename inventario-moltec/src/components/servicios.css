@@ -1,0 +1,124 @@
+/* ============================================
+   MOLTEC S.A. - SERVICIOS RESPONSIVE
+   Manteniendo TODO el diseño original
+   ============================================ */
+
+/* ============================================
+   ESTILOS ORIGINALES - SIN CAMBIOS
+   ============================================ */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  padding: 25px;
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.service-icon {
+  background-color: #131F2B;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.service-icon img {
+  width: 60%;
+  height: auto;
+  /* filter: invert(1) */; /* si querés que sea blanco como en tu imagen */
+  transition: transform 0.3s ease;
+}
+
+.service-item:hover .service-icon img {
+  transform: scale(1);
+}
+
+.service-title {
+  margin-top: 15px;
+  /* color: #555; */
+  font-size: 18px;
+  max-width: 150px;
+  font-family: Arial, sans-serif;
+}
+
+/* ============================================
+   RESPONSIVE - SOLO AJUSTES NECESARIOS
+   ============================================ */
+
+/* Tablets - 768px y menores */
+@media (max-width: 768px) {
+  .service-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 30px;
+    max-width: 85%;
+    padding: 20px;
+  }
+  
+  .service-icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .service-title {
+    font-size: 16px;
+    max-width: 140px;
+  }
+}
+
+/* Móviles - 480px y menores */
+@media (max-width: 480px) {
+  .service-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 25px;
+    max-width: 95%;
+    padding: 15px;
+  }
+  
+  .service-icon {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .service-title {
+    font-size: 15px;
+    max-width: 120px;
+    margin-top: 12px;
+  }
+}
+
+/* Móviles pequeños - 320px y menores */
+@media (max-width: 320px) {
+  .service-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    max-width: 98%;
+    padding: 10px;
+  }
+  
+  .service-icon {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .service-title {
+    font-size: 14px;
+    max-width: 110px;
+    margin-top: 10px;
+  }
+}

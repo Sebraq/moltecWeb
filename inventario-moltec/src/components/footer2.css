@@ -1,0 +1,247 @@
+/* Footer.css */
+* {
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos principales del footer */
+.footer {
+  background-color: #131F2B; /* Color de fondo oscuro */
+  border-top: 1px solid #2a3441; /* Línea sutil más clara que el fondo */
+  padding: 40px 20px 20px; /* Padding: arriba, lados, abajo */
+  margin-top: auto; /* Para que el footer se mantenga abajo si usas flexbox en el body */
+  width: 100%;
+}
+
+/* Contenedor principal que centra el contenido */
+.footer-container {
+  max-width: 1200px; /* Ancho máximo del contenido */
+  margin: 0 auto; /* Centra horizontalmente */
+  text-align: center; /* Centra el texto */
+}
+
+/* Contenedor de la información de contacto */
+.contact-info {
+  display: flex;
+  flex-direction: row; /* Los elementos van horizontalmente */
+  justify-content: space-evenly; /* Distribución uniforme con espacios iguales */
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 40px; /* Espaciado entre cada elemento de contacto */
+  margin-bottom: 30px;
+  max-width: 1000px; /* Limita el ancho máximo */
+  margin-left: auto; /* Centra el contenedor */
+  margin-right: auto; /* Centra el contenedor */
+}
+
+/* Cada elemento individual de contacto (email, dirección, teléfono) */
+.contact-item {
+  display: flex;
+  flex-direction: column; /* Label arriba, info abajo */
+  align-items: center;
+  gap: 5px; /* Pequeño espacio entre label e info */
+  flex: 1; /* Cada elemento ocupa el mismo espacio */
+  text-align: center; /* Centra el texto dentro de cada elemento */
+}
+
+/* Etiquetas (Email:, Dirección:, Teléfono:) */
+.contact-label {
+  font-weight: 600; /* Texto semi-bold */
+  font-size: 14px;
+  color: #a8b3c1; /* Color gris claro para texto en fondo oscuro */
+  text-transform: uppercase; /* Convierte a mayúsculas */
+  letter-spacing: 0.5px; /* Espaciado entre letras */
+}
+
+/* Texto normal para toda la información de contacto */
+.contact-text {
+  font-size: 16px;
+  color: #ffffff; /* Texto blanco para contrastar con fondo oscuro */
+  line-height: 1.5;
+}
+
+/* ============================================
+   SECCIÓN DE REDES SOCIALES
+   ============================================ */
+
+/* Contenedor principal de redes sociales */
+.social-media {
+  margin: 20px 0; /* Reducido de 30px a 20px */
+  text-align: center;
+}
+
+/* Etiqueta "Síguenos en:" */
+.social-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #a8b3c1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px; /* Reducido de 20px a 15px */
+}
+
+/* Contenedor de los iconos de redes sociales */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Reducido de 30px a 15px */
+}
+
+/* Enlaces de redes sociales */
+.social-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px; /* Aumentado de 8px a 10px para mejor separación entre icono y texto */
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  padding: 8px 12px; /* Ajustado el padding */
+  border-radius: 25px; /* Más redondeado */
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  color: #ffffff;
+}
+
+/* Contenedor del icono */
+.social-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0; /* Evita que el icono se reduzca */
+}
+
+/* Estilos específicos para Instagram */
+
+
+.social-link:hover .social-icon.instagram {
+  transform: scale(1.1);
+}
+
+
+.social-link:hover .social-icon.facebook {
+  transform: scale(1.1);
+}
+
+/* Estilos para imágenes de redes sociales */
+.social-image {
+  width: 32px; /* Aumentado para que se vea mejor sin el círculo */
+  height: 32px; /* Aumentado para que se vea mejor sin el círculo */
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover .social-image {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Texto debajo del icono */
+.social-link span {
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover span {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ============================================
+   LÍNEA DIVISORIA Y COPYRIGHT
+   ============================================ */
+
+/* Línea divisoria */
+.footer-divider {
+  height: 1px;
+  background-color: #2a3441; /* Color más claro que el fondo oscuro */
+  margin: 20px auto; /* Margen automático para centrar */
+  width: 60%; /* Ancho de la línea */
+  max-width: 300px; /* Ancho máximo */
+}
+
+/* Sección de copyright */
+.footer-copyright {
+  margin-top: 20px;
+}
+
+.footer-copyright p {
+  margin: 0; /* Quita el margen por defecto del párrafo */
+  font-size: 14px;
+  color: #a8b3c1; /* Color gris claro para texto en fondo oscuro */
+  text-align: center;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Responsivo para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 15px 15px; /* Reduce el padding en móviles */
+  }
+  
+  .contact-info {
+    flex-direction: column; /* Cambia a vertical en pantallas medianas */
+    gap: 15px; /* Reduce el espaciado entre elementos */
+  }
+  
+  .contact-text {
+    font-size: 15px; /* Texto ligeramente más pequeño */
+  }
+  
+  .social-icons {
+    gap: 20px; /* Reduce el espaciado entre iconos en móvil */
+  }
+  
+  .social-icon {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .social-link span {
+    font-size: 13px;
+  }
+  
+  .footer-divider {
+    width: 80%; /* Línea divisoria más ancha en móviles */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 25px 10px 10px; /* Padding aún menor para pantallas muy pequeñas */
+  }
+  
+  .contact-text {
+    font-size: 14px;
+  }
+  
+  .contact-label {
+    font-size: 13px;
+  }
+  
+  .social-icons {
+    gap: 15px;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .social-link span {
+    font-size: 12px;
+  }
+  
+  .social-label {
+    font-size: 14px;
+  }
+}

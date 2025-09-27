@@ -1,0 +1,566 @@
+/* ============================================
+   MOLTEC S.A. - PORTAFOLIO RESPONSIVE
+   CSS completamente encapsulado - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   CONTENEDOR PRINCIPAL - SOLO PORTAFOLIO
+   ============================================ */
+.portfolioSection {
+  padding: 4rem 0;
+  background: #C6C6C4;
+  min-height: 600px;
+  font-family: Arial, sans-serif;
+}
+
+.portfolioSection .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+/* ============================================
+   ENCABEZADO DE LA SECCIÓN
+   ============================================ */
+.portfolioSection .sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.portfolioSection .sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #131F2B;
+  margin-bottom: 1rem;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+.portfolioSection .sectionTitle::after {
+  content: '';
+  width: 100px;
+  height: 4px;
+  background: #131F2B;
+  display: block;
+  margin: 1rem auto 0;
+  border-radius: 4px;
+}
+
+.portfolioSection .sectionSubtitle {
+  font-size: 1.125rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-family: Arial, sans-serif;
+}
+
+/* ============================================
+   CONTENEDOR DEL CARRUSEL
+   ============================================ */
+.portfolioSection .carouselContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  margin-bottom: 3rem;
+  min-height: 500px;
+}
+
+/* ============================================
+   BOTONES DE NAVEGACIÓN
+   ============================================ */
+.portfolioSection .carouselBtn {
+  background: #ffffff;
+  border: 2px solid #e9ecef;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6c757d;
+  flex-shrink: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.portfolioSection .carouselBtn:hover {
+  background: #131F2B;
+  border-color: #131F2B;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.portfolioSection .carouselBtn:active {
+  transform: translateY(-1px);
+}
+
+.portfolioSection .prevBtn {
+  margin-right: 1rem;
+}
+
+.portfolioSection .nextBtn {
+  margin-left: 1rem;
+}
+
+/* ============================================
+   CONTENIDO DEL PROYECTO
+   ============================================ */
+.portfolioSection .projectContent {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 1rem;
+}
+
+/* ============================================
+   INFORMACIÓN DEL PROYECTO
+   ============================================ */
+.portfolioSection .projectInfo {
+  padding-right: 1rem;
+}
+
+.portfolioSection .projectTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #131F2B;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  font-family: Arial, sans-serif;
+}
+
+.portfolioSection .projectLocation {
+  font-size: 1.125rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+
+/* ============================================
+   GALERÍA DE IMÁGENES
+   ============================================ */
+.portfolioSection .projectGallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  height: 350px;
+}
+
+.portfolioSection .imageContainer {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.portfolioSection .imageContainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.portfolioSection .projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.portfolioSection .imageContainer:hover .projectImage {
+  transform: scale(1.05);
+}
+
+/* Overlay para mostrar icono de zoom */
+.portfolioSection .imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(19, 31, 43, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolioSection .imageContainer:hover .imageOverlay {
+  opacity: 1;
+}
+
+.portfolioSection .viewIcon {
+  color: #ffffff;
+  font-size: 2rem;
+  transform: scale(0.8);
+  transition: transform 0.2s ease;
+}
+
+.portfolioSection .imageContainer:hover .viewIcon {
+  transform: scale(1);
+}
+
+/* ============================================
+   MODAL DE IMAGEN
+   ============================================ */
+.portfolioSection .imageModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.portfolioSection .modalContent {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s ease;
+}
+
+.portfolioSection .closeModal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolioSection .closeModal:hover {
+  background: #131F2B;
+  transform: scale(1.1);
+}
+
+.portfolioSection .modalImage {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.portfolioSection .modalInfo {
+  padding: 1rem;
+  background: #ffffff;
+  text-align: center;
+}
+
+.portfolioSection .modalInfo h4 {
+  margin: 0 0 0.5rem 0;
+  color: #131F2B;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+}
+
+.portfolioSection .modalInfo p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablets - 768px y menores */
+@media (max-width: 768px) {
+  .portfolioSection {
+    padding: 3rem 0;
+  }
+  
+  .portfolioSection .container {
+    padding: 0 1rem;
+  }
+  
+  .portfolioSection .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .portfolioSection .sectionTitle::after {
+    width: 80px;
+    height: 3px;
+  }
+  
+  .portfolioSection .carouselContainer {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    min-height: auto;
+    position: relative;
+  }
+  
+  .portfolioSection .projectContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .portfolioSection .projectInfo {
+    padding-right: 0;
+    order: 2;
+  }
+  
+  .portfolioSection .projectGallery {
+    grid-template-columns: 1fr 1fr;
+    height: 280px;
+    gap: 0.5rem;
+    order: 1;
+  }
+  
+  .portfolioSection .carouselBtn {
+    position: absolute;
+    top: 200px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  
+  .portfolioSection .prevBtn {
+    left: 10px;
+  }
+  
+  .portfolioSection .nextBtn {
+    right: 10px;
+  }
+  
+  .portfolioSection .projectTitle {
+    font-size: 1.5rem;
+  }
+  
+  .portfolioSection .projectLocation {
+    font-size: 1rem;
+    justify-content: center;
+  }
+}
+
+/* Móviles - 480px y menores */
+@media (max-width: 480px) {
+  .portfolioSection {
+    padding: 2rem 0;
+  }
+  
+  .portfolioSection .container {
+    padding: 0 0.5rem;
+  }
+  
+  .portfolioSection .sectionTitle {
+    font-size: 1.5rem;
+  }
+  
+  .portfolioSection .sectionTitle::after {
+    width: 60px;
+    height: 3px;
+  }
+  
+  .portfolioSection .sectionSubtitle {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .portfolioSection .carouselContainer {
+    padding: 1.5rem 0.5rem;
+    margin: 0 -0.5rem;
+    border-radius: 8px;
+  }
+  
+  .portfolioSection .projectTitle {
+    font-size: 1.25rem;
+  }
+  
+  .portfolioSection .projectLocation {
+    font-size: 0.875rem;
+  }
+  
+  .portfolioSection .projectGallery {
+    height: 220px;
+    gap: 0.25rem;
+  }
+  
+  .portfolioSection .modalContent {
+    max-width: 95%;
+    max-height: 95%;
+  }
+  
+  .portfolioSection .modalImage {
+    max-height: 60vh;
+  }
+  
+  .portfolioSection .carouselBtn {
+    width: 45px;
+    height: 45px;
+    top: 150px;
+    font-size: 1.125rem;
+  }
+  
+  .portfolioSection .prevBtn {
+    left: 5px;
+  }
+  
+  .portfolioSection .nextBtn {
+    right: 5px;
+  }
+  
+  .portfolioSection .modalInfo {
+    padding: 0.5rem;
+  }
+  
+  .portfolioSection .modalInfo h4 {
+    font-size: 1.125rem;
+  }
+  
+  .portfolioSection .modalInfo p {
+    font-size: 0.875rem;
+  }
+}
+
+/* Móviles muy pequeños - 360px y menores */
+@media (max-width: 360px) {
+  .portfolioSection .sectionTitle {
+    font-size: 1.25rem;
+  }
+  
+  .portfolioSection .projectTitle {
+    font-size: 1.125rem;
+  }
+  
+  .portfolioSection .projectGallery {
+    height: 180px;
+  }
+  
+  .portfolioSection .carouselBtn {
+    width: 40px;
+    height: 40px;
+    top: 120px;
+    font-size: 1rem;
+  }
+  
+  .portfolioSection .closeModal {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   ANIMACIONES - SOLO PARA PORTAFOLIO
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolioSection .projectContent {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ============================================
+   ACCESIBILIDAD - SOLO PORTAFOLIO
+   ============================================ */
+.portfolioSection .carouselBtn:focus,
+.portfolioSection .closeModal:focus,
+.portfolioSection .imageContainer:focus {
+  outline: 2px solid #FFCC00;
+  outline-offset: 2px;
+}
+
+/* Para usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .portfolioSection .imageContainer,
+  .portfolioSection .projectImage,
+  .portfolioSection .carouselBtn,
+  .portfolioSection .projectContent {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .portfolioSection .imageContainer:hover {
+    transform: none;
+  }
+  
+  .portfolioSection .imageContainer:hover .projectImage {
+    transform: none;
+  }
+  
+  .portfolioSection .carouselBtn:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   ERROR STATE PARA IMÁGENES
+   ============================================ */
+.portfolioSection .projectImage:not([src]),
+.portfolioSection .projectImage[src=""] {
+  background: #f8f9fa;
+  opacity: 0.5;
+}

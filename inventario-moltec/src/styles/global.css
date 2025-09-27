@@ -1,0 +1,260 @@
+/* ============================================
+   MOLTEC S.A. - ESTILOS GLOBALES
+   Sistema de Inventario Web - Frontend
+   ============================================ */
+
+/* ============================================
+   VARIABLES CSS - COLORES Y TIPOGRAFÍA
+   ============================================ */
+:root {
+  /* Colores principales de MOLTEC */
+  --color-primary: #131F2B;         
+  --color-primary-light: #1a2b3a;   
+  --color-primary-dark: #0f1a24;    
+
+  /* Colores secundarios */
+  --color-secondary: #FFCC00;       
+  --color-secondary-light: #ffd93d;  
+  --color-secondary-dark: #d4a500;   
+
+  /* Colores de estado */
+  --color-success: #38a169;         
+  --color-warning: #dd6b20;         
+  --color-error: #e53e3e;           
+  --color-info: #3182ce;            
+
+  /* Colores de fondo */
+  --color-bg-primary: #ffffff;      
+  --color-bg-secondary: #C6C6C4;    
+  --color-bg-light: #f8f9fa;        
+  --color-bg-dark: #131F2B;         
+
+  /* Colores de texto */
+  --color-text-primary: #131F2B;    
+  --color-text-secondary: #6c757d;  
+  --color-text-light: #a8b3c1;      
+  --color-text-white: #ffffff;      
+
+  /* Tipografía */
+  --font-family-primary: Arial, sans-serif;
+  --font-family-secondary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Tamaños de fuente */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+
+  /* Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Bordes y sombras */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 20px;
+  --border-radius-full: 50%;
+
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.4s ease;
+
+  /* Breakpoints */
+  --bp-mobile: 480px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-wide: 1200px;
+}
+
+/* ============================================
+   RESET Y ESTILOS BASE
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   TÍTULOS Y TEXTO
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   CLASES UTILITARIAS
+   ============================================ */
+.section-title {
+  text-align: center;
+  font-size: var(--font-size-4xl);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: var(--color-primary);
+  margin: var(--spacing-sm) auto;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Contenedores */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--spacing-md); width: 100%; }
+.container-fluid { width: 100%; padding: 0 var(--spacing-md); }
+.container-narrow { max-width: 800px; margin: 0 auto; padding: 0 var(--spacing-md); }
+
+/* Secciones */
+.section { padding: var(--spacing-3xl) 0; }
+.section-alt { padding: var(--spacing-3xl) 0; background-color: var(--color-bg-secondary); }
+
+/* ============================================
+   BOTONES
+   ============================================ */
+.btn {
+  display: inline-block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  text-align: center;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+}
+
+.btn-primary { background: var(--color-primary); color: var(--color-text-white); }
+.btn-primary:hover { background: var(--color-primary-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* ============================================
+   FORMULARIOS
+   ============================================ */
+.form-control,
+input,
+textarea {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius-sm);
+  transition: border-color var(--transition-normal);
+}
+
+/* ============================================
+   TARJETAS
+   ============================================ */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-slow);
+}
+
+/* ============================================
+   TEXTO Y FLEX UTILITIES
+   ============================================ */
+.text-center { text-align: center; }
+.d-flex { display: flex; }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (min-width: 768px) {
+  .container { padding: 0 var(--spacing-lg); }
+  .btn { padding: var(--spacing-md) var(--spacing-lg); font-size: var(--font-size-lg); }
+}
+
+@media (min-width: 1024px) {
+  .container { padding: 0 var(--spacing-xl); }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn 0.6s ease-out; }
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ⚠️ FIX: Excluir Toastify del reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *:not(.Toastify__toast, .Toastify__toast *),
+  *:not(.Toastify__progress-bar, .Toastify__progress-bar *),
+  *:not(.Toastify__close-button, .Toastify__close-button *) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto !important; }
+}
+
+/* ============================================
+   TOASTIFY - FIX
+   ============================================ */
+.Toastify__toast-container { z-index: 9999 !important; }
+.Toastify__toast { margin: 0 0 6px !important; padding: 12px !important; animation-fill-mode: both !important; }
+.Toastify__toast--success { background: var(--color-success) !important; }
+.Toastify__toast--error { background: var(--color-error) !important; }
+.Toastify__toast--warning { background: var(--color-warning) !important; }
+.Toastify__toast--info { background: var(--color-info) !important; }

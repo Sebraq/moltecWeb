@@ -1,0 +1,432 @@
+/* ============================================
+   MOLTEC S.A. - ESTILOS COMPONENTE INFO
+   Sistema de Inventario Web - Responsive
+   ============================================ */
+
+/* ============================================
+   VARIABLES CSS LOCALES
+   ============================================ */
+:root {
+  /* Colores MOLTEC */
+  --moltec-primary: #131F2B;
+  --moltec-secondary: #FFCC00;
+  --moltec-bg-light: #C6C6C4;
+  --moltec-white: #ffffff;
+  --moltec-text: #131F2B;
+  --moltec-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Espaciado responsive */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 1rem;     /* 16px */
+  --spacing-md: 1.5rem;   /* 24px */
+  --spacing-lg: 2rem;     /* 32px */
+  --spacing-xl: 3rem;     /* 48px */
+  --spacing-2xl: 4rem;    /* 64px */
+
+  /* Typography responsive */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-lg: 1.25rem;   /* 20px */
+  --font-size-xl: 1.5rem;    /* 24px */
+  --font-size-2xl: 2rem;     /* 32px */
+  --font-size-3xl: 2.5rem;   /* 40px */
+
+  /* Bordes y sombras */
+  --border-radius: 8px;
+  --border-radius-lg: 20px;
+  --shadow-light: 0 2px 5px var(--moltec-shadow);
+  --shadow-medium: 0 20px 40px var(--moltec-shadow);
+  --shadow-heavy: 0 30px 60px rgba(0, 0, 0, 0.2);
+
+  /* Transiciones */
+  --transition: all 0.4s ease;
+}
+
+/* ============================================
+   ESTILOS BASE DEL COMPONENTE
+   ============================================ */
+
+/* Container principal - sin afectar body global */
+.info-container {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--moltec-text);
+}
+
+/* ============================================
+   SECCIÓN "QUIÉNES SOMOS"
+   ============================================ */
+.seccion {
+  padding: var(--spacing-xl) var(--spacing-sm);
+  transition: var(--transition);
+}
+
+.quienes {
+  margin-top: 0;
+  text-align: justify;
+  max-width: 90%; /* Más ancho en móvil */
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Párrafo responsive */
+.quienes p {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+}
+
+/* ============================================
+   TÍTULOS RESPONSIVE
+   ============================================ */
+.section-title {
+  text-align: center;
+  font-size: var(--font-size-2xl); /* Más pequeño en móvil */
+  color: var(--moltec-primary);
+  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px; /* Más pequeño en móvil */
+  height: 3px;
+  background: var(--moltec-primary);
+  margin: var(--spacing-xs) auto;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.section-title2 {
+  text-align: center;
+  font-size: var(--font-size-xl); /* Más pequeño en móvil */
+  color: var(--moltec-primary);
+  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  position: relative;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.section-title2::after {
+  content: "";
+  display: block;
+  width: 50px; /* Más pequeño en móvil */
+  height: 3px;
+  background: var(--moltec-primary);
+  margin: var(--spacing-xs) auto;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ============================================
+   SECCIÓN MISIÓN Y VISIÓN - RESPONSIVE
+   ============================================ */
+.mision-vision {
+  background-color: var(--moltec-bg-light);
+  padding: var(--spacing-lg) var(--spacing-sm);
+  min-height: auto;
+}
+
+.mision-vision-container {
+  max-width: 95%; /* Más ancho en móvil */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* Stack vertical en móvil */
+  gap: var(--spacing-md);
+  justify-content: center;
+  padding: var(--spacing-sm);
+}
+
+/* ============================================
+   TARJETAS RESPONSIVE
+   ============================================ */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-lg) var(--spacing-md); /* Menos padding en móvil */
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: var(--spacing-sm);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--moltec-primary), var(--moltec-secondary));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.01); /* Menos movimiento en móvil */
+  box-shadow: var(--shadow-heavy);
+  background: rgba(255, 255, 255, 1);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.card p {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  text-align: justify;
+  margin-bottom: 0;
+}
+
+/* ============================================
+   MEDIA QUERIES - RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* ============================================
+   TABLET - 768px y superior
+   ============================================ */
+@media (min-width: 768px) {
+  /* Secciones */
+  .seccion {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+
+  /* Quiénes somos */
+  .quienes {
+    max-width: 80%;
+    padding: 0 var(--spacing-lg);
+  }
+
+  .quienes p {
+    font-size: var(--font-size-lg);
+  }
+
+  /* Títulos */
+  .section-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .section-title::after {
+    width: 80px;
+    height: 4px;
+  }
+
+  .section-title2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-title2::after {
+    width: 70px;
+    height: 4px;
+  }
+
+  /* Misión y Visión */
+  .mision-vision {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+
+  .mision-vision-container {
+    max-width: 85%;
+    flex-direction: row; /* Lado a lado en tablet */
+    gap: var(--spacing-lg);
+  }
+
+  /* Tarjetas */
+  .card {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    flex: 1; /* Igual ancho */
+    min-width: 300px;
+  }
+
+  .card:hover {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+/* ============================================
+   DESKTOP - 1024px y superior
+   ============================================ */
+@media (min-width: 1024px) {
+  /* Secciones */
+  .seccion {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+
+  /* Quiénes somos */
+  .quienes {
+    max-width: 70%;
+    padding: 0 var(--spacing-xl);
+  }
+
+  /* Títulos */
+  .section-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+  }
+
+  .section-title::after {
+    width: 100px;
+    height: 4px;
+  }
+
+  .section-title2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-title2::after {
+    width: 80px;
+  }
+
+  /* Misión y Visión */
+  .mision-vision-container {
+    max-width: 70%;
+    gap: var(--spacing-xl);
+  }
+
+  /* Tarjetas */
+  .card {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+
+  .card:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+/* ============================================
+   DESKTOP WIDE - 1200px y superior
+   ============================================ */
+@media (min-width: 1200px) {
+  .quienes {
+    max-width: 60%;
+  }
+
+  .mision-vision-container {
+    max-width: 65%;
+    gap: var(--spacing-2xl);
+  }
+
+  .card p {
+    font-size: var(--font-size-base); /* Mantener tamaño normal */
+  }
+}
+
+/* ============================================
+   MOBILE SMALL - 480px y inferior
+   ============================================ */
+@media (max-width: 480px) {
+  .seccion {
+    padding: var(--spacing-lg) var(--spacing-xs);
+  }
+
+  .quienes {
+    max-width: 95%;
+    padding: 0 var(--spacing-xs);
+  }
+
+  .section-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .section-title2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .card {
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-radius: var(--border-radius);
+  }
+
+  .card p {
+    font-size: var(--font-size-sm);
+  }
+
+  .mision-vision {
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+
+  .mision-vision-container {
+    max-width: 100%;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs);
+  }
+}
+
+/* ============================================
+   MEJORAS DE ACCESIBILIDAD
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .section-title::after,
+  .section-title2::after,
+  .card::before {
+    transition: none;
+    animation: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* Focus para accesibilidad */
+.card:focus {
+  outline: 2px solid var(--moltec-secondary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   OPTIMIZACIONES DE RENDIMIENTO
+   ============================================ */
+.card {
+  will-change: transform, box-shadow;
+}
+
+.card::before {
+  will-change: transform;
+}
+
+/* Evitar layout shifts */
+.section-title::after,
+.section-title2::after {
+  content: "";
+  display: block;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  .card {
+    box-shadow: none;
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .mision-vision {
+    background-color: transparent;
+  }
+}

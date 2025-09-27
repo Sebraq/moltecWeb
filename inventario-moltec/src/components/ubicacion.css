@@ -1,0 +1,262 @@
+/* ============================================
+   MOLTEC S.A. - UBICACIÓN RESPONSIVE
+   CSS encapsulado para el componente de ubicación
+   ============================================ */
+
+/* ============================================
+   SECCIÓN UBICACIÓN
+   ============================================ */
+.ubicacion {
+  padding: 4rem 0;
+  font-family: Arial, sans-serif;
+}
+
+/* ============================================
+   TÍTULO DE SECCIÓN
+   ============================================ */
+.ubicacion .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #131F2B;
+  margin-bottom: 0.5rem; /* Reducido de 1.5rem */
+  margin-top: 0.5rem;    /* Reducido de 1.5rem */
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+}
+
+.ubicacion .section-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: #131F2B;
+  margin: 0.25rem auto; /* Reducido de 0.5rem */
+  border-radius: 2px;
+}
+
+/* ============================================
+   TEXTO DE UBICACIÓN
+   ============================================ */
+.ubicacionMoltec {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 1.125rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+/* ============================================
+   CONTENEDOR DEL MAPA
+   ============================================ */
+.mapita {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0; /* Mantener padding original */
+  width: 100%;
+}
+
+/* ============================================
+   ESTILOS DEL MAPA - RESPONSIVE
+   ============================================ */
+.ubicacion .leaflet-container {
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.ubicacion .leaflet-container:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Personalizar popup */
+.ubicacion .leaflet-popup-content-wrapper {
+  background: #131F2B;
+  color: white;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
+
+.ubicacion .leaflet-popup-content {
+  margin: 12px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.ubicacion .leaflet-popup-tip {
+  background: #131F2B;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Desktop - por defecto */
+.mapita .map-container {
+  height: 450px;
+  width: 65%;
+  min-width: 300px;
+}
+
+/* Tablets - 768px y menores */
+@media (max-width: 768px) {
+  .ubicacion {
+    padding: 3rem 0;
+  }
+  
+  .ubicacion .section-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .ubicacion .section-title::after {
+    width: 80px;
+    height: 3px;
+  }
+  
+  .ubicacionMoltec {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 2rem;
+  }
+  
+  .mapita {
+    padding: 0.5rem;
+  }
+  
+  .mapita .map-container {
+    height: 350px;
+    width: 85%;
+  }
+}
+
+/* Móviles - 480px y menores */
+@media (max-width: 480px) {
+  .ubicacion {
+    padding: 2rem 0;
+  }
+  
+  .ubicacion .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .ubicacion .section-title::after {
+    width: 60px;
+    height: 3px;
+  }
+  
+  .ubicacionMoltec {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    line-height: 1.4;
+  }
+  
+  .mapita {
+    padding: 0.25rem;
+  }
+  
+  .mapita .map-container {
+    height: 280px;
+    width: 95%;
+  }
+  
+  /* Ajustar controles del mapa en móvil */
+  .ubicacion .leaflet-control-container {
+    font-size: 0.875rem;
+  }
+  
+  .ubicacion .leaflet-control-zoom {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ubicacion .leaflet-control-zoom a {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Móviles muy pequeños - 360px y menores */
+@media (max-width: 360px) {
+  .ubicacion {
+    padding: 1.5rem 0;
+  }
+  
+  .ubicacion .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .ubicacionMoltec {
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
+  }
+  
+  .mapita .map-container {
+    height: 250px;
+    width: 98%;
+  }
+}
+
+/* ============================================
+   MEJORAS DE ACCESIBILIDAD
+   ============================================ */
+.ubicacion .leaflet-control-zoom a:focus {
+  outline: 2px solid #FFCC00;
+  outline-offset: 2px;
+}
+
+/* Para usuarios que prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .ubicacion .leaflet-container {
+    transition: none;
+  }
+  
+  .ubicacion .leaflet-container:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   LOADING STATE PARA EL MAPA
+   ============================================ */
+.ubicacion .map-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+  width: 65%;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  color: #6c757d;
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .ubicacion .map-loading {
+    height: 350px;
+    width: 85%;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ubicacion .map-loading {
+    height: 280px;
+    width: 95%;
+    font-size: 0.8rem;
+  }
+}
