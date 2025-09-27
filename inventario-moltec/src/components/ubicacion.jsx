@@ -2,6 +2,15 @@ import React from "react";
 import "./ubicacion.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+
+// SOLUCIÓN: Configurar los iconos de Leaflet
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+});
 
 /**
  * Componente Ubicacion - Muestra la ubicación de MOLTEC S.A.
@@ -37,7 +46,6 @@ const Ubicacion = () => {
             style={{ 
               height: "450px", 
               width: "65%",
-              // Media queries CSS se encargan del responsive
             }}
             attributionControl={true}
             zoomControl={true}
