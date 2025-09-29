@@ -11,9 +11,9 @@ export default function ContactForm() {
 
   // 📧 CONFIGURACIÓN DE EMAILJS - VERIFICAR ESTOS VALORES
   const EMAILJS_CONFIG = {
-    SERVICE_ID: "service_nl2do29", // ✅ Verificar en tu panel de EmailJS
-    TEMPLATE_ID: "template_d81nl7p", // ✅ Verificar que el template existe
-    PUBLIC_KEY: "Gx1a5Q7I6u6KGwWTj", // ✅ Verificar tu Public Key
+    SERVICE_ID: "service_6cyhn8r", // ✅ Verificar en tu panel de EmailJS
+    TEMPLATE_ID: "template_desk90h", // ✅ Verificar que el template existe
+    PUBLIC_KEY: "eiNZCr2xr_RZJzlWI", // ✅ Verificar tu Public Key
   };
 
   const [formData, setFormData] = useState({

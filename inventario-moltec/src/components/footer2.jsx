@@ -14,8 +14,8 @@ const Footer = () => {
           <div className="contact-item">
             <span className="contact-label">Email:</span>
             <span className="contact-text">
-              contacto@tuempresa.com<br />
-              contacto2@gmail.com
+              admin@grupomolet.info<br />
+              ingenieriamoltec@grupomolet.info
             </span>
           </div>
 
@@ -33,6 +33,13 @@ const Footer = () => {
             <span className="contact-text">
               +502 2212-4880<br />
               {/* +502 1234-7765 */}
+            </span>
+          </div>
+           {/* WhatsApp */}
+          <div className="contact-item">
+            <span className="contact-label">WhatsApp:</span>
+            <span className="contact-text">
+              +502 4216-4631
             </span>
           </div>
 
