@@ -1,4 +1,4 @@
-// controllers/clientesController.js
+// controllers/clientesController.js - VERSIÓN FINAL CORREGIDA
 const db = require("../db");
 const {
   registrarEnBitacora,
@@ -6,7 +6,7 @@ const {
 } = require("../helpers/bitacoraHelper");
 const { getUserId } = require("../middleware/authMiddleware");
 
-// 📋 CONFIGURACIÓN REUTILIZABLE - Tabla de clientes
+// 📋 CONFIGURACIÓN - Nombres de tabla y campos
 const TABLE_CONFIG = {
   tableName: "tbl_cliente",
   primaryKey: "pk_cliente_id",
@@ -26,21 +26,20 @@ const obtenerClientes = async (req, res) => {
     console.log("👥 Obteniendo lista de clientes...");
 
     const query = `
-  SELECT 
-    ${TABLE_CONFIG.primaryKey} as id,
-    ${TABLE_CONFIG.fields.nombre} as nombre,
-    ${TABLE_CONFIG.fields.apellido} as apellido,
-    ${TABLE_CONFIG.fields.correo} as correo,
-    ${TABLE_CONFIG.fields.telefono} as telefono,
-    ${TABLE_CONFIG.fields.fechaRegistro} as fechaRegistro,
-    ${TABLE_CONFIG.fields.nit} as nit
-  FROM ${TABLE_CONFIG.tableName}
-  WHERE cliente_status = 1
-  ORDER BY ${TABLE_CONFIG.primaryKey} DESC
-`;
+      SELECT 
+        ${TABLE_CONFIG.primaryKey} as id,
+        ${TABLE_CONFIG.fields.nombre} as nombre,
+        ${TABLE_CONFIG.fields.apellido} as apellido,
+        ${TABLE_CONFIG.fields.correo} as correo,
+        ${TABLE_CONFIG.fields.telefono} as telefono,
+        ${TABLE_CONFIG.fields.fechaRegistro} as fechaRegistro,
+        ${TABLE_CONFIG.fields.nit} as nit
+      FROM ${TABLE_CONFIG.tableName}
+      WHERE cliente_status = 1
+      ORDER BY ${TABLE_CONFIG.primaryKey} DESC
+    `;
 
     const [clientes] = await db.query(query);
-
     console.log(`✅ Se encontraron ${clientes.length} clientes`);
 
     res.json({
@@ -64,7 +63,7 @@ const crearCliente = async (req, res) => {
 
     console.log("➕ Creando nuevo cliente:", { nombre, apellido });
 
-    // 🔍 VALIDACIONES MEJORADAS
+    // 🔍 Validar campos obligatorios
     if (!nombre?.trim() || !apellido?.trim()) {
       return res.status(400).json({
         success: false,
@@ -72,7 +71,7 @@ const crearCliente = async (req, res) => {
       });
     }
 
-    // Validar longitud del nombre (máximo 15 caracteres)
+    // 🔍 Validar longitud del nombre (máximo 15 caracteres)
     if (nombre.trim().length > 15) {
       return res.status(400).json({
         success: false,
@@ -80,7 +79,7 @@ const crearCliente = async (req, res) => {
       });
     }
 
-    // Validar longitud del apellido (máximo 25 caracteres)
+    // 🔍 Validar longitud del apellido (máximo 25 caracteres)
     if (apellido.trim().length > 25) {
       return res.status(400).json({
         success: false,
@@ -88,7 +87,7 @@ const crearCliente = async (req, res) => {
       });
     }
 
-    // Validar formato de correo si se proporciona
+    // 🔍 Validar formato de correo electrónico
     if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
       return res.status(400).json({
         success: false,
@@ -96,7 +95,7 @@ const crearCliente = async (req, res) => {
       });
     }
 
-    // Validar teléfono (exactamente 8 dígitos)
+    // 🔍 Validar teléfono (exactamente 8 dígitos)
     if (telefono && !/^\d{8}$/.test(telefono.replace(/[-\s]/g, ""))) {
       return res.status(400).json({
         success: false,
@@ -104,22 +103,21 @@ const crearCliente = async (req, res) => {
       });
     }
 
-    // Validar NIT (máximo 9 dígitos, puede incluir guión)
+    // 🔍 Validar NIT (máximo 9 dígitos, puede incluir guión)
     if (nit && !/^\d{1,9}(-\d)?$/.test(nit.trim())) {
       return res.status(400).json({
         success: false,
-        error:
-          "El NIT debe tener máximo 9 dígitos (formato: 12345678 o 12345678-9)",
+        error: "El NIT debe tener máximo 9 dígitos (formato: 12345678 o 12345678-9)",
       });
     }
 
-    // Verificar si ya existe un cliente con el mismo correo (si se proporciona)
+    // 🔍 Verificar si ya existe un cliente con el mismo correo
     if (correo) {
       const checkEmailQuery = `
-  SELECT COUNT(*) as count 
-  FROM ${TABLE_CONFIG.tableName} 
-  WHERE ${TABLE_CONFIG.fields.correo} = ? AND cliente_status = 1
-`;
+        SELECT COUNT(*) as count 
+        FROM ${TABLE_CONFIG.tableName} 
+        WHERE ${TABLE_CONFIG.fields.correo} = ? AND cliente_status = 1
+      `;
       const [existingEmail] = await db.query(checkEmailQuery, [correo]);
 
       if (existingEmail[0].count > 0) {
@@ -130,13 +128,13 @@ const crearCliente = async (req, res) => {
       }
     }
 
-    // Verificar si ya existe un cliente con el mismo NIT (si se proporciona)
+    // 🔍 Verificar si ya existe un cliente con el mismo NIT
     if (nit) {
       const checkNitQuery = `
-  SELECT COUNT(*) as count 
-  FROM ${TABLE_CONFIG.tableName} 
-  WHERE ${TABLE_CONFIG.fields.nit} = ? AND cliente_status = 1
-`;
+        SELECT COUNT(*) as count 
+        FROM ${TABLE_CONFIG.tableName} 
+        WHERE ${TABLE_CONFIG.fields.nit} = ? AND cliente_status = 1
+      `;
       const [existingNit] = await db.query(checkNitQuery, [nit]);
 
       if (existingNit[0].count > 0) {
@@ -147,17 +145,17 @@ const crearCliente = async (req, res) => {
       }
     }
 
-    // Insertar nuevo cliente
+    // ➕ Insertar nuevo cliente en la base de datos
     const insertQuery = `
-  INSERT INTO ${TABLE_CONFIG.tableName} (
-    ${TABLE_CONFIG.fields.nombre},
-    ${TABLE_CONFIG.fields.apellido},
-    ${TABLE_CONFIG.fields.correo},
-    ${TABLE_CONFIG.fields.telefono},
-    ${TABLE_CONFIG.fields.nit},
-    cliente_status
-  ) VALUES (?, ?, ?, ?, ?, 1)
-`;
+      INSERT INTO ${TABLE_CONFIG.tableName} (
+        ${TABLE_CONFIG.fields.nombre},
+        ${TABLE_CONFIG.fields.apellido},
+        ${TABLE_CONFIG.fields.correo},
+        ${TABLE_CONFIG.fields.telefono},
+        ${TABLE_CONFIG.fields.nit},
+        cliente_status
+      ) VALUES (?, ?, ?, ?, ?, 1)
+    `;
 
     const [result] = await db.query(insertQuery, [
       nombre.trim(),
@@ -169,9 +167,10 @@ const crearCliente = async (req, res) => {
 
     console.log(`✅ Cliente creado con ID: ${result.insertId}`);
 
+    // 📝 Registrar acción en bitácora
     await registrarEnBitacora(
       TIPOS_EVENTO.CLIENTE_CREADO,
-      getUserId(req) || 1, // Usuario por defecto si no está autenticado
+      getUserId(req) || 1,
       {
         id: result.insertId,
         nombre: nombre.trim(),
@@ -197,7 +196,7 @@ const crearCliente = async (req, res) => {
   }
 };
 
-// 🤫 REGISTRO SILENCIOSO DESDE FORMULARIO DE CONTACTO - VERSIÓN MEJORADA
+// 🤫 REGISTRO SILENCIOSO - Desde formulario de contacto público
 const registroSilencioso = async (req, res) => {
   try {
     const { nombre, apellido, email, telefono } = req.body;
@@ -207,11 +206,9 @@ const registroSilencioso = async (req, res) => {
       apellido,
       email,
     });
-    console.log("📝 Request body completo:", req.body);
 
     // Validaciones básicas (menos estrictas que el CRUD admin)
     if (!nombre?.trim() || !apellido?.trim() || !email?.trim()) {
-      console.log("❌ Datos incompletos:", { nombre, apellido, email });
       return res.status(400).json({
         success: false,
         error: "Datos incompletos para registro",
@@ -220,26 +217,25 @@ const registroSilencioso = async (req, res) => {
 
     // Validar formato de correo
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      console.log("❌ Formato de correo inválido:", email);
       return res.status(400).json({
         success: false,
         error: "Formato de correo inválido",
       });
     }
 
-    // 🔍 VERIFICAR SI YA EXISTE EL CLIENTE
+    // 🔍 Verificar si ya existe el cliente
     const checkClienteQuery = `
-  SELECT 
-    ${TABLE_CONFIG.primaryKey} as id,
-    ${TABLE_CONFIG.fields.correo} as correo
-  FROM ${TABLE_CONFIG.tableName} 
-  WHERE ${TABLE_CONFIG.fields.correo} = ? AND cliente_status = 1
-`;
+      SELECT 
+        ${TABLE_CONFIG.primaryKey} as id,
+        ${TABLE_CONFIG.fields.correo} as correo
+      FROM ${TABLE_CONFIG.tableName} 
+      WHERE ${TABLE_CONFIG.fields.correo} = ? AND cliente_status = 1
+    `;
 
     const [existingCliente] = await db.query(checkClienteQuery, [email.trim()]);
 
     if (existingCliente.length > 0) {
-      // Cliente ya existe, no registrar pero responder success
+      // Cliente ya existe - no error, solo informar
       console.log(`ℹ️ Cliente ya existe con correo: ${email}`);
       return res.json({
         success: true,
@@ -249,27 +245,25 @@ const registroSilencioso = async (req, res) => {
       });
     }
 
-    // 🆕 REGISTRAR NUEVO CLIENTE
+    // 🆕 Registrar nuevo cliente
     const insertQuery = `
-  INSERT INTO ${TABLE_CONFIG.tableName} (
-    ${TABLE_CONFIG.fields.nombre},
-    ${TABLE_CONFIG.fields.apellido},
-    ${TABLE_CONFIG.fields.correo},
-    ${TABLE_CONFIG.fields.telefono},
-    cliente_status
-  ) VALUES (?, ?, ?, ?, 1)
-`;
+      INSERT INTO ${TABLE_CONFIG.tableName} (
+        ${TABLE_CONFIG.fields.nombre},
+        ${TABLE_CONFIG.fields.apellido},
+        ${TABLE_CONFIG.fields.correo},
+        ${TABLE_CONFIG.fields.telefono},
+        cliente_status
+      ) VALUES (?, ?, ?, ?, 1)
+    `;
 
     const [result] = await db.query(insertQuery, [
       nombre.trim(),
       apellido.trim(),
       email.trim(),
-      telefono?.replace(/[-\s]/g, "") || null, // Limpiar teléfono
+      telefono?.replace(/[-\s]/g, "") || null,
     ]);
 
-    console.log(
-      `✅ Nuevo cliente registrado silenciosamente con ID: ${result.insertId}`
-    );
+    console.log(`✅ Cliente registrado silenciosamente con ID: ${result.insertId}`);
 
     await registrarEnBitacora(
       TIPOS_EVENTO.CLIENTE_REGISTRO_SILENCIOSO,
@@ -291,7 +285,7 @@ const registroSilencioso = async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Error en registro silencioso:", error);
-    // Siempre respuesta positiva para no afectar la UX
+    // Siempre respuesta positiva para no afectar UX del formulario público
     res.json({
       success: true,
       message: "Formulario procesado",
@@ -300,7 +294,7 @@ const registroSilencioso = async (req, res) => {
   }
 };
 
-// ✏️ ACTUALIZAR CLIENTE
+// ✏️ ACTUALIZAR CLIENTE - ✅ FIX APLICADO
 const actualizarCliente = async (req, res) => {
   try {
     const { id } = req.params;
@@ -308,7 +302,7 @@ const actualizarCliente = async (req, res) => {
 
     console.log(`✏️ Actualizando cliente ID: ${id}`);
 
-    // 🔍 VALIDACIONES MEJORADAS
+    // 🔍 Validar campos obligatorios
     if (!nombre?.trim() || !apellido?.trim()) {
       return res.status(400).json({
         success: false,
@@ -316,7 +310,7 @@ const actualizarCliente = async (req, res) => {
       });
     }
 
-    // Validar longitud del nombre (máximo 15 caracteres)
+    // 🔍 Validar longitud del nombre (máximo 15 caracteres)
     if (nombre.trim().length > 15) {
       return res.status(400).json({
         success: false,
@@ -324,7 +318,7 @@ const actualizarCliente = async (req, res) => {
       });
     }
 
-    // Validar longitud del apellido (máximo 25 caracteres)
+    // 🔍 Validar longitud del apellido (máximo 25 caracteres)
     if (apellido.trim().length > 25) {
       return res.status(400).json({
         success: false,
@@ -332,7 +326,7 @@ const actualizarCliente = async (req, res) => {
       });
     }
 
-    // Validar formato de correo si se proporciona
+    // 🔍 Validar formato de correo electrónico
     if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
       return res.status(400).json({
         success: false,
@@ -340,7 +334,7 @@ const actualizarCliente = async (req, res) => {
       });
     }
 
-    // Validar teléfono (exactamente 8 dígitos)
+    // 🔍 Validar teléfono (exactamente 8 dígitos)
     if (telefono && !/^\d{8}$/.test(telefono.replace(/[-\s]/g, ""))) {
       return res.status(400).json({
         success: false,
@@ -348,16 +342,15 @@ const actualizarCliente = async (req, res) => {
       });
     }
 
-    // Validar NIT (máximo 9 dígitos, puede incluir guión)
+    // 🔍 Validar NIT (máximo 9 dígitos, puede incluir guión)
     if (nit && !/^\d{1,9}(-\d)?$/.test(nit.trim())) {
       return res.status(400).json({
         success: false,
-        error:
-          "El NIT debe tener máximo 9 dígitos (formato: 12345678 o 12345678-9)",
+        error: "El NIT debe tener máximo 9 dígitos (formato: 12345678 o 12345678-9)",
       });
     }
 
-    // Verificar que el cliente existe
+    // 🔍 Verificar que el cliente existe
     const checkQuery = `
       SELECT COUNT(*) as count 
       FROM ${TABLE_CONFIG.tableName} 
@@ -372,13 +365,18 @@ const actualizarCliente = async (req, res) => {
       });
     }
 
-    // Verificar correo único (excluyendo el cliente actual)
+    // ✅ FIX CRÍTICO: Verificar correo único EXCLUYENDO el cliente actual
+    // ANTES solo tenía 1 placeholder: WHERE correo = ?
+    // AHORA tiene 2 placeholders: WHERE correo = ? AND id != ?
     if (correo) {
       const checkEmailQuery = `
-  SELECT COUNT(*) as count 
-  FROM ${TABLE_CONFIG.tableName} 
-  WHERE ${TABLE_CONFIG.fields.correo} = ? AND cliente_status = 1
-`;
+        SELECT COUNT(*) as count 
+        FROM ${TABLE_CONFIG.tableName} 
+        WHERE ${TABLE_CONFIG.fields.correo} = ? 
+          AND ${TABLE_CONFIG.primaryKey} != ?
+          AND cliente_status = 1
+      `;
+      // ✅ Ahora pasamos 2 valores [correo, id] para 2 placeholders
       const [existingEmail] = await db.query(checkEmailQuery, [correo, id]);
 
       if (existingEmail[0].count > 0) {
@@ -389,13 +387,18 @@ const actualizarCliente = async (req, res) => {
       }
     }
 
-    // Verificar NIT único (excluyendo el cliente actual)
+    // ✅ FIX CRÍTICO: Verificar NIT único EXCLUYENDO el cliente actual
+    // ANTES solo tenía 1 placeholder: WHERE nit = ?
+    // AHORA tiene 2 placeholders: WHERE nit = ? AND id != ?
     if (nit) {
       const checkNitQuery = `
-  SELECT COUNT(*) as count 
-  FROM ${TABLE_CONFIG.tableName} 
-  WHERE ${TABLE_CONFIG.fields.nit} = ? AND cliente_status = 1
-`;
+        SELECT COUNT(*) as count 
+        FROM ${TABLE_CONFIG.tableName} 
+        WHERE ${TABLE_CONFIG.fields.nit} = ? 
+          AND ${TABLE_CONFIG.primaryKey} != ?
+          AND cliente_status = 1
+      `;
+      // ✅ Ahora pasamos 2 valores [nit, id] para 2 placeholders
       const [existingNit] = await db.query(checkNitQuery, [nit, id]);
 
       if (existingNit[0].count > 0) {
@@ -406,7 +409,7 @@ const actualizarCliente = async (req, res) => {
       }
     }
 
-    // Actualizar cliente
+    // ✏️ Actualizar datos del cliente
     const updateQuery = `
       UPDATE ${TABLE_CONFIG.tableName} 
       SET 
@@ -429,13 +432,15 @@ const actualizarCliente = async (req, res) => {
 
     console.log(`✅ Cliente ID ${id} actualizado exitosamente`);
 
+    // 📝 Registrar acción en bitácora
     await registrarEnBitacora(
       TIPOS_EVENTO.CLIENTE_ACTUALIZADO,
       getUserId(req) || 1,
       {
-        id: id,
+        id: parseInt(id),
         nombre: nombre.trim(),
         apellido: apellido.trim(),
+        correo: correo?.trim() || null,
       },
       req
     );
@@ -453,14 +458,14 @@ const actualizarCliente = async (req, res) => {
   }
 };
 
-// ELIMINAR CLIENTE (BORRADO LÓGICO)
+// 🗑️ ELIMINAR CLIENTE - Borrado lógico (cambia status a 0)
 const eliminarCliente = async (req, res) => {
   try {
     const { id } = req.params;
 
     console.log(`🗑️ Eliminando cliente ID: ${id} (borrado lógico)`);
 
-    // Verificar que el cliente existe y está activo
+    // 🔍 Verificar que el cliente existe y está activo
     const checkQuery = `
       SELECT 
         ${TABLE_CONFIG.fields.nombre} as nombre,
@@ -477,7 +482,7 @@ const eliminarCliente = async (req, res) => {
       });
     }
 
-    // Realizar borrado lógico (cambiar status a 0)
+    // 🗑️ Realizar borrado lógico (cambiar status a 0)
     const deleteQuery = `
       UPDATE ${TABLE_CONFIG.tableName} 
       SET cliente_status = 0
@@ -486,9 +491,7 @@ const eliminarCliente = async (req, res) => {
 
     await db.query(deleteQuery, [id]);
 
-    console.log(
-      `✅ Cliente "${cliente[0].nombre} ${cliente[0].apellido}" desactivado exitosamente`
-    );
+    console.log(`✅ Cliente "${cliente[0].nombre} ${cliente[0].apellido}" desactivado`);
 
     await registrarEnBitacora(
       TIPOS_EVENTO.CLIENTE_ELIMINADO,
@@ -519,33 +522,34 @@ const obtenerEstadisticas = async (req, res) => {
   try {
     console.log("📊 Obteniendo estadísticas de clientes...");
 
+    // Estadísticas generales
     const statsQuery = `
-  SELECT 
-    COUNT(*) as totalClientes,
-    SUM(CASE WHEN ${TABLE_CONFIG.fields.correo} IS NOT NULL AND ${TABLE_CONFIG.fields.correo} != '' THEN 1 ELSE 0 END) as clientesConCorreo,
-    SUM(CASE WHEN ${TABLE_CONFIG.fields.telefono} IS NOT NULL AND ${TABLE_CONFIG.fields.telefono} != '' THEN 1 ELSE 0 END) as clientesConTelefono,
-    SUM(CASE WHEN ${TABLE_CONFIG.fields.nit} IS NOT NULL AND ${TABLE_CONFIG.fields.nit} != '' THEN 1 ELSE 0 END) as clientesConNIT,
-    COUNT(DISTINCT DATE(${TABLE_CONFIG.fields.fechaRegistro})) as diasConRegistros,
-    DATE(MIN(${TABLE_CONFIG.fields.fechaRegistro})) as primerRegistro,
-    DATE(MAX(${TABLE_CONFIG.fields.fechaRegistro})) as ultimoRegistro
-  FROM ${TABLE_CONFIG.tableName}
-  WHERE cliente_status = 1
-`;
+      SELECT 
+        COUNT(*) as totalClientes,
+        SUM(CASE WHEN ${TABLE_CONFIG.fields.correo} IS NOT NULL AND ${TABLE_CONFIG.fields.correo} != '' THEN 1 ELSE 0 END) as clientesConCorreo,
+        SUM(CASE WHEN ${TABLE_CONFIG.fields.telefono} IS NOT NULL AND ${TABLE_CONFIG.fields.telefono} != '' THEN 1 ELSE 0 END) as clientesConTelefono,
+        SUM(CASE WHEN ${TABLE_CONFIG.fields.nit} IS NOT NULL AND ${TABLE_CONFIG.fields.nit} != '' THEN 1 ELSE 0 END) as clientesConNIT,
+        COUNT(DISTINCT DATE(${TABLE_CONFIG.fields.fechaRegistro})) as diasConRegistros,
+        DATE(MIN(${TABLE_CONFIG.fields.fechaRegistro})) as primerRegistro,
+        DATE(MAX(${TABLE_CONFIG.fields.fechaRegistro})) as ultimoRegistro
+      FROM ${TABLE_CONFIG.tableName}
+      WHERE cliente_status = 1
+    `;
 
     const [stats] = await db.query(statsQuery);
 
     // Estadísticas por mes (últimos 12 meses)
     const monthlyStatsQuery = `
-  SELECT 
-    DATE_FORMAT(${TABLE_CONFIG.fields.fechaRegistro}, '%Y-%m') as mes,
-    COUNT(*) as registros
-  FROM ${TABLE_CONFIG.tableName}
-  WHERE ${TABLE_CONFIG.fields.fechaRegistro} >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
-  AND cliente_status = 1
-  GROUP BY DATE_FORMAT(${TABLE_CONFIG.fields.fechaRegistro}, '%Y-%m')
-  ORDER BY mes DESC
-  LIMIT 12
-`;
+      SELECT 
+        DATE_FORMAT(${TABLE_CONFIG.fields.fechaRegistro}, '%Y-%m') as mes,
+        COUNT(*) as registros
+      FROM ${TABLE_CONFIG.tableName}
+      WHERE ${TABLE_CONFIG.fields.fechaRegistro} >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
+      AND cliente_status = 1
+      GROUP BY DATE_FORMAT(${TABLE_CONFIG.fields.fechaRegistro}, '%Y-%m')
+      ORDER BY mes DESC
+      LIMIT 12
+    `;
 
     const [monthlyStats] = await db.query(monthlyStatsQuery);
 
@@ -565,11 +569,12 @@ const obtenerEstadisticas = async (req, res) => {
   }
 };
 
-// 🔍 BUSCAR CLIENTES (búsqueda avanzada)
+// 🔍 BUSCAR CLIENTES - Búsqueda avanzada
 const buscarClientes = async (req, res) => {
   try {
-    const { q, tipo } = req.query; // q = término de búsqueda, tipo = 'nombre', 'correo', 'telefono', 'nit'
+    const { q, tipo } = req.query;
 
+    // Validar que el término de búsqueda tenga al menos 2 caracteres
     if (!q || q.trim().length < 2) {
       return res.status(400).json({
         success: false,
@@ -582,6 +587,7 @@ const buscarClientes = async (req, res) => {
     let whereClause;
     let params;
 
+    // Construir cláusula WHERE según el tipo de búsqueda
     switch (tipo) {
       case "nombre":
         whereClause = `(${TABLE_CONFIG.fields.nombre} LIKE ? OR ${TABLE_CONFIG.fields.apellido} LIKE ?)`;
@@ -612,19 +618,19 @@ const buscarClientes = async (req, res) => {
     }
 
     const searchQuery = `
-  SELECT 
-    ${TABLE_CONFIG.primaryKey} as id,
-    ${TABLE_CONFIG.fields.nombre} as nombre,
-    ${TABLE_CONFIG.fields.apellido} as apellido,
-    ${TABLE_CONFIG.fields.correo} as correo,
-    ${TABLE_CONFIG.fields.telefono} as telefono,
-    ${TABLE_CONFIG.fields.fechaRegistro} as fechaRegistro,
-    ${TABLE_CONFIG.fields.nit} as nit
-  FROM ${TABLE_CONFIG.tableName}
-  WHERE (${whereClause}) AND cliente_status = 1
-  ORDER BY ${TABLE_CONFIG.fields.nombre} ASC, ${TABLE_CONFIG.fields.apellido} ASC
-  LIMIT 50
-`;
+      SELECT 
+        ${TABLE_CONFIG.primaryKey} as id,
+        ${TABLE_CONFIG.fields.nombre} as nombre,
+        ${TABLE_CONFIG.fields.apellido} as apellido,
+        ${TABLE_CONFIG.fields.correo} as correo,
+        ${TABLE_CONFIG.fields.telefono} as telefono,
+        ${TABLE_CONFIG.fields.fechaRegistro} as fechaRegistro,
+        ${TABLE_CONFIG.fields.nit} as nit
+      FROM ${TABLE_CONFIG.tableName}
+      WHERE (${whereClause}) AND cliente_status = 1
+      ORDER BY ${TABLE_CONFIG.fields.nombre} ASC, ${TABLE_CONFIG.fields.apellido} ASC
+      LIMIT 50
+    `;
 
     const [resultados] = await db.query(searchQuery, params);
 
@@ -646,6 +652,7 @@ const buscarClientes = async (req, res) => {
   }
 };
 
+// 📤 Exportar todas las funciones del controlador
 module.exports = {
   obtenerClientes,
   crearCliente,

@@ -1,4 +1,4 @@
-// services/clientesApi.js
+// services/clientesApi.js - VERSIÓN CORREGIDA COMPLETA
 // 🔧 CONFIGURACIÓN REUTILIZABLE - Cambiar para otros CRUDs
 const API_CONFIG = {
   baseURL: import.meta.env.VITE_API_URL,
@@ -61,8 +61,8 @@ class ClientesAPI {
     console.log('➕ Creando cliente:', clienteData);
     
     try {
-      // 🔍 VALIDACIONES MEJORADAS EN FRONTEND
-      const errores = this.validarCliente(clienteData);
+      // 🔍 VALIDACIONES DE FORMATO EN FRONTEND
+      const errores = this.validarClienteFormato(clienteData);
       if (errores.length > 0) {
         throw new Error(errores[0]); // Mostrar el primer error
       }
@@ -80,15 +80,16 @@ class ClientesAPI {
     }
   }
 
-  // ✏️ ACTUALIZAR CLIENTE
+  // ✏️ ACTUALIZAR CLIENTE - CORREGIDO
+  // Solo valida FORMATO, NO duplicados (el backend se encarga de eso)
   async actualizarCliente(id, clienteData) {
     console.log(`✏️ Actualizando cliente ID: ${id}`, clienteData);
     
     try {
-      // 🔍 VALIDACIONES MEJORADAS EN FRONTEND
-      const errores = this.validarCliente(clienteData);
+      // 🔍 SOLO VALIDACIONES DE FORMATO (NO de duplicados)
+      const errores = this.validarClienteFormato(clienteData);
       if (errores.length > 0) {
-        throw new Error(errores[0]); // Mostrar el primer error
+        throw new Error(errores[0]);
       }
 
       const data = await this.makeRequest(`${this.baseURL}/${id}`, {
@@ -201,8 +202,10 @@ class ClientesAPI {
     }
   }
 
-  // 📊 VALIDAR DATOS DE CLIENTE - VERSIÓN ACTUALIZADA
-  validarCliente(clienteData) {
+  // 📊 VALIDAR FORMATO DE CLIENTE (SIN verificar duplicados)
+  // Esta función SOLO valida que los datos tengan el formato correcto
+  // NO verifica si el correo/NIT ya existen (eso lo hace el backend)
+  validarClienteFormato(clienteData) {
     const errores = [];
 
     // Validaciones requeridas
@@ -218,12 +221,12 @@ class ClientesAPI {
       errores.push('El apellido no puede exceder 25 caracteres');
     }
 
-    // Validaciones opcionales pero con formato
+    // Validar FORMATO de correo (NO si ya existe)
     if (clienteData.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clienteData.correo)) {
       errores.push('El formato del correo electrónico no es válido');
     }
 
-    // Validar teléfono: exactamente 8 dígitos
+    // Validar FORMATO de teléfono: exactamente 8 dígitos (NO si ya existe)
     if (clienteData.telefono) {
       const telefonoLimpio = clienteData.telefono.replace(/[-\s]/g, '');
       if (!/^\d{8}$/.test(telefonoLimpio)) {
@@ -231,7 +234,7 @@ class ClientesAPI {
       }
     }
 
-    // Validar NIT: máximo 9 dígitos, formato opcional con guión
+    // Validar FORMATO de NIT: máximo 9 dígitos (NO si ya existe)
     if (clienteData.nit) {
       if (!/^\d{1,9}(-\d)?$/.test(clienteData.nit.trim())) {
         errores.push('El NIT debe tener máximo 9 dígitos (formato: 12345678 o 12345678-9)');
@@ -239,6 +242,12 @@ class ClientesAPI {
     }
 
     return errores;
+  }
+
+  // 📊 VALIDAR CLIENTE (mantener compatibilidad)
+  // Esta función ahora solo llama a validarClienteFormato
+  validarCliente(clienteData) {
+    return this.validarClienteFormato(clienteData);
   }
 
   // 🔄 VALIDAR CONEXIÓN CON API
@@ -290,6 +299,11 @@ EJEMPLO PARA EMPLEADOS:
 - Cambiar mensajes de console.log
 - Adaptar validaciones específicas de empleados
 - Todo lo demás queda igual
+
+IMPORTANTE: 
+- validarClienteFormato() solo valida FORMATO (longitud, formato de email, etc.)
+- NO valida duplicados (correo/NIT ya existentes)
+- Los duplicados los valida el BACKEND excluyendo el registro actual al editar
 */
 
 export default new ClientesAPI();

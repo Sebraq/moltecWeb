@@ -14,6 +14,7 @@ import {
 import dashboardAPI from "../services/dashboardApi";
 
 // 📊 REGISTRAR COMPONENTES DE CHART.JS
+// Necesario para que Chart.js funcione correctamente con React
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -464,14 +465,15 @@ const injectCSS = () => {
 };
 
 const DashboardStats = () => {
-  // Estado para forzar re-render en cambio de ventana
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [datosDashboard, setDatosDashboard] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [lastUpdate, setLastUpdate] = useState(null);
+  // 📊 ESTADOS DEL COMPONENTE
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth); // Ancho de ventana para responsive
+  const [datosDashboard, setDatosDashboard] = useState(null); // Datos del dashboard
+  const [loading, setLoading] = useState(true); // Estado de carga
+  const [error, setError] = useState(null); // Errores
+  const [lastUpdate, setLastUpdate] = useState(null); // Última actualización
 
-  // Efecto para manejar cambios de tamaño de ventana
+  // 📐 EFECTO PARA MANEJAR CAMBIOS DE TAMAÑO DE VENTANA
+  // Actualiza el estado cuando la ventana cambia de tamaño para gráficas responsive
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -481,13 +483,14 @@ const DashboardStats = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Cargar datos al montar el componente
+  // 🚀 CARGAR DATOS AL MONTAR EL COMPONENTE
   useEffect(() => {
-    injectCSS();
+    injectCSS(); // Inyectar CSS para animaciones
     cargarDatos();
   }, []);
 
-  // Función para obtener opciones responsive para las gráficas
+  // 📊 FUNCIÓN PARA OBTENER OPCIONES RESPONSIVE PARA GRÁFICAS DE BARRAS
+  // Ajusta el tamaño de fuente y configuración según el ancho de pantalla
   const getOpcionesBarrasResponsive = (titulo = "Datos") => {
     const isMobile = windowWidth <= 768;
     const isSmallMobile = windowWidth <= 480;
@@ -547,6 +550,7 @@ const DashboardStats = () => {
   };
 
   // 📊 CARGAR DATOS DEL DASHBOARD
+  // Hace una petición al backend para obtener todas las estadísticas
   const cargarDatos = async () => {
     try {
       setLoading(true);
@@ -570,18 +574,14 @@ const DashboardStats = () => {
     }
   };
 
-  // 🔄 CARGAR DATOS AL MONTAR EL COMPONENTE
-  useEffect(() => {
-    injectCSS(); // Inyectar CSS para animaciones
-    cargarDatos();
-  }, []);
-
   // 🔄 FUNCIÓN DE RECARGAR
+  // Permite actualizar manualmente los datos del dashboard
   const handleRecargar = () => {
     cargarDatos();
   };
 
   // 📊 RENDERIZAR LOADING
+  // Muestra un spinner mientras se cargan los datos
   if (loading) {
     return (
       <div style={styles.container}>
@@ -597,6 +597,7 @@ const DashboardStats = () => {
   }
 
   // ❌ RENDERIZAR ERROR
+  // Muestra un mensaje de error si algo salió mal
   if (error) {
     return (
       <div style={styles.container}>
@@ -615,14 +616,16 @@ const DashboardStats = () => {
     );
   }
 
-  // 📊 RENDERIZAR DASHBOARD
+  // 📊 RENDERIZAR DASHBOARD COMPLETO
   return (
     <div style={styles.container} className="dashboard-container">
+      {/* ============================================ */}
       {/* HEADER DEL DASHBOARD */}
+      {/* ============================================ */}
       <div style={styles.header} className="dashboard-header">
         <div style={styles.headerContent} className="dashboard-header-content">
           <h1 style={styles.headerTitle} className="dashboard-header-title">
-            Dashboard - MOLTEC S.A.
+            📊 Dashboard - MOLTEC S.A.
           </h1>
           <div style={styles.headerActions}>
             <button
@@ -630,7 +633,7 @@ const DashboardStats = () => {
               style={styles.btnRefresh}
               className="dashboard-btn-hover"
             >
-              Actualizar
+              🔄 Actualizar
             </button>
             {lastUpdate && (
               <span style={styles.lastUpdate}>
@@ -641,12 +644,15 @@ const DashboardStats = () => {
         </div>
       </div>
 
-      {/* TARJETAS DE TOTALES */}
+      {/* ============================================ */}
+      {/* TARJETAS DE TOTALES - RESUMEN GENERAL */}
+      {/* ============================================ */}
       <div style={styles.section}>
         <h2 style={styles.sectionTitle} className="dashboard-section-title">
           📋 Resumen General
         </h2>
         <div style={styles.totalesGrid} className="dashboard-totales-grid">
+          {/* TOTAL MATERIALES */}
           <div
             style={{ ...styles.totalCard, ...styles.totalCardMateriales }}
             className="dashboard-card-hover dashboard-total-card"
@@ -662,6 +668,7 @@ const DashboardStats = () => {
             </div>
           </div>
 
+          {/* TOTAL HERRAMIENTAS */}
           <div
             style={{ ...styles.totalCard, ...styles.totalCardHerramientas }}
             className="dashboard-card-hover dashboard-total-card"
@@ -677,6 +684,7 @@ const DashboardStats = () => {
             </div>
           </div>
 
+          {/* TOTAL EMPLEADOS */}
           <div
             style={{ ...styles.totalCard, ...styles.totalCardEmpleados }}
             className="dashboard-card-hover dashboard-total-card"
@@ -692,6 +700,7 @@ const DashboardStats = () => {
             </div>
           </div>
 
+          {/* TOTAL CLIENTES */}
           <div
             style={{ ...styles.totalCard, ...styles.totalCardClientes }}
             className="dashboard-card-hover dashboard-total-card"
@@ -707,12 +716,13 @@ const DashboardStats = () => {
             </div>
           </div>
 
+          {/* PROYECTOS ACTIVOS */}
           <div
             style={{ ...styles.totalCard, ...styles.totalCardProyectos }}
             className="dashboard-card-hover dashboard-total-card"
           >
             <div style={styles.cardIcon} className="dashboard-card-icon">
-              🏗️
+              🗂️
             </div>
             <div style={styles.cardContent}>
               <h3 style={styles.cardTitle}>Proyectos Activos</h3>
@@ -724,7 +734,9 @@ const DashboardStats = () => {
         </div>
       </div>
 
-      {/* GRÁFICAS PIE */}
+      {/* ============================================ */}
+      {/* GRÁFICAS PIE - ESTADO Y STOCK */}
+      {/* ============================================ */}
       <div style={styles.section}>
         <h2 style={styles.sectionTitle} className="dashboard-section-title">
           📊 Gráficas de Estado
@@ -734,6 +746,7 @@ const DashboardStats = () => {
           className="dashboard-graficas-pie-grid"
         >
           {/* ESTADO DE HERRAMIENTAS */}
+          {/* Colores: nuevo(verde), buen estado(azul), desgastado(naranja), reparacion(amarillo), baja(rojo) */}
           <div
             style={styles.graficaCard}
             className="dashboard-card-hover dashboard-grafica-card"
@@ -747,7 +760,8 @@ const DashboardStats = () => {
             >
               <Pie
                 data={dashboardAPI.formatearDatosPie(
-                  datosDashboard?.graficasPie?.estadoHerramientas
+                  datosDashboard?.graficasPie?.estadoHerramientas,
+                  'estadoHerramientas' // ⬅️ PARÁMETRO PARA COLORES CORRECTOS
                 )}
                 options={dashboardAPI.getOpcionesPie()}
               />
@@ -755,6 +769,7 @@ const DashboardStats = () => {
           </div>
 
           {/* STOCK DE HERRAMIENTAS */}
+          {/* Colores: normal(verde), bajo(naranja), critico(rojo) */}
           <div
             style={styles.graficaCard}
             className="dashboard-card-hover dashboard-grafica-card"
@@ -768,7 +783,8 @@ const DashboardStats = () => {
             >
               <Pie
                 data={dashboardAPI.formatearDatosPie(
-                  datosDashboard?.graficasPie?.stockHerramientas
+                  datosDashboard?.graficasPie?.stockHerramientas,
+                  'stockHerramientas' // ⬅️ PARÁMETRO PARA COLORES CORRECTOS
                 )}
                 options={dashboardAPI.getOpcionesPie()}
               />
@@ -776,6 +792,7 @@ const DashboardStats = () => {
           </div>
 
           {/* STOCK DE MATERIALES */}
+          {/* Colores: normal(verde), bajo(naranja), critico(rojo) */}
           <div
             style={styles.graficaCard}
             className="dashboard-card-hover dashboard-grafica-card"
@@ -789,7 +806,8 @@ const DashboardStats = () => {
             >
               <Pie
                 data={dashboardAPI.formatearDatosPie(
-                  datosDashboard?.graficasPie?.stockMateriales
+                  datosDashboard?.graficasPie?.stockMateriales,
+                  'stockMateriales' // ⬅️ PARÁMETRO PARA COLORES CORRECTOS
                 )}
                 options={dashboardAPI.getOpcionesPie()}
               />
@@ -798,13 +816,15 @@ const DashboardStats = () => {
         </div>
       </div>
 
-      {/* GRÁFICAS DE BARRAS */}
+      {/* ============================================ */}
+      {/* GRÁFICAS DE BARRAS - ANÁLISIS DE ACTIVIDAD */}
+      {/* ============================================ */}
       <div style={styles.section}>
         <h2 style={styles.sectionTitle} className="dashboard-section-title">
           📈 Análisis de Actividad
         </h2>
         <div style={styles.graficasBarrasGrid}>
-          {/* TOP MATERIALES/HERRAMIENTAS */}
+          {/* TOP MATERIALES/HERRAMIENTAS CON MÁS SALIDAS */}
           <div
             style={{ ...styles.graficaCard, ...styles.graficaCardFullWidth }}
             className="dashboard-card-hover dashboard-grafica-card"
@@ -817,7 +837,7 @@ const DashboardStats = () => {
               className="dashboard-chart-container-large"
             >
               <Bar
-                key={windowWidth} // Forzar re-render al cambiar tamaño
+                key={windowWidth} // Forzar re-render al cambiar tamaño de ventana
                 data={dashboardAPI.formatearDatosBarras(
                   datosDashboard?.graficasBarras?.topMaterialesHerramientas
                 )}
@@ -826,7 +846,7 @@ const DashboardStats = () => {
             </div>
           </div>
 
-          {/* CLIENTES REGISTRADOS */}
+          {/* CLIENTES REGISTRADOS POR SEMANA */}
           <div
             style={{ ...styles.graficaCard, ...styles.graficaCardFullWidth }}
             className="dashboard-card-hover dashboard-grafica-card"
@@ -850,7 +870,9 @@ const DashboardStats = () => {
         </div>
       </div>
 
+      {/* ============================================ */}
       {/* FOOTER DEL DASHBOARD */}
+      {/* ============================================ */}
       <div style={styles.footer}>
         <p style={styles.footerText}>
           © {new Date().getFullYear()} MOLTEC S.A. - Sistema de Gestión de

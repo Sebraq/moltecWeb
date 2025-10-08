@@ -1,17 +1,24 @@
-// routes/clientes.js
+// routes/clientes.js - VERSIÓN CORREGIDA
 const express = require('express');
 const router = express.Router();
 const { verifyToken, isAdmin } = require('../middleware/authMiddleware');
+
+// ✅ IMPORTAR TODAS LAS FUNCIONES (incluido registroSilencioso)
 const {
   obtenerClientes,
   crearCliente,
   actualizarCliente,
   eliminarCliente,
   obtenerEstadisticas,
-  buscarClientes
+  buscarClientes,
+  registroSilencioso  // ← AGREGAR ESTA LÍNEA
 } = require('../controllers/clientesController');
 
-// 🔒 TODAS LAS RUTAS REQUIEREN AUTENTICACIÓN
+// 🔓 RUTA PÚBLICA - Registro silencioso (SIN autenticación)
+// Esta ruta DEBE ir ANTES de router.use(verifyToken)
+router.post('/registro-silencioso', registroSilencioso);
+
+// 🔒 TODAS LAS DEMÁS RUTAS REQUIEREN AUTENTICACIÓN
 router.use(verifyToken);
 
 // 📋 RUTAS PARA CONSULTAS (todos los usuarios autenticados)
@@ -25,9 +32,7 @@ router.get('/estadisticas', obtenerEstadisticas);
 // Ejemplo: /api/clientes/buscar?q=juan&tipo=nombre
 router.get('/buscar', buscarClientes);
 
-// 🔧 RUTAS PARA MODIFICACIONES (requieren permisos especiales)
-// Puedes cambiar 'isAdmin' por otro middleware según tu lógica de permisos
-
+// 🔧 RUTAS PARA MODIFICACIONES (requieren permisos de admin)
 // POST /api/clientes - Crear nuevo cliente
 router.post('/', isAdmin, crearCliente);
 
@@ -58,15 +63,18 @@ router.param('id', (req, res, next, id) => {
 /*
 RUTAS DISPONIBLES:
 
-📋 CONSULTAS:
-GET    /api/clientes                → Listar clientes
-GET    /api/clientes/estadisticas   → Estadísticas generales
-GET    /api/clientes/buscar         → Búsqueda avanzada
+🔓 PÚBLICAS (sin autenticación):
+POST   /api/clientes/registro-silencioso  → Registro desde formulario web
 
-📋 CRUD BÁSICO:
-POST   /api/clientes                → Crear cliente
-PUT    /api/clientes/:id            → Actualizar cliente
-DELETE /api/clientes/:id            → Eliminar cliente
+📋 CONSULTAS (requieren autenticación):
+GET    /api/clientes                      → Listar clientes
+GET    /api/clientes/estadisticas         → Estadísticas generales
+GET    /api/clientes/buscar               → Búsqueda avanzada
+
+📋 CRUD (requieren autenticación + admin):
+POST   /api/clientes                      → Crear cliente
+PUT    /api/clientes/:id                  → Actualizar cliente
+DELETE /api/clientes/:id                  → Eliminar cliente
 
 EJEMPLO DE USO:
 - Crear: POST /api/clientes 
@@ -78,13 +86,21 @@ EJEMPLO DE USO:
     "nit": "1234567-8"
   }
 
+- Registro silencioso: POST /api/clientes/registro-silencioso
+  {
+    "nombre": "María",
+    "apellido": "González",
+    "email": "maria@email.com",
+    "telefono": "87654321"
+  }
+
 - Buscar: GET /api/clientes/buscar?q=juan&tipo=nombre
 - Buscar todos los campos: GET /api/clientes/buscar?q=juan
 
 🔒 PERMISOS:
 - Consultas y búsquedas: Usuario autenticado
 - CRUD: Administrador
-- Estadísticas: Usuario autenticado (configurable)
+- Registro silencioso: Público (sin autenticación)
 
 📊 RESPUESTAS:
 - Éxito: { success: true, data: [...], total: number }
