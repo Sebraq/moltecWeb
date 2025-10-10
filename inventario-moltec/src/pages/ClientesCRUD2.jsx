@@ -509,14 +509,14 @@ const ClientesCRUD = () => {
                   <td className="crud-td">
                     <div className="crud-table-actions">
                       <button
-                        className="crud-btn-icon crud-btn-secondary"
+                        className="crud-btn crud-btn-icon crud-btn-secondary"
                         title="Editar"
                         onClick={() => abrirModalEditar(cliente)}
                       >
                         <Edit size={16} />
                       </button>
                       <button
-                        className="crud-btn-icon crud-btn-danger"
+                        className="crud-btn crud-btn-icon crud-btn-danger"
                         title="Eliminar"
                         onClick={() => eliminarCliente(cliente)}
                       >

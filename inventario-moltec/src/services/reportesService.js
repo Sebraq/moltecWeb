@@ -1505,189 +1505,193 @@ class ReportesService {
 
   // TABLA DE PROYECTOS COMPLETA
   agregarTablaProyectosCompleta(doc, proyectos, configuracion, startY) {
-    // COLUMNAS BASE
-    let columnas = ["Proyecto", "Cliente", "Responsable"];
+  // COLUMNAS BASE
+  let columnas = ["Proyecto", "Cliente", "Responsable"];
 
-    // Agregar columnas según configuración
+  // Agregar columnas según configuración
+  if (configuracion.incluirFechas) {
+    columnas.push("F. Inicio", "F. Est. Fin");
+  }
+
+  columnas.push("Estado");
+
+  if (configuracion.incluirAprobacion) {
+    columnas.push("Aprobado");
+  }
+
+  if (configuracion.incluirFinanzas) {
+    columnas.push("Cotización", "N° Cotiz."); // ⭐ AGREGADA COLUMNA
+  }
+
+  // CONSTRUIR FILAS
+  const filas = proyectos.map((proyecto) => {
+    let fila = [];
+
+    // Datos base
+    fila.push(proyecto.nombre || "Sin nombre");
+    fila.push(proyecto.clienteNombre || "Sin cliente");
+    fila.push(proyecto.responsableNombre || "Sin responsable");
+
+    // Fechas si están habilitadas
     if (configuracion.incluirFechas) {
-      columnas.push("F. Inicio", "F. Est. Fin");
+      fila.push(this.formatearFecha(proyecto.fechaInicio));
+      fila.push(this.formatearFecha(proyecto.fechaAproxFin));
     }
 
-    columnas.push("Estado");
+    // Estado siempre
+    fila.push(proyecto.status || "Sin estado");
 
+    // Aprobación si está habilitada
     if (configuracion.incluirAprobacion) {
-      columnas.push("Aprobado");
+      fila.push(proyecto.aprobado ? "Sí" : "No");
     }
 
+    // Finanzas si están habilitadas
     if (configuracion.incluirFinanzas) {
-      columnas.push("Cotización");
+      fila.push(this.formatearMonedaParaReporte(proyecto.cotizacion));
+      fila.push(proyecto.numCotizacion ? proyecto.numCotizacion.toString() : "-"); // ⭐ AGREGADO
     }
 
-    // CONSTRUIR FILAS
-    const filas = proyectos.map((proyecto) => {
-      let fila = [];
+    return fila;
+  });
 
-      // Datos base
-      fila.push(proyecto.nombre || "Sin nombre");
-      fila.push(proyecto.clienteNombre || "Sin cliente");
-      fila.push(proyecto.responsableNombre || "Sin responsable");
-
-      // Fechas si están habilitadas
-      if (configuracion.incluirFechas) {
-        fila.push(this.formatearFecha(proyecto.fechaInicio));
-        fila.push(this.formatearFecha(proyecto.fechaAproxFin));
-      }
-
-      // Estado siempre
-      fila.push(proyecto.status || "Sin estado");
-
-      // Aprobación si está habilitada
-      if (configuracion.incluirAprobacion) {
-        fila.push(proyecto.aprobado ? "Sí" : "No");
-      }
-
-      // Finanzas si están habilitadas
-      if (configuracion.incluirFinanzas) {
-        fila.push(this.formatearMonedaParaReporte(proyecto.cotizacion));
-      }
-
-      return fila;
-    });
 
     // ESTILOS DE COLUMNA
-    const columnStyles = this.calcularAnchoColumnasProyectos(configuracion);
+   const columnStyles = this.calcularAnchoColumnasProyectos(configuracion);
 
-    // GENERAR TABLA
-    autoTable(doc, {
-      startY: startY,
-      head: [columnas],
-      body: filas,
-      styles: {
-        fontSize: 8,
-        cellPadding: 2,
-        font: "Arial",
-        textColor: [0, 0, 0],
-        lineColor: [200, 200, 200],
-        lineWidth: 0.1,
-      },
-      headStyles: {
-        fillColor: [19, 31, 43],
-        textColor: [255, 255, 255],
-        fontStyle: "bold",
-        fontSize: 9,
-        font: "Arial",
-      },
-      alternateRowStyles: {
-        fillColor: [248, 250, 252],
-      },
-      columnStyles: columnStyles,
-      didParseCell: function (data) {
-        const estadoIndex = columnas.indexOf("Estado");
-        const aprobadoIndex = columnas.indexOf("Aprobado");
+  // GENERAR TABLA
+  autoTable(doc, {
+    startY: startY,
+    head: [columnas],
+    body: filas,
+    styles: {
+      fontSize: 8,
+      cellPadding: 2,
+      font: "Arial",
+      textColor: [0, 0, 0],
+      lineColor: [200, 200, 200],
+      lineWidth: 0.1,
+    },
+    headStyles: {
+      fillColor: [19, 31, 43],
+      textColor: [255, 255, 255],
+      fontStyle: "bold",
+      fontSize: 9,
+      font: "Arial",
+    },
+    alternateRowStyles: {
+      fillColor: [248, 250, 252],
+    },
+    columnStyles: columnStyles,
+    didParseCell: function (data) {
+      const estadoIndex = columnas.indexOf("Estado");
+      const aprobadoIndex = columnas.indexOf("Aprobado");
 
-        // Colorear estado
-        if (data.section === "body" && data.column.index === estadoIndex) {
-          const estado = data.cell.text[0];
-          switch (estado) {
-            case "planificado":
-              data.cell.styles.fillColor = [190, 227, 248];
-              data.cell.styles.textColor = [49, 130, 206];
-              break;
-            case "en progreso":
-              data.cell.styles.fillColor = [254, 235, 200];
-              data.cell.styles.textColor = [154, 52, 18];
-              break;
-            case "completado":
-              data.cell.styles.fillColor = [198, 246, 213];
-              data.cell.styles.textColor = [21, 128, 61];
-              break;
-            case "pausado":
-              data.cell.styles.fillColor = [250, 240, 137];
-              data.cell.styles.textColor = [113, 63, 18];
-              break;
-            case "cancelado":
-              data.cell.styles.fillColor = [254, 215, 215];
-              data.cell.styles.textColor = [185, 28, 28];
-              break;
-          }
-          data.cell.styles.fontStyle = "bold";
-        }
-
-        // Colorear aprobación
-        if (data.section === "body" && data.column.index === aprobadoIndex) {
-          const aprobado = data.cell.text[0];
-          if (aprobado === "Sí") {
-            data.cell.styles.fillColor = [198, 246, 213];
-            data.cell.styles.textColor = [21, 128, 61];
-            data.cell.styles.fontStyle = "bold";
-          } else {
+      // Colorear estado
+      if (data.section === "body" && data.column.index === estadoIndex) {
+        const estado = data.cell.text[0];
+        switch (estado) {
+          case "planificado":
+            data.cell.styles.fillColor = [190, 227, 248];
+            data.cell.styles.textColor = [49, 130, 206];
+            break;
+          case "en progreso":
             data.cell.styles.fillColor = [254, 235, 200];
             data.cell.styles.textColor = [154, 52, 18];
-            data.cell.styles.fontStyle = "bold";
-          }
+            break;
+          case "completado":
+            data.cell.styles.fillColor = [198, 246, 213];
+            data.cell.styles.textColor = [21, 128, 61];
+            break;
+          case "pausado":
+            data.cell.styles.fillColor = [250, 240, 137];
+            data.cell.styles.textColor = [113, 63, 18];
+            break;
+          case "cancelado":
+            data.cell.styles.fillColor = [254, 215, 215];
+            data.cell.styles.textColor = [185, 28, 28];
+            break;
         }
-      },
-      margin: { left: 20, right: 20 },
-      theme: "striped",
-      showHead: "everyPage",
-    });
-  }
+        data.cell.styles.fontStyle = "bold";
+      }
+
+      // Colorear aprobación
+      if (data.section === "body" && data.column.index === aprobadoIndex) {
+        const aprobado = data.cell.text[0];
+        if (aprobado === "Sí") {
+          data.cell.styles.fillColor = [198, 246, 213];
+          data.cell.styles.textColor = [21, 128, 61];
+          data.cell.styles.fontStyle = "bold";
+        } else {
+          data.cell.styles.fillColor = [254, 235, 200];
+          data.cell.styles.textColor = [154, 52, 18];
+          data.cell.styles.fontStyle = "bold";
+        }
+      }
+    },
+    margin: { left: 20, right: 20 },
+    theme: "striped",
+    showHead: "everyPage",
+  });
+}
 
   // CALCULAR ANCHOS DE COLUMNA
   calcularAnchoColumnasProyectos(configuracion) {
-    const columnStyles = {};
-    let currentIndex = 0;
+  const columnStyles = {};
+  let currentIndex = 0;
 
-    // Determinar número total de columnas
-    let totalColumnas = 4; // Proyecto, Cliente, Responsable, Estado
-    if (configuracion.incluirFechas) totalColumnas += 2;
-    if (configuracion.incluirAprobacion) totalColumnas += 1;
-    if (configuracion.incluirFinanzas) totalColumnas += 1;
+  // Determinar número total de columnas
+  let totalColumnas = 4; // Proyecto, Cliente, Responsable, Estado
+  if (configuracion.incluirFechas) totalColumnas += 2;
+  if (configuracion.incluirAprobacion) totalColumnas += 1;
+  if (configuracion.incluirFinanzas) totalColumnas += 2; // ⭐ AHORA SON 2: Cotización + N° Cotiz.
 
-    if (totalColumnas <= 6) {
-      // Tabla con pocas columnas
-      columnStyles[currentIndex++] = { cellWidth: 35 }; // Proyecto
-      columnStyles[currentIndex++] = { cellWidth: 30 }; // Cliente
-      columnStyles[currentIndex++] = { cellWidth: 30 }; // Responsable
+  if (totalColumnas <= 6) {
+    // Tabla con pocas columnas
+    columnStyles[currentIndex++] = { cellWidth: 35 }; // Proyecto
+    columnStyles[currentIndex++] = { cellWidth: 30 }; // Cliente
+    columnStyles[currentIndex++] = { cellWidth: 30 }; // Responsable
 
-      if (configuracion.incluirFechas) {
-        columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" };
-        columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" };
-      }
-
-      columnStyles[currentIndex++] = { cellWidth: 25, halign: "center" }; // Estado
-
-      if (configuracion.incluirAprobacion) {
-        columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" };
-      }
-
-      if (configuracion.incluirFinanzas) {
-        columnStyles[currentIndex++] = { cellWidth: 25, halign: "right" };
-      }
-    } else {
-      // Tabla con muchas columnas
-      columnStyles[currentIndex++] = { cellWidth: 25 }; // Proyecto
-      columnStyles[currentIndex++] = { cellWidth: 22 }; // Cliente
-      columnStyles[currentIndex++] = { cellWidth: 22 }; // Responsable
-
-      if (configuracion.incluirFechas) {
-        columnStyles[currentIndex++] = { cellWidth: 18, halign: "center" };
-        columnStyles[currentIndex++] = { cellWidth: 18, halign: "center" };
-      }
-
-      columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" }; // Estado
-
-      if (configuracion.incluirAprobacion) {
-        columnStyles[currentIndex++] = { cellWidth: 15, halign: "center" };
-      }
-
-      if (configuracion.incluirFinanzas) {
-        columnStyles[currentIndex++] = { cellWidth: 22, halign: "right" };
-      }
+    if (configuracion.incluirFechas) {
+      columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" };
+      columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" };
     }
 
-    return columnStyles;
+    columnStyles[currentIndex++] = { cellWidth: 25, halign: "center" }; // Estado
+
+    if (configuracion.incluirAprobacion) {
+      columnStyles[currentIndex++] = { cellWidth: 20, halign: "center" };
+    }
+
+    if (configuracion.incluirFinanzas) {
+      columnStyles[currentIndex++] = { cellWidth: 25, halign: "right" }; // Cotización
+      columnStyles[currentIndex++] = { cellWidth: 18, halign: "center" }; // ⭐ N° Cotiz.
+    }
+  } else {
+    // Tabla con muchas columnas (más compacta)
+    columnStyles[currentIndex++] = { cellWidth: 22 }; // Proyecto
+    columnStyles[currentIndex++] = { cellWidth: 20 }; // Cliente
+    columnStyles[currentIndex++] = { cellWidth: 20 }; // Responsable
+
+    if (configuracion.incluirFechas) {
+      columnStyles[currentIndex++] = { cellWidth: 16, halign: "center" };
+      columnStyles[currentIndex++] = { cellWidth: 16, halign: "center" };
+    }
+
+    columnStyles[currentIndex++] = { cellWidth: 18, halign: "center" }; // Estado
+
+    if (configuracion.incluirAprobacion) {
+      columnStyles[currentIndex++] = { cellWidth: 14, halign: "center" };
+    }
+
+    if (configuracion.incluirFinanzas) {
+      columnStyles[currentIndex++] = { cellWidth: 20, halign: "right" }; // Cotización
+      columnStyles[currentIndex++] = { cellWidth: 14, halign: "center" }; // ⭐ N° Cotiz.
+    }
   }
+
+  return columnStyles;
+}
 
   // FORMATEAR MONEDA PARA REPORTES
   formatearMonedaParaReporte(valor) {

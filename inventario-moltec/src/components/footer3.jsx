@@ -6,35 +6,14 @@
 import React from 'react';
 import './footer3.css';
 
-/**
- * Componente Footer
- * 
- * Pie de página del sitio web que muestra:
- * - Información de contacto (Email, Dirección, Teléfono, WhatsApp)
- * - Enlaces a redes sociales (Instagram, Facebook)
- * - Copyright con año dinámico
- * 
- * Características:
- * - Totalmente responsive
- * - Iconos con efectos hover
- * - Enlaces externos con seguridad (rel="noopener noreferrer")
- * - Accesible con atributos aria-label
- * 
- * @component
- * @returns {JSX.Element} Footer del sitio web
- */
 const Footer = () => {
   return (
     <footer className="moltec-footer">
-      {/* ============================================
-          CONTENEDOR PRINCIPAL
-          Centra todo el contenido del footer
-          ============================================ */}
       <div className="moltec-footer-container">
         
         {/* ============================================
             SECCIÓN DE INFORMACIÓN DE CONTACTO
-            Muestra email, dirección, teléfono y WhatsApp
+            Ahora SIN WhatsApp (se movió a redes sociales)
             ============================================ */}
         <div className="moltec-contact-info">
           
@@ -59,41 +38,26 @@ const Footer = () => {
           <div className="moltec-contact-item">
             <span className="moltec-contact-label">Teléfono:</span>
             <span className="moltec-contact-text">
-              +502 2212-4880<br />
-              {/* +502 1234-7765 - Comentado por si se necesita en el futuro */}
-            </span>
-          </div>
-
-          {/* WHATSAPP */}
-          <div className="moltec-contact-item">
-            <span className="moltec-contact-label">WhatsApp:</span>
-            <span className="moltec-contact-text">
-              +502 4216-4631
+              +502 2212-4880
             </span>
           </div>
 
         </div>
 
-        {/* ============================================
-            LÍNEA DIVISORIA
-            Separa la información de contacto de las redes sociales
-            ============================================ */}
+        {/* LÍNEA DIVISORIA */}
         <div className="moltec-footer-divider"></div>
 
         {/* ============================================
             SECCIÓN DE REDES SOCIALES
-            Enlaces a Instagram y Facebook
+            AHORA con Instagram, Facebook Y WhatsApp
             ============================================ */}
         <div className="moltec-social-media">
-          {/* Etiqueta "Síguenos en:" */}
           <span className="moltec-social-label">Síguenos en:</span>
           
-          {/* Contenedor de iconos */}
           <div className="moltec-social-icons">
             
             {/* ============================================
                 INSTAGRAM
-                Enlace a perfil de Instagram de MOLTEC
                 ============================================ */}
             <a 
               href="https://www.instagram.com/constructora.moltec/" 
@@ -102,7 +66,6 @@ const Footer = () => {
               className="moltec-social-link"
               aria-label="Síguenos en Instagram"
             >
-              {/* Contenedor del icono de Instagram */}
               <div className="moltec-social-icon instagram">
                 <img 
                   src="/Instagram_icon.png" 
@@ -110,13 +73,11 @@ const Footer = () => {
                   className="moltec-social-image"
                 />
               </div>
-              {/* Texto "Instagram" */}
               <span>Instagram</span>
             </a>
 
             {/* ============================================
                 FACEBOOK
-                Enlace a perfil de Facebook de MOLTEC
                 ============================================ */}
             <a 
               href="https://www.facebook.com/profile.php?id=100064695862060" 
@@ -125,7 +86,6 @@ const Footer = () => {
               className="moltec-social-link"
               aria-label="Síguenos en Facebook"
             >
-              {/* Contenedor del icono de Facebook */}
               <div className="moltec-social-icon facebook">
                 <img 
                   src="/Facebook_logo.png" 
@@ -133,23 +93,37 @@ const Footer = () => {
                   className="moltec-social-image"
                 />
               </div>
-              {/* Texto "Facebook" */}
               <span>Facebook</span>
+            </a>
+
+            {/* ============================================
+                WHATSAPP - NUEVO ✨
+                Abre chat directo con mensaje predefinido
+                ============================================ */}
+            <a 
+              href="https://wa.me/50242164631?text=Hola%20Moltec,%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="moltec-social-link"
+              aria-label="Contáctanos por WhatsApp"
+            >
+              <div className="moltec-social-icon whatsapp">
+                <img 
+                  src="/WhatsApp_icon.png" 
+                  alt="WhatsApp" 
+                  className="moltec-social-image"
+                />
+              </div>
+              <span>WhatsApp</span>
             </a>
 
           </div>
         </div>
 
-        {/* ============================================
-            LÍNEA DIVISORIA
-            Separa las redes sociales del copyright
-            ============================================ */}
+        {/* LÍNEA DIVISORIA */}
         <div className="moltec-footer-divider"></div>
 
-        {/* ============================================
-            SECCIÓN DE COPYRIGHT
-            Muestra el año actual dinámicamente
-            ============================================ */}
+        {/* COPYRIGHT */}
         <div className="moltec-footer-copyright">
           <p>
             &copy; {new Date().getFullYear()} Moltec S.A. Todos los derechos reservados.
@@ -162,44 +136,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-/* ============================================
-   NOTAS IMPORTANTES PARA EL DESARROLLADOR
-   ============================================
-
-   1. CLASES CSS ENCAPSULADAS:
-      - Todas las clases comienzan con "moltec-" para evitar conflictos
-      - No usa selectores genéricos como "footer", "span", "a"
-      - Totalmente compatible con el sistema de gestión
-
-   2. ESTRUCTURA:
-      - Información de contacto en 4 columnas (email, dirección, teléfono, WhatsApp)
-      - Responsive: se convierte en una columna en móviles
-      - Redes sociales con iconos y texto
-
-   3. ACCESIBILIDAD:
-      - target="_blank" para abrir en nueva pestaña
-      - rel="noopener noreferrer" para seguridad
-      - aria-label en enlaces de redes sociales
-      - alt text en imágenes
-
-   4. RESPONSIVE:
-      - 768px: Información de contacto en columna
-      - 480px: Ajustes adicionales de tamaño
-      - Totalmente adaptable a móviles
-
-   5. ICONOS:
-      - /Instagram_icon.png - Icono de Instagram
-      - /Facebook_logo.png - Icono de Facebook
-      - Ubicados en la carpeta public del proyecto
-
-   6. COPYRIGHT DINÁMICO:
-      - new Date().getFullYear() obtiene el año actual automáticamente
-      - Se actualiza cada año sin necesidad de modificar código
-
-   7. EFECTOS HOVER:
-      - Los enlaces de redes sociales se levantan al pasar el mouse
-      - Los iconos se agrandan ligeramente
-      - El brillo aumenta en las imágenes
-
-   ============================================ */

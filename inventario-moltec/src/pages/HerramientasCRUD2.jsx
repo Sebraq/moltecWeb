@@ -748,7 +748,7 @@ const HerramientasCRUD = () => {
                     <td className="crud-td">
                       <div className="crud-table-actions">
                         <button
-                          className="crud-btn-icon crud-btn-primary"
+                          className="crud-btn crud-btn-icon crud-btn-primary"
                           title="Ingreso de Stock"
                           onClick={() =>
                             abrirModalStock(herramienta, "ingreso")
@@ -757,21 +757,21 @@ const HerramientasCRUD = () => {
                           <ArrowUp size={16} />
                         </button>
                         <button
-                          className="crud-btn-icon crud-btn-warning"
+                          className="crud-btn crud-btn-icon crud-btn-warning"
                           title="Salida de Stock"
                           onClick={() => abrirModalStock(herramienta, "salida")}
                         >
                           <ArrowDown size={16} />
                         </button>
                         <button
-                          className="crud-btn-icon crud-btn-secondary"
+                          className="crud-btn crud-btn-icon crud-btn-secondary"
                           title="Editar"
                           onClick={() => abrirModalEditar(herramienta)}
                         >
                           <Edit size={16} />
                         </button>
                         <button
-                          className="crud-btn-icon crud-btn-danger"
+                          className="crud-btn crud-btn-icon crud-btn-danger"
                           title="Eliminar"
                           onClick={() => eliminarHerramienta(herramienta)}
                         >

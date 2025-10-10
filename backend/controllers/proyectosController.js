@@ -20,6 +20,7 @@ const TABLE_CONFIG = {
     fechaAproxFin: "proyecto_fecha_aprox_fin",
     fechaFin: "proyecto_fecha_fin",
     cotizacion: "proyecto_cotizacion",
+    numCotizacion: "proyecto_num_cotizacion", // ⭐ NUEVO CAMPO AGREGADO
     aprobado: "proyecto_aprobado",
     status: "proyecto_status",
     statusRegistro: "proyecto_status_registro",
@@ -55,9 +56,10 @@ const formatearFecha = (fecha) => {
 // 📄 OBTENER TODOS LOS PROYECTOS CON INFORMACIÓN DE RESPONSABLE Y CLIENTE
 const obtenerProyectos = async (req, res) => {
   try {
-    console.log("📁 Obteniendo lista de proyectos...");
+    console.log("🔍 Obteniendo lista de proyectos...");
 
     // Query con JOINs para obtener información del responsable y cliente
+    // ⭐ AGREGAMOS EL NUEVO CAMPO proyecto_num_cotizacion
     const query = `
       SELECT 
         p.${TABLE_CONFIG.primaryKey} as id,
@@ -72,13 +74,14 @@ const obtenerProyectos = async (req, res) => {
         p.${TABLE_CONFIG.fields.fechaAproxFin} as fechaAproxFin,
         p.${TABLE_CONFIG.fields.fechaFin} as fechaFin,
         p.${TABLE_CONFIG.fields.cotizacion} as cotizacion,
+        p.${TABLE_CONFIG.fields.numCotizacion} as numCotizacion,
         p.${TABLE_CONFIG.fields.aprobado} as aprobado,
         p.${TABLE_CONFIG.fields.status} as status,
         p.${TABLE_CONFIG.fields.statusRegistro} as statusRegistro
       FROM ${TABLE_CONFIG.tableName} p
-LEFT JOIN tbl_empleado e ON p.${TABLE_CONFIG.fields.responsableId} = e.pk_empleado_id
-LEFT JOIN tbl_cliente c ON p.${TABLE_CONFIG.fields.clienteId} = c.pk_cliente_id
-WHERE p.${TABLE_CONFIG.fields.statusRegistro} = 1 
+      LEFT JOIN tbl_empleado e ON p.${TABLE_CONFIG.fields.responsableId} = e.pk_empleado_id
+      LEFT JOIN tbl_cliente c ON p.${TABLE_CONFIG.fields.clienteId} = c.pk_cliente_id
+      WHERE p.${TABLE_CONFIG.fields.statusRegistro} = 1 
       ORDER BY p.${TABLE_CONFIG.primaryKey} DESC
     `;
 
@@ -113,6 +116,7 @@ const crearProyecto = async (req, res) => {
       fechaAproxFin,
       fechaFin,
       cotizacion,
+      numCotizacion, // ⭐ NUEVO CAMPO - Número de cotización único
       aprobado,
       status,
     } = req.body;
@@ -121,6 +125,7 @@ const crearProyecto = async (req, res) => {
       nombre,
       responsableId,
       clienteId,
+      numCotizacion, // ⭐ LOG del nuevo campo
     });
 
     // Validaciones básicas
@@ -136,6 +141,26 @@ const crearProyecto = async (req, res) => {
         success: false,
         error: "El nombre del proyecto no puede exceder 150 caracteres",
       });
+    }
+
+    // ⭐ VALIDAR QUE EL NÚMERO DE COTIZACIÓN SEA ÚNICO (si se proporciona)
+    if (numCotizacion) {
+      const checkNumCotizacionQuery = `
+        SELECT COUNT(*) as count 
+        FROM ${TABLE_CONFIG.tableName} 
+        WHERE ${TABLE_CONFIG.fields.numCotizacion} = ? 
+          AND ${TABLE_CONFIG.fields.statusRegistro} = 1
+      `;
+      const [existingNumCotizacion] = await db.query(checkNumCotizacionQuery, [
+        numCotizacion,
+      ]);
+
+      if (existingNumCotizacion[0].count > 0) {
+        return res.status(409).json({
+          success: false,
+          error: `El número de cotización ${numCotizacion} ya está asignado a otro proyecto`,
+        });
+      }
     }
 
     // Validar que el responsable existe y está activo
@@ -221,7 +246,7 @@ const crearProyecto = async (req, res) => {
       });
     }
 
-    // Insertar nuevo proyecto
+    // ⭐ INSERTAR NUEVO PROYECTO (incluyendo el campo proyecto_num_cotizacion)
     const insertQuery = `
       INSERT INTO ${TABLE_CONFIG.tableName} (
         ${TABLE_CONFIG.fields.nombre},
@@ -233,10 +258,11 @@ const crearProyecto = async (req, res) => {
         ${TABLE_CONFIG.fields.fechaAproxFin},
         ${TABLE_CONFIG.fields.fechaFin},
         ${TABLE_CONFIG.fields.cotizacion},
+        ${TABLE_CONFIG.fields.numCotizacion},
         ${TABLE_CONFIG.fields.aprobado},
         ${TABLE_CONFIG.fields.status},
         ${TABLE_CONFIG.fields.statusRegistro}
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
     `;
 
     const [result] = await db.query(insertQuery, [
@@ -249,6 +275,7 @@ const crearProyecto = async (req, res) => {
       fechaAproxFinFormatted,
       fechaFinFormatted,
       cotizacion ? parseFloat(cotizacion) : null,
+      numCotizacion || null, // ⭐ NUEVO VALOR - Puede ser null si no se proporciona
       aprobado ? 1 : 0,
       statusFinal,
     ]);
@@ -261,6 +288,7 @@ const crearProyecto = async (req, res) => {
       {
         id: result.insertId,
         nombre: nombre,
+        numCotizacion: numCotizacion, // ⭐ Registrar en bitácora
       },
       req
     );
@@ -295,6 +323,7 @@ const actualizarProyecto = async (req, res) => {
       fechaAproxFin,
       fechaFin,
       cotizacion,
+      numCotizacion, // ⭐ NUEVO CAMPO
       aprobado,
       status,
     } = req.body;
@@ -322,6 +351,28 @@ const actualizarProyecto = async (req, res) => {
         success: false,
         error: "Proyecto no encontrado",
       });
+    }
+
+    // ⭐ VALIDAR QUE EL NÚMERO DE COTIZACIÓN SEA ÚNICO (excluyendo el proyecto actual)
+    if (numCotizacion) {
+      const checkNumCotizacionQuery = `
+        SELECT COUNT(*) as count 
+        FROM ${TABLE_CONFIG.tableName} 
+        WHERE ${TABLE_CONFIG.fields.numCotizacion} = ? 
+          AND ${TABLE_CONFIG.primaryKey} != ?
+          AND ${TABLE_CONFIG.fields.statusRegistro} = 1
+      `;
+      const [existingNumCotizacion] = await db.query(checkNumCotizacionQuery, [
+        numCotizacion,
+        id,
+      ]);
+
+      if (existingNumCotizacion[0].count > 0) {
+        return res.status(409).json({
+          success: false,
+          error: `El número de cotización ${numCotizacion} ya está asignado a otro proyecto`,
+        });
+      }
     }
 
     // Validar que el responsable existe y está activo
@@ -413,7 +464,7 @@ const actualizarProyecto = async (req, res) => {
     const statusFinal =
       status && statusValidos.includes(status) ? status : "planificado";
 
-    // Actualizar proyecto
+    // ⭐ ACTUALIZAR PROYECTO (incluyendo el campo proyecto_num_cotizacion)
     const updateQuery = `
       UPDATE ${TABLE_CONFIG.tableName} 
       SET 
@@ -426,6 +477,7 @@ const actualizarProyecto = async (req, res) => {
         ${TABLE_CONFIG.fields.fechaAproxFin} = ?,
         ${TABLE_CONFIG.fields.fechaFin} = ?,
         ${TABLE_CONFIG.fields.cotizacion} = ?,
+        ${TABLE_CONFIG.fields.numCotizacion} = ?,
         ${TABLE_CONFIG.fields.aprobado} = ?,
         ${TABLE_CONFIG.fields.status} = ?
       WHERE ${TABLE_CONFIG.primaryKey} = ?
@@ -441,6 +493,7 @@ const actualizarProyecto = async (req, res) => {
       fechaAproxFinFormatted,
       fechaFinFormatted,
       cotizacion ? parseFloat(cotizacion) : null,
+      numCotizacion || null, // ⭐ NUEVO VALOR
       aprobado ? 1 : 0,
       statusFinal,
       id,
@@ -454,6 +507,7 @@ const actualizarProyecto = async (req, res) => {
       {
         id: id,
         nombre: nombre,
+        numCotizacion: numCotizacion, // ⭐ Registrar en bitácora
       },
       req
     );
@@ -729,6 +783,7 @@ const buscarProyectos = async (req, res) => {
         CONCAT(c.cliente_nombre, ' ', c.cliente_apellido) as clienteNombre,
         p.${TABLE_CONFIG.fields.status} as status,
         p.${TABLE_CONFIG.fields.cotizacion} as cotizacion,
+        p.${TABLE_CONFIG.fields.numCotizacion} as numCotizacion,
         p.${TABLE_CONFIG.fields.aprobado} as aprobado
       FROM ${TABLE_CONFIG.tableName} p
       INNER JOIN tbl_empleado e ON p.${
@@ -777,6 +832,7 @@ const obtenerProyectoPorId = async (req, res) => {
         p.${TABLE_CONFIG.fields.fechaAproxFin} as fechaAproxFin,
         p.${TABLE_CONFIG.fields.fechaFin} as fechaFin,
         p.${TABLE_CONFIG.fields.cotizacion} as cotizacion,
+        p.${TABLE_CONFIG.fields.numCotizacion} as numCotizacion,
         p.${TABLE_CONFIG.fields.aprobado} as aprobado,
         p.${TABLE_CONFIG.fields.status} as status
       FROM ${TABLE_CONFIG.tableName} p
@@ -842,4 +898,14 @@ EJEMPLO PARA HERRAMIENTAS:
 - Cambiar mensajes de console.log
 - Adaptar validaciones específicas de herramientas
 - Todo lo demás queda igual
+
+⭐ CAMBIOS REALIZADOS PARA NÚMERO DE COTIZACIÓN:
+1. ✅ Agregado campo 'numCotizacion' en TABLE_CONFIG.fields
+2. ✅ Incluido en la consulta SELECT de obtenerProyectos
+3. ✅ Validación de unicidad en crearProyecto (líneas 112-127)
+4. ✅ Validación de unicidad en actualizarProyecto (líneas 295-310)
+5. ✅ Incluido en INSERT query de crearProyecto
+6. ✅ Incluido en UPDATE query de actualizarProyecto
+7. ✅ Registrado en bitácora al crear/actualizar proyectos
+8. ✅ Incluido en buscarProyectos y obtenerProyectoPorId
 */
