@@ -146,18 +146,59 @@
 }
 
 /* ============================================
-   RESPONSIVE - TABLETS (768px y menores)
+   RESPONSIVE - TABLETS (768px - 1023px)
    ============================================ */
-@media (max-width: 768px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .servicios-section {
-    padding: 2.5rem 1rem;
+    padding: 4rem 1.5rem;
   }
 
-  .servicios-section .section-title {
-    font-size: 1.75rem;
+  /* 🔧 AJUSTE DEL TÍTULO PRINCIPAL EN TABLETS */
+  .servicios-title-main {
+    font-size: 3rem; /* Consistente con info3.css */
   }
 
-  .servicios-section .section-title::after {
+  .servicios-title-main::after {
+    width: 120px;
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 35px;
+    max-width: 85%;
+    padding: 20px;
+  }
+
+  .servicios-icon {
+    width: 110px;
+    height: 110px;
+  }
+
+  .servicios-title {
+    font-size: 17px;
+    max-width: 140px;
+  }
+
+  /* Hover menos exagerado en tablets */
+  .servicios-item:hover {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (menores a 768px)
+   ============================================ */
+@media (max-width: 767px) {
+  .servicios-section {
+    padding: 2rem 1rem;
+  }
+
+  /* 🔧 AJUSTE DEL TÍTULO PRINCIPAL EN MÓVILES */
+  .servicios-title-main {
+    font-size: 2rem; /* Consistente con info3.css */
+  }
+
+  .servicios-title-main::after {
     width: 80px;
     height: 3px;
   }
@@ -165,7 +206,7 @@
   .servicios-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 30px;
-    max-width: 85%;
+    max-width: 90%;
     padding: 20px;
   }
 
@@ -179,25 +220,30 @@
     max-width: 140px;
   }
 
-  /* Hover menos exagerado en tablets */
+  /* Hover moderado en móviles */
   .servicios-item:hover {
-    transform: translateY(-6px) scale(1.03);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .servicios-item:hover .servicios-icon img {
+    transform: scale(1.05) rotate(3deg);
   }
 }
 
 /* ============================================
-   RESPONSIVE - MÓVILES (480px y menores)
+   RESPONSIVE - MÓVILES PEQUEÑOS (menores a 480px)
    ============================================ */
 @media (max-width: 480px) {
   .servicios-section {
-    padding: 2rem 0.5rem;
+    padding: 1.5rem 0.5rem;
   }
 
-  .servicios-section .section-title {
-    font-size: 1.5rem;
+  /* 🔧 AJUSTE DEL TÍTULO PRINCIPAL EN MÓVILES PEQUEÑOS */
+  .servicios-title-main {
+    font-size: 1.5rem; /* Consistente con info3.css */
   }
 
-  .servicios-section .section-title::after {
+  .servicios-title-main::after {
     width: 60px;
     height: 3px;
   }
@@ -231,11 +277,21 @@
 }
 
 /* ============================================
-   RESPONSIVE - MÓVILES PEQUEÑOS (320px y menores)
+   RESPONSIVE - MÓVILES EXTRA PEQUEÑOS (menores a 320px)
    ============================================ */
 @media (max-width: 320px) {
   .servicios-section {
     padding: 1.5rem 0.5rem;
+  }
+
+  /* 🔧 TÍTULO MÁS PEQUEÑO PARA PANTALLAS MUY CHICAS */
+  .servicios-title-main {
+    font-size: 1.25rem;
+  }
+
+  .servicios-title-main::after {
+    width: 50px;
+    height: 2px;
   }
 
   .servicios-grid {

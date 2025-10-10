@@ -1,0 +1,321 @@
+/* ============================================
+   MOLTEC S.A. - COMPONENTE FOOTER
+   Sistema de Inventario Web - Página Informativa
+   TOTALMENTE ENCAPSULADO - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   FOOTER PRINCIPAL
+   Contenedor principal del footer
+   ============================================ */
+.moltec-footer {
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  background-color: #131F2B; /* Color de fondo oscuro (ORIGINAL) */
+  border-top: 1px solid #2a3441; /* Línea sutil más clara que el fondo (ORIGINAL) */
+  padding: 40px 20px 20px; /* Padding: arriba, lados, abajo (ORIGINAL) */
+  margin-top: auto; /* Para que el footer se mantenga abajo (ORIGINAL) */
+  width: 100%; /* Ocupa todo el ancho */
+  box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+/* Reset box-sizing solo dentro del footer */
+.moltec-footer *,
+.moltec-footer *::before,
+.moltec-footer *::after {
+  box-sizing: border-box;
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   Centra el contenido del footer
+   ============================================ */
+.moltec-footer-container {
+  max-width: 1200px; /* Ancho máximo del contenido (ORIGINAL) */
+  margin: 0 auto; /* Centra horizontalmente (ORIGINAL) */
+  text-align: center; /* Centra el texto (ORIGINAL) */
+}
+
+/* ============================================
+   INFORMACIÓN DE CONTACTO
+   Sección con email, dirección, teléfono, WhatsApp
+   ============================================ */
+.moltec-contact-info {
+  display: flex; /* Usa flexbox */
+  flex-direction: row; /* Los elementos van horizontalmente (ORIGINAL) */
+  justify-content: space-evenly; /* Distribución uniforme con espacios iguales (ORIGINAL) */
+  align-items: center; /* Centra verticalmente los elementos (ORIGINAL) */
+  gap: 40px; /* Espaciado entre cada elemento de contacto (ORIGINAL) */
+  margin-bottom: 30px; /* Margen inferior (ORIGINAL) */
+  max-width: 1000px; /* Limita el ancho máximo (ORIGINAL) */
+  margin-left: auto; /* Centra el contenedor (ORIGINAL) */
+  margin-right: auto; /* Centra el contenedor (ORIGINAL) */
+}
+
+/* ============================================
+   ELEMENTO INDIVIDUAL DE CONTACTO
+   Cada item (email, dirección, teléfono, WhatsApp)
+   ============================================ */
+.moltec-contact-item {
+  display: flex; /* Usa flexbox */
+  flex-direction: column; /* Label arriba, info abajo (ORIGINAL) */
+  align-items: center; /* Centra horizontalmente (ORIGINAL) */
+  gap: 5px; /* Pequeño espacio entre label e info (ORIGINAL) */
+  flex: 1; /* Cada elemento ocupa el mismo espacio (ORIGINAL) */
+  text-align: center; /* Centra el texto dentro de cada elemento (ORIGINAL) */
+}
+
+/* ============================================
+   ETIQUETAS DE CONTACTO
+   Labels como "Email:", "Dirección:", etc.
+   ============================================ */
+.moltec-contact-label {
+  font-weight: 600; /* Texto semi-bold (ORIGINAL) */
+  font-size: 14px; /* Tamaño de fuente (ORIGINAL) */
+  color: #a8b3c1; /* Color gris claro para texto en fondo oscuro (ORIGINAL) */
+  text-transform: uppercase; /* Convierte a mayúsculas (ORIGINAL) */
+  letter-spacing: 0.5px; /* Espaciado entre letras (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+}
+
+/* ============================================
+   TEXTO DE CONTACTO
+   Información de contacto (emails, direcciones, números)
+   ============================================ */
+.moltec-contact-text {
+  font-size: 16px; /* Tamaño de fuente (ORIGINAL) */
+  color: #ffffff; /* Texto blanco para contrastar con fondo oscuro (ORIGINAL) */
+  line-height: 1.5; /* Altura de línea (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+}
+
+/* ============================================
+   SECCIÓN DE REDES SOCIALES
+   ============================================ */
+
+/* Contenedor principal de redes sociales */
+.moltec-social-media {
+  margin: 20px 0; /* Reducido de 30px a 20px (ORIGINAL) */
+  text-align: center; /* Centra el contenido */
+}
+
+/* Etiqueta "Síguenos en:" */
+.moltec-social-label {
+  display: block; /* Se comporta como bloque */
+  font-weight: 600; /* Semi-negrita (ORIGINAL) */
+  font-size: 14px; /* Tamaño de fuente (ORIGINAL) */
+  color: #a8b3c1; /* Color gris claro (ORIGINAL) */
+  text-transform: uppercase; /* Mayúsculas (ORIGINAL) */
+  letter-spacing: 0.5px; /* Espaciado entre letras (ORIGINAL) */
+  margin-bottom: 15px; /* Reducido de 20px a 15px (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+}
+
+/* Contenedor de los iconos de redes sociales */
+.moltec-social-icons {
+  display: flex; /* Usa flexbox */
+  justify-content: center; /* Centra horizontalmente (ORIGINAL) */
+  align-items: center; /* Centra verticalmente (ORIGINAL) */
+  gap: 15px; /* Reducido de 30px a 15px (ORIGINAL) */
+}
+
+/* Enlaces de redes sociales */
+.moltec-social-link {
+  display: flex; /* Usa flexbox */
+  flex-direction: row; /* Horizontal (ORIGINAL) */
+  align-items: center; /* Centra verticalmente (ORIGINAL) */
+  gap: 10px; /* Aumentado de 8px a 10px (ORIGINAL) */
+  text-decoration: none; /* Sin subrayado */
+  color: #ffffff; /* Texto blanco (ORIGINAL) */
+  transition: all 0.3s ease; /* Transición suave (ORIGINAL) */
+  padding: 8px 12px; /* Ajustado el padding (ORIGINAL) */
+  border-radius: 25px; /* Más redondeado (ORIGINAL) */
+}
+
+/* Hover en enlaces de redes sociales */
+.moltec-social-link:hover {
+  transform: translateY(-3px); /* Levanta el elemento (ORIGINAL) */
+  color: #ffffff; /* Mantiene texto blanco (ORIGINAL) */
+}
+
+/* ============================================
+   CONTENEDOR DEL ICONO DE RED SOCIAL
+   ============================================ */
+.moltec-social-icon {
+  width: 40px; /* Ancho del contenedor (ORIGINAL) */
+  height: 40px; /* Alto del contenedor (ORIGINAL) */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  transition: all 0.3s ease; /* Transición suave (ORIGINAL) */
+  flex-shrink: 0; /* Evita que el icono se reduzca (ORIGINAL) */
+}
+
+/* Hover en iconos específicos - Instagram */
+.moltec-social-link:hover .moltec-social-icon.instagram {
+  transform: scale(1.1); /* Agranda ligeramente (ORIGINAL) */
+}
+
+/* Hover en iconos específicos - Facebook */
+.moltec-social-link:hover .moltec-social-icon.facebook {
+  transform: scale(1.1); /* Agranda ligeramente (ORIGINAL) */
+}
+
+/* ============================================
+   IMÁGENES DE REDES SOCIALES
+   Iconos de Instagram y Facebook
+   ============================================ */
+.moltec-social-image {
+  width: 32px; /* Aumentado para que se vea mejor (ORIGINAL) */
+  height: 32px; /* Aumentado para que se vea mejor (ORIGINAL) */
+  object-fit: contain; /* Mantiene proporciones (ORIGINAL) */
+  transition: all 0.3s ease; /* Transición suave (ORIGINAL) */
+}
+
+/* Hover en imágenes de redes sociales */
+.moltec-social-link:hover .moltec-social-image {
+  transform: scale(1.1); /* Agranda ligeramente (ORIGINAL) */
+  filter: brightness(1.1); /* Aumenta brillo (ORIGINAL) */
+}
+
+/* ============================================
+   TEXTO DE REDES SOCIALES
+   Texto "Instagram" y "Facebook"
+   ============================================ */
+.moltec-social-link span {
+  font-size: 14px; /* Tamaño de fuente (ORIGINAL) */
+  font-weight: 500; /* Semi-negrita (ORIGINAL) */
+  transition: all 0.3s ease; /* Transición suave (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  color: #ffffff; /* Texto blanco (ORIGINAL) - CORREGIDO */
+}
+
+/* Hover en texto de redes sociales */
+.moltec-social-link:hover span {
+  color: #ffffff; /* Mantiene texto blanco (ORIGINAL) */
+  font-weight: 600; /* Más negrita (ORIGINAL) */
+}
+
+/* ============================================
+   LÍNEA DIVISORIA
+   Línea horizontal que separa secciones
+   ============================================ */
+.moltec-footer-divider {
+  height: 1px; /* Grosor de la línea (ORIGINAL) */
+  background-color: #2a3441; /* Color más claro que el fondo oscuro (ORIGINAL) */
+  margin: 20px auto; /* Margen automático para centrar (ORIGINAL) */
+  width: 60%; /* Ancho de la línea (ORIGINAL) */
+  max-width: 300px; /* Ancho máximo (ORIGINAL) */
+}
+
+/* ============================================
+   SECCIÓN DE COPYRIGHT
+   Texto de derechos reservados
+   ============================================ */
+.moltec-footer-copyright {
+  margin-top: 20px; /* Margen superior (ORIGINAL) */
+}
+
+/* Párrafo de copyright */
+.moltec-footer-copyright p {
+  margin: 0; /* Quita el margen por defecto del párrafo (ORIGINAL) */
+  font-size: 14px; /* Tamaño de fuente (ORIGINAL) */
+  color: #a8b3c1; /* Color gris claro para texto en fondo oscuro (ORIGINAL) */
+  text-align: center; /* Centra el texto (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   ============================================ */
+@media (max-width: 768px) {
+  .moltec-footer {
+    padding: 30px 15px 15px; /* Reduce el padding en móviles (ORIGINAL) */
+  }
+  
+  .moltec-contact-info {
+    flex-direction: column; /* Cambia a vertical en pantallas medianas (ORIGINAL) */
+    gap: 15px; /* Reduce el espaciado entre elementos (ORIGINAL) */
+  }
+  
+  .moltec-contact-text {
+    font-size: 15px; /* Texto ligeramente más pequeño (ORIGINAL) */
+  }
+  
+  .moltec-social-icons {
+    gap: 20px; /* Reduce el espaciado entre iconos en móvil (ORIGINAL) */
+  }
+  
+  .moltec-social-icon {
+    width: 45px; /* Iconos más grandes en tablet (ORIGINAL) */
+    height: 45px; /* Iconos más grandes en tablet (ORIGINAL) */
+  }
+  
+  .moltec-social-link span {
+    font-size: 13px; /* Texto más pequeño (ORIGINAL) */
+  }
+  
+  .moltec-footer-divider {
+    width: 80%; /* Línea divisoria más ancha en móviles (ORIGINAL) */
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   ============================================ */
+@media (max-width: 480px) {
+  .moltec-footer {
+    padding: 25px 10px 10px; /* Padding aún menor para pantallas muy pequeñas (ORIGINAL) */
+  }
+  
+  .moltec-contact-text {
+    font-size: 14px; /* Texto más pequeño (ORIGINAL) */
+  }
+  
+  .moltec-contact-label {
+    font-size: 13px; /* Labels más pequeños (ORIGINAL) */
+  }
+  
+  .moltec-social-icons {
+    gap: 15px; /* Reduce espaciado (ORIGINAL) */
+  }
+  
+  .moltec-social-icon {
+    width: 40px; /* Iconos tamaño estándar (ORIGINAL) */
+    height: 40px; /* Iconos tamaño estándar (ORIGINAL) */
+  }
+  
+  .moltec-social-link span {
+    font-size: 12px; /* Texto más pequeño (ORIGINAL) */
+  }
+  
+  .moltec-social-label {
+    font-size: 14px; /* Mantiene tamaño (ORIGINAL) */
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   Mejoras para usuarios con tecnologías asistivas
+   ============================================ */
+.moltec-social-link:focus {
+  outline: 2px solid #FFCC00; /* Contorno amarillo al enfocar */
+  outline-offset: 2px; /* Separación del contorno */
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   Para usuarios que prefieren menos animaciones
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .moltec-social-link,
+  .moltec-social-icon,
+  .moltec-social-image {
+    transition: none !important; /* Elimina todas las transiciones */
+  }
+
+  .moltec-social-link:hover,
+  .moltec-social-link:hover .moltec-social-icon,
+  .moltec-social-link:hover .moltec-social-image {
+    transform: none; /* Elimina transformaciones */
+  }
+}

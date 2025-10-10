@@ -101,7 +101,7 @@ class ReportesService {
 
     doc.setFont("Arial", "normal");
     doc.setFontSize(12);
-    doc.text("Constructora y Servicios de Ingeniería", 55, 32);
+    doc.text("Constructora", 55, 32);
     doc.text("Sistema de Gestión de Inventario", 55, 38);
 
     // TÍTULO DEL REPORTE
@@ -130,7 +130,7 @@ class ReportesService {
     doc.text(`Generado el: ${fechaHora}`, 20, 65);
 
     // INFORMACIÓN DE CONTACTO
-    doc.text("Email: contacto@moltec.com.gt | Tel: +502 1234-5678", 20, 70);
+    doc.text("Email: admin@grupomolet.info | Tel: +502 2212-4880", 20, 70);
 
     // LÍNEA SEPARADORA
     doc.setDrawColor(19, 31, 43);
@@ -345,7 +345,7 @@ class ReportesService {
       doc.text(this.obtenerFechaCompleta(), 190, 290, { align: "right" }); // X=190 para coincidir
 
       // Centro
-      doc.text("contacto@moltec.com.gt | +502 1234-5678", 105, 285, {
+      doc.text("admin@grupomolet.info | +502 2212-4880", 105, 285, {
         align: "center",
       });
       doc.text("Documento generado automáticamente por el sistema", 105, 290, {

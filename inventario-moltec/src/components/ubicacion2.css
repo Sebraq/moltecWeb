@@ -1,0 +1,329 @@
+/* ============================================
+   MOLTEC S.A. - COMPONENTE UBICACIÓN
+   Sistema de Inventario Web - Página Informativa
+   ENCAPSULADO - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   SECCIÓN UBICACIÓN
+   Contenedor principal de la sección
+   ============================================ */
+.ubicacion-section {
+  padding: 4rem 0; /* Espaciado vertical superior e inferior */
+  font-family: Arial, sans-serif; /* Tipografía corporativa */
+  background-color: #fff; /* Fondo blanco */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  display: flex; /* Usa flexbox para centrar contenido */
+  flex-direction: column; /* Organiza elementos en columna */
+  align-items: center; /* Centra horizontalmente todos los elementos hijos */
+}
+
+/* ============================================
+   TÍTULO "UBICACIÓN"
+   Título principal de la sección con línea decorativa
+   ============================================ */
+.ubicacion-title {
+  text-align: center; /* Centra el texto horizontalmente */
+  font-size: 2.5rem; /* Tamaño grande para el título */
+  color: #131F2B; /* Color azul oscuro corporativo */
+  margin-bottom: 1.5rem; /* Espacio debajo del título */
+  margin-top: 0; /* Sin margen superior */
+  position: relative; /* Para posicionar el ::after */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  font-weight: 700; /* Negrita */
+  line-height: 1.2; /* Altura de línea ajustada */
+  width: 100%; /* Ocupa todo el ancho */
+}
+
+/* Línea decorativa debajo del título */
+.ubicacion-title::after {
+  content: ""; /* Elemento vacío */
+  display: block; /* Se comporta como bloque */
+  width: 100px; /* Ancho de la línea */
+  height: 4px; /* Grosor de la línea */
+  background: #131F2B; /* Color de la línea */
+  margin: 0.5rem auto 0; /* Centra horizontalmente con auto */
+  border-radius: 2px; /* Bordes ligeramente redondeados */
+}
+
+/* ============================================
+   TEXTO DE DIRECCIÓN - CORREGIDO
+   Se agregaron propiedades para garantizar el centrado
+   ============================================ */
+.ubicacion-direccion {
+  /* PROPIEDADES DE CENTRADO */
+  text-align: center; /* Centra el texto */
+  display: block; /* Asegura que sea un elemento de bloque */
+  width: 100%; /* Ocupa todo el ancho del contenedor padre */
+  
+  /* ESTILOS VISUALES */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  font-size: 1.125rem; /* Tamaño de fuente legible (18px) */
+  color: #6c757d; /* Color gris para texto secundario */
+  
+  /* ESPACIADO */
+  margin-bottom: 2rem; /* Espacio debajo del texto */
+  margin-left: auto; /* Centra el contenedor */
+  margin-right: auto; /* Centra el contenedor */
+  padding: 0 1rem; /* Padding horizontal para móviles */
+  
+  /* DIMENSIONES */
+  max-width: 600px; /* Ancho máximo para legibilidad */
+  
+  /* TIPOGRAFÍA */
+  line-height: 1.6; /* Altura de línea para legibilidad */
+}
+
+/* ============================================
+   CONTENEDOR DEL MAPA
+   Wrapper que contiene el mapa de Leaflet
+   ============================================ */
+.ubicacion-mapa-wrapper {
+  display: flex; /* Usa flexbox para centrar */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  padding: 1rem 0; /* Espaciado vertical */
+  width: 100%; /* Ocupa todo el ancho */
+}
+
+/* ============================================
+   CONTENEDOR DEL MAPA LEAFLET
+   Contenedor directo del componente MapContainer
+   ============================================ */
+.ubicacion-mapa-container {
+  height: 450px; /* Altura fija del mapa */
+  width: 65%; /* 65% del ancho disponible */
+  min-width: 300px; /* Ancho mínimo para móviles */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  border: 2px solid #e9ecef; /* Borde gris claro */
+  transition: all 0.3s ease; /* Transición suave para hover */
+  overflow: hidden; /* Oculta contenido que se sale */
+}
+
+/* Efecto hover en el contenedor del mapa */
+.ubicacion-mapa-container:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+  transform: translateY(-2px); /* Levanta ligeramente el mapa */
+}
+
+/* ============================================
+   ESTILOS DEL MAPA LEAFLET
+   Personalización de componentes de Leaflet
+   ============================================ */
+
+/* Personalizar el popup (ventana emergente) */
+.ubicacion-section .leaflet-popup-content-wrapper {
+  background: #131F2B; /* Fondo azul oscuro corporativo */
+  color: white; /* Texto blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+}
+
+/* Contenido del popup */
+.ubicacion-section .leaflet-popup-content {
+  margin: 12px 16px; /* Espaciado interno */
+  font-size: 1rem; /* Tamaño de fuente legible */
+  font-weight: 500; /* Semi-negrita */
+}
+
+/* Flecha del popup */
+.ubicacion-section .leaflet-popup-tip {
+  background: #131F2B; /* Mismo color que el fondo del popup */
+}
+
+/* Contenedor de controles de zoom */
+.ubicacion-section .leaflet-control-zoom {
+  border: none; /* Sin borde */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+/* Botones de zoom (+/-) */
+.ubicacion-section .leaflet-control-zoom a {
+  background-color: #fff; /* Fondo blanco */
+  border-bottom: 1px solid #ccc; /* Borde inferior gris */
+  color: #131F2B; /* Color del icono */
+  font-weight: bold; /* Negrita */
+}
+
+/* Hover en botones de zoom */
+.ubicacion-section .leaflet-control-zoom a:hover {
+  background-color: #f4f4f4; /* Fondo gris claro al pasar el mouse */
+}
+
+/* ============================================
+   LOADING STATE
+   Estado de carga del mapa (si se implementa)
+   ============================================ */
+.ubicacion-loading {
+  display: flex; /* Flexbox para centrar contenido */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 450px; /* Misma altura que el mapa */
+  width: 65%; /* Mismo ancho que el mapa */
+  min-width: 300px; /* Ancho mínimo */
+  background: #f8f9fa; /* Fondo gris claro */
+  border-radius: 12px; /* Bordes redondeados */
+  border: 2px solid #e9ecef; /* Borde gris */
+  color: #6c757d; /* Color del texto */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  font-size: 1rem; /* Tamaño de fuente */
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   Ajustes para pantallas medianas
+   ============================================ */
+@media (max-width: 768px) {
+  .ubicacion-section {
+    padding: 3rem 0; /* Reduce el padding vertical */
+  }
+
+  .ubicacion-title {
+    font-size: 2rem; /* Reduce el tamaño del título */
+  }
+
+  .ubicacion-title::after {
+    width: 80px; /* Línea más corta */
+    height: 3px; /* Línea más delgada */
+  }
+
+  .ubicacion-direccion {
+    font-size: 1rem; /* Reduce el tamaño del texto */
+    margin-bottom: 1.5rem; /* Reduce el margen inferior */
+    padding: 0 1rem; /* Mantiene el padding horizontal */
+  }
+
+  .ubicacion-mapa-wrapper {
+    padding: 0.5rem 0; /* Reduce el padding */
+  }
+
+  .ubicacion-mapa-container {
+    height: 350px; /* Reduce la altura del mapa */
+    width: 85%; /* Aumenta el ancho relativo */
+  }
+
+  .ubicacion-loading {
+    height: 350px; /* Ajusta altura del loading */
+    width: 85%; /* Ajusta ancho del loading */
+    font-size: 0.9375rem; /* Ajusta tamaño de fuente */
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   Ajustes para pantallas pequeñas
+   ============================================ */
+@media (max-width: 480px) {
+  .ubicacion-section {
+    padding: 2rem 0; /* Reduce más el padding */
+  }
+
+  .ubicacion-title {
+    font-size: 1.5rem; /* Título más pequeño */
+  }
+
+  .ubicacion-title::after {
+    width: 60px; /* Línea más corta */
+    height: 3px; /* Mantiene el grosor */
+  }
+
+  .ubicacion-direccion {
+    font-size: 0.9375rem; /* Texto más pequeño (15px) */
+    margin-bottom: 1rem; /* Reduce el margen */
+    padding: 0 0.5rem; /* Reduce el padding horizontal */
+    line-height: 1.5; /* Ajusta la altura de línea */
+  }
+
+  .ubicacion-mapa-wrapper {
+    padding: 0.25rem 0; /* Padding mínimo */
+  }
+
+  .ubicacion-mapa-container {
+    height: 280px; /* Mapa más pequeño */
+    width: 95%; /* Casi todo el ancho */
+  }
+
+  .ubicacion-loading {
+    height: 280px; /* Ajusta altura */
+    width: 95%; /* Ajusta ancho */
+    font-size: 0.875rem; /* Texto más pequeño */
+  }
+
+  /* Ajustar controles del mapa en móvil */
+  .ubicacion-section .leaflet-control-container {
+    font-size: 0.875rem; /* Controles más pequeños */
+  }
+
+  .ubicacion-section .leaflet-control-zoom a {
+    width: 35px; /* Botones más pequeños */
+    height: 35px; /* Botones más pequeños */
+    line-height: 35px; /* Centra el icono */
+    font-size: 1.2rem; /* Tamaño del icono +/- */
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (360px y menores)
+   Ajustes para pantallas muy pequeñas
+   ============================================ */
+@media (max-width: 360px) {
+  .ubicacion-section {
+    padding: 1.5rem 0; /* Padding mínimo */
+  }
+
+  .ubicacion-title {
+    font-size: 1.25rem; /* Título muy pequeño */
+  }
+
+  .ubicacion-title::after {
+    width: 50px; /* Línea muy corta */
+  }
+
+  .ubicacion-direccion {
+    font-size: 0.875rem; /* Texto muy pequeño (14px) */
+    padding: 0 0.5rem; /* Padding mínimo */
+  }
+
+  .ubicacion-mapa-container {
+    height: 250px; /* Mapa muy pequeño */
+    width: 98%; /* Casi todo el ancho disponible */
+  }
+
+  .ubicacion-loading {
+    height: 250px; /* Ajusta altura */
+    width: 98%; /* Ajusta ancho */
+    font-size: 0.8rem; /* Texto muy pequeño */
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   Mejoras para usuarios con tecnologías asistivas
+   ============================================ */
+.ubicacion-section .leaflet-control-zoom a:focus {
+  outline: 2px solid #FFCC00; /* Contorno amarillo al enfocar */
+  outline-offset: 2px; /* Separación del contorno */
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   Para usuarios que prefieren menos animaciones
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .ubicacion-mapa-container {
+    transition: none; /* Elimina transiciones */
+  }
+
+  .ubicacion-mapa-container:hover {
+    transform: none; /* Elimina transformación hover */
+  }
+}
+
+/* ============================================
+   OPTIMIZACIÓN DE RENDIMIENTO
+   Sugiere al navegador optimizar transformaciones
+   ============================================ */
+.ubicacion-mapa-container {
+  will-change: transform; /* Optimiza cambios de transform */
+}

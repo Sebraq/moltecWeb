@@ -1,0 +1,245 @@
+/* ============================================
+   MOLTEC S.A. - COMPONENTE CONTACTO
+   Sistema de Inventario Web - Página Informativa
+   TOTALMENTE ENCAPSULADO - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   SECCIÓN PRINCIPAL DE CONTACTO
+   Contenedor principal que encapsula todo el componente
+   ============================================ */
+.contacto-section {
+  padding: 4rem 0; /* Espaciado vertical superior e inferior */
+  font-family: Arial, sans-serif; /* Tipografía corporativa */
+  background-color: #fff; /* Fondo blanco */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  display: flex; /* Usa flexbox para centrar */
+  flex-direction: column; /* Organiza elementos en columna */
+  align-items: center; /* Centra horizontalmente todos los elementos */
+}
+
+/* ============================================
+   TÍTULO DE LA SECCIÓN "CONTÁCTENOS"
+   ============================================ */
+.contacto-title {
+  text-align: center; /* Centra el texto */
+  font-size: 2.5rem; /* Tamaño grande para el título */
+  color: #131F2B; /* Color azul oscuro corporativo */
+  margin-bottom: 1.5rem; /* Espacio debajo del título */
+  margin-top: 0; /* Sin margen superior */
+  position: relative; /* Para posicionar el ::after */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  font-weight: 700; /* Negrita */
+  line-height: 1.2; /* Altura de línea ajustada */
+  width: 100%; /* Ocupa todo el ancho */
+}
+
+/* Línea decorativa debajo del título */
+.contacto-title::after {
+  content: ""; /* Elemento vacío */
+  display: block; /* Se comporta como bloque */
+  width: 100px; /* Ancho de la línea */
+  height: 4px; /* Grosor de la línea */
+  background: #131F2B; /* Color de la línea */
+  margin: 0.5rem auto 0; /* Centra horizontalmente con auto */
+  border-radius: 2px; /* Bordes ligeramente redondeados */
+}
+
+/* ============================================
+   FORMULARIO DE CONTACTO
+   Contenedor del formulario con todos los campos
+   ============================================ */
+.contacto-form {
+  max-width: 400px; /* Ancho máximo del formulario (ORIGINAL) */
+  width: 100%; /* Ocupa todo el ancho disponible hasta el máximo */
+  margin: 0 auto; /* Centra horizontalmente */
+  margin-bottom: 1.5rem; /* Margen inferior (ORIGINAL) */
+  display: flex; /* Usa flexbox */
+  flex-direction: column; /* Organiza campos en columna */
+  align-items: center; /* Centra los elementos (ORIGINAL) */
+  padding: 0 1rem; /* Padding horizontal para móviles */
+  box-sizing: border-box; /* Incluye padding en el cálculo del ancho */
+}
+
+/* ============================================
+   INPUTS Y TEXTAREA DEL FORMULARIO
+   Estilos para todos los campos de entrada
+   ============================================ */
+.contacto-input,
+.contacto-textarea {
+  width: 100%; /* Ocupa todo el ancho del contenedor (ORIGINAL) */
+  margin-bottom: 10px; /* Espacio entre campos (ORIGINAL) */
+  padding: 8px; /* Espaciado interno (ORIGINAL) */
+  box-sizing: border-box; /* Para que padding no agrande el ancho (ORIGINAL) */
+  font-size: 16px; /* Tamaño de fuente (ORIGINAL) */
+  border: 1px solid #ccc; /* Borde gris claro (ORIGINAL) */
+  border-radius: 4px; /* Bordes redondeados (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente (ORIGINAL) */
+  outline: none; /* Elimina el outline por defecto */
+  transition: border-color 0.3s ease; /* Transición suave solo para el borde */
+}
+
+/* Estado focus (cuando el usuario hace clic en el campo) */
+.contacto-input:focus,
+.contacto-textarea:focus {
+  border-color: #131F2B; /* Borde más oscuro al enfocar */
+}
+
+/* Estado disabled (cuando el formulario está enviando) */
+.contacto-input:disabled,
+.contacto-textarea:disabled {
+  opacity: 0.6; /* Más transparente */
+  cursor: not-allowed; /* Cursor de "no permitido" */
+}
+
+/* ============================================
+   TEXTAREA ESPECÍFICO
+   Área de texto para el mensaje
+   ============================================ */
+.contacto-textarea {
+  height: 100px; /* Altura fija (ORIGINAL) */
+  resize: vertical; /* Para poder cambiar tamaño vertical (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Mantiene la tipografía */
+}
+
+/* ============================================
+   MENSAJE DE ERROR
+   Muestra errores de validación debajo de cada campo
+   ============================================ */
+.contacto-error-message {
+  color: red; /* Color rojo para errores (ORIGINAL era inline style) */
+  font-size: 0.875rem; /* Texto pequeño */
+  margin: 0 0 10px 0; /* Margen inferior igual que los inputs */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  width: 100%; /* Ocupa todo el ancho */
+  text-align: left; /* Alineado a la izquierda */
+}
+
+/* ============================================
+   BOTÓN DE ENVÍO
+   Botón principal del formulario
+   ============================================ */
+.contacto-submit-btn {
+  padding: 10px 20px; /* Espaciado interno (ORIGINAL) */
+  cursor: pointer; /* Cursor de puntero (ORIGINAL) */
+  font-size: 16px; /* Tamaño de fuente (ORIGINAL) */
+  background-color: #131F2B; /* Fondo azul oscuro (ORIGINAL) */
+  color: white; /* Texto blanco (ORIGINAL) */
+  border: none; /* Sin borde (ORIGINAL) */
+  border-radius: 4px; /* Bordes redondeados (ORIGINAL) */
+  font-family: Arial, sans-serif; /* Tipografía consistente */
+  transition: background-color 0.3s ease; /* Transición suave */
+  font-weight: normal; /* Peso normal de fuente */
+}
+
+/* Estado hover del botón */
+.contacto-submit-btn:hover:not(:disabled) {
+  background-color: #a8b3c1; /* Color hover (ORIGINAL) */
+}
+
+/* Estado disabled (cuando está enviando) */
+.contacto-submit-btn:disabled {
+  cursor: not-allowed; /* Cursor de "no permitido" */
+  /* opacity y cursor se manejan con estilos inline en el JSX */
+}
+
+/* Estado focus del botón para accesibilidad */
+.contacto-submit-btn:focus {
+  outline: 2px solid #FFCC00; /* Contorno amarillo para accesibilidad */
+  outline-offset: 2px; /* Separación del contorno */
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   ============================================ */
+@media (max-width: 768px) {
+  .contacto-section {
+    padding: 3rem 0; /* Reduce el padding vertical */
+  }
+
+  .contacto-title {
+    font-size: 2rem; /* Reduce el tamaño del título */
+  }
+
+  .contacto-title::after {
+    width: 80px; /* Línea más corta */
+    height: 3px; /* Línea más delgada */
+  }
+
+  .contacto-form {
+    max-width: 380px; /* Reduce ligeramente el ancho máximo */
+    padding: 0 1.5rem; /* Aumenta el padding horizontal */
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   ============================================ */
+@media (max-width: 480px) {
+  .contacto-section {
+    padding: 2rem 0; /* Reduce más el padding */
+  }
+
+  .contacto-title {
+    font-size: 1.5rem; /* Título más pequeño */
+  }
+
+  .contacto-title::after {
+    width: 60px; /* Línea más corta */
+    height: 3px; /* Mantiene el grosor */
+  }
+
+  .contacto-form {
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0 1rem; /* Padding estándar */
+  }
+
+  .contacto-input,
+  .contacto-textarea {
+    font-size: 16px; /* Mantiene 16px para evitar zoom en iOS */
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (360px y menores)
+   ============================================ */
+@media (max-width: 360px) {
+  .contacto-section {
+    padding: 1.5rem 0; /* Padding mínimo */
+  }
+
+  .contacto-title {
+    font-size: 1.25rem; /* Título muy pequeño */
+  }
+
+  .contacto-title::after {
+    width: 50px; /* Línea muy corta */
+  }
+
+  .contacto-form {
+    padding: 0 0.75rem; /* Padding reducido */
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD - FOCUS VISIBLE
+   Mejora la visualización del foco para teclado
+   ============================================ */
+.contacto-input:focus-visible,
+.contacto-textarea:focus-visible,
+.contacto-submit-btn:focus-visible {
+  outline: 2px solid #FFCC00; /* Contorno amarillo visible */
+  outline-offset: 2px; /* Separación del contorno */
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   Para usuarios que prefieren menos animaciones
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .contacto-input,
+  .contacto-textarea,
+  .contacto-submit-btn {
+    transition: none; /* Elimina todas las transiciones */
+  }
+}

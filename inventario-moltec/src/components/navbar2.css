@@ -1,74 +1,130 @@
+/* ============================================
+   MOLTEC S.A. - NAVBAR STICKY
+   Sistema de Inventario Web - Página Informativa
+   STICKY con Z-index corregido para modales
+   ============================================ */
+
+/* ============================================
+   SCROLL PADDING PARA SECCIONES
+   Evita que el contenido quede oculto bajo el navbar
+   ============================================ */
 #quienes,
 #servicios,
 #proyectos,
 #ubi,
 #contacto {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 80px; /* Espaciado para compensar altura del navbar */
 }
+
+/* Scroll suave en toda la página */
 html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-behavior: smooth; /* Animación suave al hacer scroll */
+  scroll-padding-top: 80px; /* Padding superior al hacer scroll */
 }
+
+/* ============================================
+   NAVBAR STICKY PRINCIPAL
+   ============================================ */
 .pi-navbar {
+  /* LAYOUT */
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   padding: 10px 10% !important;
-  background-color: #131f2b !important;
-  position: -webkit-sticky !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 9999 !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-  transition: all 0.3s ease !important;
+  
+  /* ESTILO */
+  background-color: #131f2b !important; /* Fondo azul oscuro corporativo */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important; /* Sombra suave */
+  
+  /* POSICIONAMIENTO STICKY */
+  position: -webkit-sticky !important; /* Soporte Safari */
+  position: sticky !important; /* Navbar sticky */
+  top: 0 !important; /* Se queda pegado arriba */
+  z-index: 900 !important; /* ✅ CORREGIDO: Menor que modales (10000+) pero mayor que contenido normal */
+  
+  /* DIMENSIONES */
   width: 100% !important;
+  
+  /* TRANSICIONES */
+  transition: all 0.3s ease !important;
 }
+
+/* ============================================
+   LOGO DEL NAVBAR
+   ============================================ */
 .pi-navbar-logo {
-  cursor: pointer;
-  width: 120px;
-  height: auto;
-  transition: width 0.3s ease;
-  object-fit: contain;
+  cursor: pointer; /* Muestra que es clickeable */
+  width: 120px; /* Ancho del logo */
+  height: auto; /* Alto automático para mantener proporción */
+  transition: width 0.3s ease; /* Transición suave al cambiar tamaño */
+  object-fit: contain; /* Mantiene la proporción de la imagen */
 }
+
+/* ============================================
+   CONTENEDOR DE LINKS
+   ============================================ */
 .pi-navbar-links {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
+  list-style: none; /* Sin bullets */
+  display: flex; /* Flexbox horizontal */
+  align-items: center; /* Centra verticalmente */
+  margin: 0; /* Sin margen */
+  padding: 0; /* Sin padding */
 }
+
+/* Items individuales del menú */
 .pi-navbar-links li {
-  display: inline-block;
-  padding: 0 20px;
+  display: inline-block; /* En línea */
+  padding: 0 20px; /* Espaciado horizontal entre items */
 }
+
+/* ============================================
+   LINKS DEL MENÚ
+   ============================================ */
 .pi-navbar-links li a {
+  /* TIPOGRAFÍA */
   font-family: Arial, sans-serif;
-  font-weight: 500;
+  font-weight: 500; /* Semi-negrita */
   font-size: 16px;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
+  color: #fff; /* Texto blanco */
+  
+  /* ESTILOS */
+  text-decoration: none; /* Sin subrayado */
+  
+  /* LAYOUT */
+  position: relative; /* Para posicionar el ::after */
   display: block;
+  
+  /* TRANSICIONES */
+  transition: all 0.3s ease;
 }
+
+/* Hover en links */
 .pi-navbar-links li a:hover {
-  color: #ffcc00;
+  color: #ffcc00; /* Cambia a amarillo MOLTEC */
 }
+
+/* Línea animada debajo del link */
 .pi-navbar-links li a::after {
   content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
-  width: 0;
+  width: 0; /* Inicia con ancho 0 */
   height: 2px;
-  background-color: #ffcc00;
-  transition: width 0.3s ease;
+  background-color: #ffcc00; /* Línea amarilla */
+  transition: width 0.3s ease; /* Animación de ancho */
 }
+
+/* Hover en línea animada */
 .pi-navbar-links li a:hover::after {
-  width: 100%;
+  width: 100%; /* Se expande al 100% */
 }
+
+/* ============================================
+   BOTÓN HAMBURGUESA (MÓVIL)
+   ============================================ */
 .pi-navbar-hamburger {
-  display: none;
+  display: none; /* Oculto por defecto (desktop) */
   flex-direction: column;
   justify-content: space-around;
   width: 30px;
@@ -77,44 +133,66 @@ html {
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 10000;
+  z-index: 10000; /* Por encima de todo */
 }
+
+/* Líneas del hamburguesa */
 .pi-navbar-hamburger span {
   width: 100%;
   height: 3px;
-  background-color: #fff;
+  background-color: #fff; /* Líneas blancas */
   border-radius: 2px;
   transition: all 0.3s ease;
 }
+
+/* Animación cuando está activo (convertir en X) */
 .pi-navbar-hamburger--active span:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
+
 .pi-navbar-hamburger--active span:nth-child(2) {
-  opacity: 0;
+  opacity: 0; /* Línea del medio desaparece */
 }
+
 .pi-navbar-hamburger--active span:nth-child(3) {
   transform: rotate(-45deg) translate(6px, -6px);
 }
+
+/* ============================================
+   OVERLAY OSCURO (MÓVIL)
+   Fondo oscuro cuando el menú móvil está abierto
+   ============================================ */
 .pi-navbar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 999;
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.7); /* Fondo negro semi-transparente */
+  z-index: 899; /* Debajo del navbar pero encima del contenido */
+  backdrop-filter: blur(2px); /* Efecto de desenfoque */
 }
+
+/* ============================================
+   ESTADO SCROLLED (cuando se hace scroll)
+   ============================================ */
 .pi-navbar.scrolled {
-  background-color: rgba(19, 31, 43, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 8px 10%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background-color: rgba(19, 31, 43, 0.95) !important; /* Fondo semi-transparente */
+  backdrop-filter: blur(10px); /* Efecto glassmorphism */
+  padding: 8px 10% !important; /* Padding más pequeño */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important; /* Sombra más pronunciada */
 }
+
+/* Logo más pequeño cuando se hace scroll */
 .pi-navbar.scrolled .pi-navbar-logo {
   width: 100px;
 }
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   ============================================ */
 @media (max-width: 768px) {
+  /* Ajusta el scroll-margin para móviles */
   #quienes,
   #servicios,
   #proyectos,
@@ -122,44 +200,74 @@ html {
   #contacto {
     scroll-margin-top: 70px;
   }
+
   html {
     scroll-padding-top: 70px;
   }
+
+  /* Navbar en móvil */
   .pi-navbar {
     justify-content: space-between !important;
     padding: 10px 5% !important;
   }
+
   .pi-navbar.scrolled {
     padding: 8px 5%;
   }
+
+  /* Logo más pequeño en móvil */
   .pi-navbar-logo {
     width: 100px;
   }
+
   .pi-navbar.scrolled .pi-navbar-logo {
     width: 85px;
   }
+
+  /* Muestra el botón hamburguesa */
   .pi-navbar-hamburger {
     display: flex;
   }
+
+  /* ============================================
+     MENÚ MÓVIL DESLIZABLE
+     ============================================ */
   .pi-navbar-links {
+    /* POSICIONAMIENTO */
     position: fixed;
     top: 0;
-    right: -100%;
+    right: -100%; /* Oculto fuera de la pantalla */
+    
+    /* DIMENSIONES */
     width: 280px;
     height: 100vh;
+    
+    /* ESTILO */
     background: linear-gradient(180deg, #131f2b 0%, #1a2b3a 100%);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    
+    /* LAYOUT */
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding-top: 80px;
+    
+    /* Z-INDEX */
+    z-index: 950; /* Por encima del navbar pero debajo del hamburguesa */
+    
+    /* TRANSICIONES */
     transition: right 0.3s ease;
-    z-index: 1000;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    
+    /* SCROLL */
     overflow-y: auto;
   }
+
+  /* Menú activo (visible) */
   .pi-navbar-links--active {
-    right: 0;
+    right: 0; /* Se desliza desde la derecha */
   }
+
+  /* Items del menú móvil */
   .pi-navbar-links li {
     display: block;
     padding: 15px 0;
@@ -167,9 +275,12 @@ html {
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
+
   .pi-navbar-links li:last-child {
     border-bottom: none;
   }
+
+  /* Links del menú móvil */
   .pi-navbar-links li a {
     display: block;
     padding: 15px 20px;
@@ -178,14 +289,22 @@ html {
     border-radius: 8px;
     margin: 0 10px;
   }
+
+  /* Hover en móvil */
   .pi-navbar-links li a:hover {
     background-color: rgba(255, 204, 0, 0.15);
     color: #ffcc00;
   }
+
+  /* Desactiva la línea animada en móvil */
   .pi-navbar-links li a::after {
     display: none;
   }
 }
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   ============================================ */
 @media (max-width: 480px) {
   #quienes,
   #servicios,
@@ -194,30 +313,42 @@ html {
   #contacto {
     scroll-margin-top: 65px;
   }
+
   html {
     scroll-padding-top: 65px;
   }
+
   .pi-navbar {
     padding: 8px 3% !important;
   }
+
   .pi-navbar.scrolled {
     padding: 6px 3%;
   }
+
   .pi-navbar-logo {
     width: 90px;
   }
+
   .pi-navbar.scrolled .pi-navbar-logo {
     width: 75px;
   }
+
+  /* Menú móvil ocupa todo el ancho */
   .pi-navbar-links {
     width: 100%;
     padding-top: 70px;
   }
+
   .pi-navbar-links li a {
     font-size: 16px;
     padding: 12px 15px;
   }
 }
+
+/* ============================================
+   ANIMACIÓN DE DESLIZAMIENTO
+   ============================================ */
 @keyframes slideInRight {
   from {
     transform: translateX(100%);
@@ -228,20 +359,45 @@ html {
     opacity: 1;
   }
 }
+
 .pi-navbar-links--active {
   animation: slideInRight 0.3s ease-out;
 }
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+/* Focus visible para navegación con teclado */
 .pi-navbar-links li a:focus {
   outline: 2px solid #ffcc00;
   outline-offset: 2px;
 }
+
 .pi-navbar-hamburger:focus {
   outline: 2px solid #ffcc00;
   outline-offset: 2px;
 }
+
+/* Link activo (sección actual) */
 .pi-navbar-links li a.active {
   color: #ffcc00;
 }
+
 .pi-navbar-links li a.active::after {
   width: 100%;
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .pi-navbar,
+  .pi-navbar-logo,
+  .pi-navbar-links,
+  .pi-navbar-links li a,
+  .pi-navbar-links li a::after,
+  .pi-navbar-hamburger span {
+    transition: none !important;
+    animation: none !important;
+  }
 }
