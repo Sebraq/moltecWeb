@@ -1,0 +1,376 @@
+/* ============================================
+   MOLTEC S.A. - COMPONENTE INFO (QUIÉNES SOMOS)
+   Sistema de Inventario Web - Consistente con global.css
+   ENCAPSULADO - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   CONTENEDOR PRINCIPAL DEL COMPONENTE
+   ============================================ */
+.info-container {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #131F2B;
+}
+
+/* ============================================
+   SECCIÓN "QUIÉNES SOMOS"
+   ============================================ */
+.info-quienes-section {
+  padding: 3rem 1rem;
+  transition: all 0.4s ease;
+  background-color: #fff;
+}
+
+/* Título "¿QUIÉNES SOMOS?" */
+.info-quienes-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #131F2B;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.info-quienes-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: #131F2B;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+.info-quienes-content {
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: justify;
+}
+
+.info-quienes-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 0;
+  color: #131F2B;
+}
+
+/* ============================================
+   SECCIÓN MISIÓN Y VISIÓN
+   ============================================ */
+.info-mision-vision-section {
+  background-color: #C6C6C4;
+  padding: 3rem 1rem;
+  min-height: auto;
+}
+
+.info-mision-vision-container {
+  max-width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* ============================================
+   TARJETAS DE MISIÓN Y VISIÓN
+   ============================================ */
+.info-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Barra superior animada */
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #131F2B, #FFCC00);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 1);
+}
+
+.info-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Título de la tarjeta (Misión/Visión) */
+.info-card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #131F2B;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  position: relative;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.info-card-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #131F2B;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* Texto de la tarjeta */
+.info-card p {
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: justify;
+  margin-bottom: 0;
+  color: #131F2B;
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px - 1023px)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .info-quienes-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .info-quienes-title {
+    font-size: 3rem;
+  }
+
+  .info-quienes-title::after {
+    width: 120px;
+  }
+
+  .info-quienes-content {
+    max-width: 80%;
+    padding: 0 1.5rem;
+  }
+
+  .info-quienes-content p {
+    font-size: 1.125rem;
+  }
+
+  .info-mision-vision-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .info-mision-vision-container {
+    max-width: 85%;
+    gap: 2rem;
+  }
+
+  .info-card {
+    padding: 2.5rem 2rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (menores a 768px)
+   ============================================ */
+@media (max-width: 767px) {
+  .info-quienes-section {
+    padding: 2rem 1rem;
+  }
+
+  .info-quienes-title {
+    font-size: 2rem;
+  }
+
+  .info-quienes-title::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .info-quienes-content {
+    max-width: 90%;
+    padding: 0 0.5rem;
+  }
+
+  .info-quienes-content p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .info-mision-vision-section {
+    padding: 2rem 1rem;
+  }
+
+  .info-mision-vision-container {
+    max-width: 95%;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .info-card {
+    padding: 2rem 1.5rem;
+    min-width: 100%;
+  }
+
+  .info-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .info-card-title {
+    font-size: 1.25rem;
+  }
+
+  .info-card-title::after {
+    width: 60px;
+  }
+
+  .info-card p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (menores a 480px)
+   ============================================ */
+@media (max-width: 480px) {
+  .info-quienes-section {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .info-quienes-title {
+    font-size: 1.5rem;
+  }
+
+  .info-quienes-title::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .info-quienes-content {
+    max-width: 95%;
+    padding: 0 0.5rem;
+  }
+
+  .info-quienes-content p {
+    font-size: 0.875rem;
+  }
+
+  .info-mision-vision-section {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .info-mision-vision-container {
+    max-width: 100%;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .info-card {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+
+  .info-card-title {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-card-title::after {
+    width: 50px;
+    height: 2px;
+  }
+
+  .info-card p {
+    font-size: 0.875rem;
+  }
+}
+
+/* ============================================
+   DESKTOP WIDE (1200px y superior)
+   ============================================ */
+@media (min-width: 1200px) {
+  .info-quienes-content {
+    max-width: 60%;
+  }
+
+  .info-mision-vision-container {
+    max-width: 65%;
+    gap: 2.5rem;
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+.info-card:focus {
+  outline: 2px solid #FFCC00;
+  outline-offset: 2px;
+}
+
+/* Reducción de movimiento para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .info-card,
+  .info-card::before,
+  .info-card-title::after {
+    transition: none;
+    animation: none;
+  }
+
+  .info-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   OPTIMIZACIONES DE RENDIMIENTO
+   ============================================ */
+.info-card {
+  will-change: transform, box-shadow;
+}
+
+.info-card::before {
+  will-change: transform;
+}
+
+/* ============================================
+   ESTILOS PARA IMPRESIÓN
+   ============================================ */
+@media print {
+  .info-card {
+    box-shadow: none;
+    border: 1px solid #000;
+    break-inside: avoid;
+  }
+
+  .info-card:hover {
+    transform: none;
+  }
+
+  .info-mision-vision-section {
+    background-color: transparent;
+  }
+
+  .info-card::before {
+    display: none;
+  }
+}

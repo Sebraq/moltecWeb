@@ -1,0 +1,592 @@
+/* ============================================
+   MOLTEC S.A. - GLOBAL CSS ENCAPSULADO
+   Sistema de Inventario Web - Página Informativa
+   TOTALMENTE ENCAPSULADO - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   CONTENEDOR RAÍZ - TODO ENCAPSULADO AQUÍ
+   ============================================ */
+.pagina-info {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #131f2b;
+  background-color: #fff;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Reset box-sizing solo dentro de pagina-info */
+.pagina-info *,
+.pagina-info *::before,
+.pagina-info *::after {
+  box-sizing: border-box;
+}
+
+/* ============================================
+   VARIABLES CSS (dentro de .pagina-info)
+   ============================================ */
+.pagina-info {
+  /* Colores Corporativos MOLTEC */
+  --pi-primary: #131F2B;
+  --pi-secondary: #FFCC00;
+  --pi-bg-light: #C6C6C4;
+  --pi-white: #ffffff;
+  --pi-text: #131F2B;
+  --pi-gray: #6c757d;
+  --pi-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Espaciado Responsive */
+  --pi-spacing-xs: 0.5rem;    /* 8px */
+  --pi-spacing-sm: 1rem;      /* 16px */
+  --pi-spacing-md: 1.5rem;    /* 24px */
+  --pi-spacing-lg: 2rem;      /* 32px */
+  --pi-spacing-xl: 3rem;      /* 48px */
+  --pi-spacing-2xl: 4rem;     /* 64px */
+  --pi-spacing-3xl: 5rem;     /* 80px */
+
+  /* Tipografía Responsive */
+  --pi-font-sm: 0.875rem;   /* 14px */
+  --pi-font-base: 1rem;     /* 16px */
+  --pi-font-lg: 1.25rem;    /* 20px */
+  --pi-font-xl: 1.5rem;     /* 24px */
+  --pi-font-2xl: 2rem;      /* 32px */
+  --pi-font-3xl: 2.5rem;    /* 40px */
+
+  /* Bordes y Radios */
+  --pi-radius-sm: 8px;
+  --pi-radius-md: 12px;
+  --pi-radius-lg: 20px;
+  --pi-radius-full: 50%;
+
+  /* Sombras */
+  --pi-shadow-light: 0 2px 5px var(--pi-shadow);
+  --pi-shadow-medium: 0 4px 15px var(--pi-shadow);
+  --pi-shadow-heavy: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+  /* Transiciones */
+  --pi-transition-fast: all 0.2s ease;
+  --pi-transition-normal: all 0.3s ease;
+  --pi-transition-slow: all 0.4s ease;
+
+  /* Contenedor máximo */
+  --pi-container-max: 1200px;
+}
+
+/* ============================================
+   TIPOGRAFÍA
+   ============================================ */
+.pagina-info h1,
+.pagina-info h2,
+.pagina-info h3,
+.pagina-info h4,
+.pagina-info h5,
+.pagina-info h6 {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--pi-primary);
+  margin: 0;
+}
+
+.pagina-info p {
+  margin: 0 0 var(--pi-spacing-sm) 0;
+  line-height: 1.6;
+}
+
+.pagina-info a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--pi-transition-normal);
+}
+
+/* ============================================
+   TÍTULOS DE SECCIÓN
+   ============================================ */
+.pagina-info .pi-title {
+  text-align: center;
+  font-size: var(--pi-font-2xl);
+  color: var(--pi-primary);
+  margin-bottom: var(--pi-spacing-md);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pagina-info .pi-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--pi-primary);
+  margin: var(--pi-spacing-xs) auto;
+  border-radius: 2px;
+}
+
+.pagina-info .pi-subtitle {
+  text-align: center;
+  font-size: var(--pi-font-lg);
+  color: var(--pi-gray);
+  margin-bottom: var(--pi-spacing-lg);
+  line-height: 1.5;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   CONTENEDORES
+   ============================================ */
+.pagina-info .pi-container {
+  width: 100%;
+  max-width: var(--pi-container-max);
+  margin: 0 auto;
+  padding: 0 var(--pi-spacing-sm);
+}
+
+.pagina-info .pi-wrapper-narrow {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--pi-spacing-sm);
+}
+
+.pagina-info .pi-wrapper-medium {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--pi-spacing-sm);
+}
+
+.pagina-info .pi-wrapper-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--pi-spacing-sm);
+}
+
+/* ============================================
+   SECCIONES
+   ============================================ */
+.pagina-info .pi-section {
+  padding: var(--pi-spacing-xl) var(--pi-spacing-sm);
+  width: 100%;
+  position: relative;
+}
+
+/* ============================================
+   GRIDS
+   ============================================ */
+.pagina-info .pi-grid {
+  display: grid;
+  gap: var(--pi-spacing-md);
+  width: 100%;
+  max-width: var(--pi-container-max);
+  margin: 0 auto;
+}
+
+.pagina-info .pi-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.pagina-info .pi-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.pagina-info .pi-grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* ============================================
+   TARJETAS
+   ============================================ */
+.pagina-info .pi-card {
+  background: var(--pi-white);
+  border-radius: var(--pi-radius-md);
+  padding: var(--pi-spacing-lg);
+  box-shadow: var(--pi-shadow-medium);
+  transition: var(--pi-transition-slow);
+  width: 100%;
+  max-width: 100%;
+}
+
+.pagina-info .pi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--pi-shadow-heavy);
+}
+
+/* ============================================
+   BOTONES
+   ============================================ */
+.pagina-info .pi-btn {
+  padding: 12px 24px;
+  font-size: var(--pi-font-base);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--pi-radius-sm);
+  cursor: pointer;
+  transition: var(--pi-transition-normal);
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+}
+
+.pagina-info .pi-btn-primary {
+  background: var(--pi-primary);
+  color: var(--pi-white);
+}
+
+.pagina-info .pi-btn-primary:hover {
+  background: #0d1720;
+  transform: translateY(-2px);
+}
+
+.pagina-info .pi-btn-secondary {
+  background: var(--pi-secondary);
+  color: var(--pi-primary);
+}
+
+.pagina-info .pi-btn-secondary:hover {
+  background: #e6b800;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   IMÁGENES RESPONSIVE
+   ============================================ */
+.pagina-info .pi-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: var(--pi-radius-sm);
+}
+
+.pagina-info .pi-img-fixed {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: var(--pi-radius-sm);
+}
+
+/* Aspect Ratios */
+.pagina-info .pi-aspect-16-9 {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  border-radius: var(--pi-radius-sm);
+}
+
+.pagina-info .pi-aspect-16-9 img,
+.pagina-info .pi-aspect-16-9 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pagina-info .pi-aspect-4-3 {
+  position: relative;
+  width: 100%;
+  padding-bottom: 75%;
+  overflow: hidden;
+  border-radius: var(--pi-radius-sm);
+}
+
+.pagina-info .pi-aspect-4-3 img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pagina-info .pi-aspect-1-1 {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+  border-radius: var(--pi-radius-sm);
+}
+
+.pagina-info .pi-aspect-1-1 img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================
+   FLEX UTILITIES
+   ============================================ */
+.pagina-info .pi-flex {
+  display: flex;
+}
+
+.pagina-info .pi-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagina-info .pi-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagina-info .pi-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagina-info .pi-flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   SPACING UTILITIES (Margin)
+   ============================================ */
+.pagina-info .pi-mt-1 { margin-top: var(--pi-spacing-xs); }
+.pagina-info .pi-mt-2 { margin-top: var(--pi-spacing-sm); }
+.pagina-info .pi-mt-3 { margin-top: var(--pi-spacing-md); }
+.pagina-info .pi-mt-4 { margin-top: var(--pi-spacing-lg); }
+
+.pagina-info .pi-mb-1 { margin-bottom: var(--pi-spacing-xs); }
+.pagina-info .pi-mb-2 { margin-bottom: var(--pi-spacing-sm); }
+.pagina-info .pi-mb-3 { margin-bottom: var(--pi-spacing-md); }
+.pagina-info .pi-mb-4 { margin-bottom: var(--pi-spacing-lg); }
+
+/* ============================================
+   SPACING UTILITIES (Padding)
+   ============================================ */
+.pagina-info .pi-p-1 { padding: var(--pi-spacing-xs); }
+.pagina-info .pi-p-2 { padding: var(--pi-spacing-sm); }
+.pagina-info .pi-p-3 { padding: var(--pi-spacing-md); }
+.pagina-info .pi-p-4 { padding: var(--pi-spacing-lg); }
+
+/* ============================================
+   TEXT UTILITIES
+   ============================================ */
+.pagina-info .pi-text-center { text-align: center; }
+.pagina-info .pi-text-left { text-align: left; }
+.pagina-info .pi-text-right { text-align: right; }
+.pagina-info .pi-text-justify { text-align: justify; }
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+.pagina-info .pi-btn:focus,
+.pagina-info .pi-card:focus {
+  outline: 2px solid var(--pi-secondary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   SCROLL SUAVE (solo para pagina-info)
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   SCROLLBAR PERSONALIZADO
+   ============================================ */
+.pagina-info::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pagina-info::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.pagina-info::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+.pagina-info::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   ============================================ */
+@media (max-width: 768px) {
+  .pagina-info {
+    --pi-font-2xl: 1.75rem;
+    --pi-font-xl: 1.25rem;
+    --pi-font-lg: 1.125rem;
+    --pi-spacing-xl: 2rem;
+    --pi-spacing-2xl: 3rem;
+  }
+
+  .pagina-info .pi-container {
+    padding: 0 var(--pi-spacing-sm);
+  }
+
+  .pagina-info .pi-section {
+    padding: var(--pi-spacing-lg) var(--pi-spacing-sm);
+  }
+
+  .pagina-info .pi-grid-2,
+  .pagina-info .pi-grid-3,
+  .pagina-info .pi-grid-4 {
+    grid-template-columns: 1fr;
+    gap: var(--pi-spacing-sm);
+  }
+
+  .pagina-info .pi-card {
+    padding: var(--pi-spacing-md);
+  }
+
+  .pagina-info .pi-title::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .pagina-info .pi-img-fixed {
+    height: 250px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   ============================================ */
+@media (max-width: 480px) {
+  .pagina-info {
+    --pi-font-2xl: 1.5rem;
+    --pi-font-xl: 1.125rem;
+    --pi-font-lg: 1rem;
+    --pi-font-base: 0.9375rem;
+    --pi-spacing-xl: 1.5rem;
+    --pi-spacing-lg: 1.25rem;
+  }
+
+  .pagina-info .pi-container {
+    padding: 0 var(--pi-spacing-xs);
+  }
+
+  .pagina-info .pi-section {
+    padding: var(--pi-spacing-md) var(--pi-spacing-xs);
+  }
+
+  .pagina-info .pi-card {
+    padding: var(--pi-spacing-sm);
+    border-radius: var(--pi-radius-sm);
+  }
+
+  .pagina-info .pi-btn {
+    padding: 10px 20px;
+    font-size: var(--pi-font-sm);
+    width: 100%;
+  }
+
+  .pagina-info .pi-title::after {
+    width: 50px;
+  }
+
+  .pagina-info .pi-img-fixed {
+    height: 200px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (360px y menores)
+   ============================================ */
+@media (max-width: 360px) {
+  .pagina-info {
+    --pi-font-2xl: 1.25rem;
+    --pi-font-xl: 1rem;
+    --pi-spacing-md: 1rem;
+  }
+
+  .pagina-info .pi-section {
+    padding: var(--pi-spacing-sm) var(--pi-spacing-xs);
+  }
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .pagina-info .pi-card,
+  .pagina-info .pi-btn,
+  .pagina-info * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .pagina-info .pi-card:hover,
+  .pagina-info .pi-btn:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   OVERFLOW Y MAX-WIDTH
+   ============================================ */
+.pagina-info {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   UTILIDADES ADICIONALES
+   ============================================ */
+.pagina-info .pi-hidden {
+  display: none !important;
+}
+
+.pagina-info .pi-visible {
+  display: block !important;
+}
+
+.pagina-info .pi-shadow-sm {
+  box-shadow: var(--pi-shadow-light);
+}
+
+.pagina-info .pi-shadow-md {
+  box-shadow: var(--pi-shadow-medium);
+}
+
+.pagina-info .pi-shadow-lg {
+  box-shadow: var(--pi-shadow-heavy);
+}
+
+/* ============================================
+   ANIMACIONES (solo dentro de .pagina-info)
+   ============================================ */
+@keyframes pi-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pi-slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.pagina-info .pi-fade-in {
+  animation: pi-fadeIn 0.5s ease-in;
+}
+
+.pagina-info .pi-slide-in-up {
+  animation: pi-slideInUp 0.5s ease-out;
+}

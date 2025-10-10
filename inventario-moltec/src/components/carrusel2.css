@@ -1,0 +1,276 @@
+/* ============================================
+   MOLTEC S.A. - COMPONENTE CARRUSEL
+   Sistema de Inventario Web - Página Informativa
+   ENCAPSULADO - NO afecta otros componentes
+   ============================================ */
+
+/* ============================================
+   CONTENEDOR PRINCIPAL DEL CARRUSEL
+   ============================================ */
+.carousel-moltec {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #131F2B; /* Color de fondo mientras carga */
+}
+
+/* ============================================
+   IMÁGENES DEL CARRUSEL
+   ============================================ */
+.carousel-moltec-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene proporción sin distorsión */
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Imagen activa visible */
+.carousel-moltec-image.active {
+  display: block;
+  opacity: 1;
+}
+
+/* ============================================
+   INDICADORES (DOTS)
+   ============================================ */
+.carousel-moltec-dots {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+/* Dot individual */
+.carousel-moltec-dot {
+  height: 12px;
+  width: 12px;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover en dot */
+.carousel-moltec-dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dot activo (amarillo MOLTEC) */
+.carousel-moltec-dot.active {
+  background-color: #FFCC00;
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.3);
+  transform: scale(1.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   CONTROLES OPCIONALES (FLECHAS)
+   Si quieres agregar flechas de navegación
+   ============================================ */
+.carousel-moltec-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(19, 31, 43, 0.6);
+  color: #FFCC00;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.carousel-moltec-control:hover {
+  background-color: rgba(19, 31, 43, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-moltec-control-prev {
+  left: 20px;
+}
+
+.carousel-moltec-control-next {
+  right: 20px;
+}
+
+/* ============================================
+   ANIMACIÓN DE CARGA
+   ============================================ */
+.carousel-moltec-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #FFCC00;
+  border-radius: 50%;
+  animation: carousel-spin 1s linear infinite;
+}
+
+@keyframes carousel-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   ============================================ */
+@media (max-width: 768px) {
+  .carousel-moltec {
+    height: 300px;
+  }
+
+  .carousel-moltec-dots {
+    bottom: 15px;
+    gap: 10px;
+  }
+
+  .carousel-moltec-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .carousel-moltec-dot.active {
+    transform: scale(1.2);
+  }
+
+  .carousel-moltec-control {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .carousel-moltec-control-prev {
+    left: 15px;
+  }
+
+  .carousel-moltec-control-next {
+    right: 15px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   ============================================ */
+@media (max-width: 480px) {
+  .carousel-moltec {
+    height: 250px;
+  }
+
+  .carousel-moltec-dots {
+    bottom: 12px;
+    gap: 8px;
+  }
+
+  .carousel-moltec-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .carousel-moltec-dot.active {
+    transform: scale(1.3);
+  }
+
+  /* Ocultar controles en móvil para mejor UX */
+  .carousel-moltec-control {
+    display: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (320px y menores)
+   ============================================ */
+@media (max-width: 320px) {
+  .carousel-moltec {
+    height: 200px;
+  }
+
+  .carousel-moltec-dots {
+    bottom: 10px;
+    gap: 6px;
+  }
+
+  .carousel-moltec-dot {
+    width: 7px;
+    height: 7px;
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+/* Focus para navegación con teclado */
+.carousel-moltec-dot:focus {
+  outline: 2px solid #FFCC00;
+  outline-offset: 2px;
+}
+
+.carousel-moltec-control:focus {
+  outline: 2px solid #FFCC00;
+  outline-offset: 2px;
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-moltec-image {
+    transition: none;
+  }
+
+  .carousel-moltec-dot,
+  .carousel-moltec-control {
+    transition: none;
+  }
+
+  .carousel-moltec-loading {
+    animation: none;
+  }
+}
+
+/* ============================================
+   OPTIMIZACIÓN DE RENDIMIENTO
+   ============================================ */
+.carousel-moltec-image {
+  will-change: opacity;
+}
+
+/* ============================================
+   SOPORTE PARA PANTALLAS DE ALTA DENSIDAD
+   ============================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .carousel-moltec-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}

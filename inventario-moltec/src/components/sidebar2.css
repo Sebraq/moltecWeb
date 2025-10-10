@@ -1,0 +1,464 @@
+/* ========================================
+   SIDEBAR RESPONSIVE - MOLTEC S.A.
+   Sistema de Inventario Web
+   ======================================== */
+
+/* === VARIABLES CSS === */
+:root {
+  --sidebar-width-expanded: 280px;
+  --sidebar-width-collapsed: 80px;
+  --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.sidebar {
+  width: var(--sidebar-width-expanded);
+  height: 100vh;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  transition: var(--sidebar-transition);
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-width-collapsed);
+}
+
+/* === BOTÓN TOGGLE MEJORADO === */
+.sidebar-toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(66, 153, 225, 0.3);
+}
+
+.sidebar-toggle-btn:hover {
+  background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+}
+
+.sidebar-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animación del icono hamburguesa */
+.toggle-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-icon-line {
+  width: 18px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 2px 0;
+}
+
+/* Estado expandido (hamburguesa) */
+.sidebar:not(.collapsed) .toggle-icon-line:nth-child(1) {
+  transform: translateY(0);
+}
+
+.sidebar:not(.collapsed) .toggle-icon-line:nth-child(2) {
+  opacity: 1;
+}
+
+.sidebar:not(.collapsed) .toggle-icon-line:nth-child(3) {
+  transform: translateY(0);
+}
+
+/* Estado colapsado (X) */
+.sidebar.collapsed .toggle-icon-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.sidebar.collapsed .toggle-icon-line:nth-child(2) {
+  opacity: 0;
+}
+
+.sidebar.collapsed .toggle-icon-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* === SECCIÓN DE USUARIO === */
+.sidebar-user-section {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e2e8f0;
+  transition: var(--sidebar-transition);
+}
+
+.sidebar.collapsed .sidebar-user-section {
+  padding: 20px 10px;
+}
+
+.sidebar-user-avatar {
+  width: 70px;
+  height: 70px;
+  background-color: #e2e8f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border: 3px solid #cbd5e0;
+  transition: var(--sidebar-transition);
+}
+
+.sidebar.collapsed .sidebar-user-avatar {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 0;
+}
+
+.sidebar-user-info {
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  max-width: 100%;
+}
+
+.sidebar.collapsed .sidebar-user-info {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.sidebar-user-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-user-role {
+  font-size: 14px;
+  color: #718096;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === SEPARADOR === */
+.sidebar-separator {
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 0 20px;
+}
+
+.sidebar.collapsed .sidebar-separator {
+  margin: 0 10px;
+}
+
+/* === NAVEGACIÓN === */
+.sidebar-navigation {
+  flex: 1;
+  padding: 20px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-navigation::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-navigation::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.sidebar-navigation::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.sidebar-navigation::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* === ITEMS DEL MENÚ === */
+.sidebar-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  text-align: left;
+  position: relative;
+}
+
+.sidebar.collapsed .sidebar-menu-item {
+  padding: 14px 0;
+  justify-content: center;
+}
+
+.sidebar-menu-item:hover {
+  background-color: #f7fafc;
+}
+
+.sidebar-menu-item.active {
+  background-color: #edf2f7;
+  border-left-color: #131F2B;
+}
+
+.sidebar-menu-item.admin-only {
+  background-color: #faf5ff;
+  border-color: #e9d8fd;
+}
+
+/* === ICONO DEL MENÚ === */
+.sidebar-menu-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  transition: margin 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-menu-icon {
+  margin-right: 0;
+}
+
+/* === TEXTO DEL MENÚ === */
+.sidebar-menu-text {
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  color: #4a5568;
+}
+
+.sidebar.collapsed .sidebar-menu-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sidebar-menu-item.active .sidebar-menu-text {
+  color: #131F2B;
+}
+
+.sidebar-menu-item.admin-only .sidebar-menu-text {
+  color: #805ad5;
+}
+
+/* === TOOLTIP CUANDO ESTÁ COLAPSADO === */
+.sidebar-menu-item .menu-tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #2d3748;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  margin-left: 10px;
+  z-index: 1002;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-menu-item .menu-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 4px 4px 0;
+  border-color: transparent #2d3748 transparent transparent;
+}
+
+.sidebar.collapsed .sidebar-menu-item:hover .menu-tooltip {
+  opacity: 1;
+}
+
+/* === SECCIÓN DE LOGOUT === */
+.sidebar-logout-section {
+  padding: 20px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.sidebar-logout-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  text-align: left;
+}
+
+.sidebar.collapsed .sidebar-logout-button {
+  padding: 14px 0;
+  justify-content: center;
+}
+
+.sidebar-logout-button:hover {
+  background-color: #fed7d7;
+  border-left-color: #e53e3e;
+}
+
+.sidebar-logout-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #e53e3e;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.collapsed .sidebar-logout-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* === RESPONSIVE MOBILE === */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width-expanded);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle-btn {
+    display: none;
+  }
+
+  /* Botón hamburguesa para móviles */
+  .mobile-menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+    transform: scale(1.05);
+  }
+
+  .mobile-menu-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Overlay para cerrar el sidebar en móvil */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
+/* === ANIMACIONES === */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.sidebar.mobile-open {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* === ESTADOS DE HOVER EN BOTONES === */
+.sidebar-toggle-btn,
+.sidebar-menu-item,
+.sidebar-logout-button {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}

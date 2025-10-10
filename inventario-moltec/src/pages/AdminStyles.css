@@ -1,0 +1,95 @@
+/* ========================================
+   ADMIN PANEL RESPONSIVE - MOLTEC S.A.
+   ======================================== */
+
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f7fafc;
+  font-family: Arial, sans-serif;
+}
+
+.admin-main-content {
+  margin-left: 280px;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f7fafc;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+}
+
+/* Cuando el sidebar está colapsado */
+.admin-container:has(.sidebar.collapsed) .admin-main-content {
+  margin-left: 80px;
+}
+
+.admin-error-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7fafc;
+  font-family: Arial, sans-serif;
+}
+
+.admin-content-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  min-height: calc(100vh - 40px);
+}
+
+.admin-section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.admin-only-card {
+  background-color: #e6f3ff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 2px solid #3182ce;
+  text-align: center;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .admin-main-content {
+    margin-left: 0;
+    padding: 80px 15px 20px 15px;
+  }
+
+  .admin-container:has(.sidebar.collapsed) .admin-main-content {
+    margin-left: 0;
+  }
+
+  .admin-content-section {
+    padding: 20px;
+  }
+
+  .admin-section-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-main-content {
+    padding: 70px 10px 15px 10px;
+  }
+
+  .admin-content-section {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .admin-section-title {
+    font-size: 20px;
+  }
+}

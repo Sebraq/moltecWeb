@@ -1,0 +1,332 @@
+/* ============================================
+   MOLTEC S.A. - COMPONENTE SERVICIOS
+   Sistema de Inventario Web - Página Informativa
+   ENCAPSULADO - Mantiene el hover smooth actual
+   ============================================ */
+
+/* ============================================
+   SECCIÓN SERVICIOS
+   ============================================ */
+.servicios-section {
+  padding: 3rem 1rem;
+  background-color: #fff;
+}
+
+/* ============================================
+   TÍTULO "SERVICIOS"
+   ============================================ */
+.servicios-title-main {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #131F2B;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.servicios-title-main::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: #131F2B;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+/* ============================================
+   GRID DE SERVICIOS
+   ============================================ */
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  padding: 25px;
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ============================================
+   ITEM INDIVIDUAL DE SERVICIO
+   ============================================ */
+.servicios-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Efecto hover SMOOTH en el item completo */
+.servicios-item:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+/* ============================================
+   ICONO CIRCULAR DEL SERVICIO
+   ============================================ */
+.servicios-icon {
+  background-color: #131F2B;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(19, 31, 43, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto adicional en hover del icono */
+.servicios-item:hover .servicios-icon {
+  background-color: #1a2938;
+  box-shadow: 0 8px 25px rgba(19, 31, 43, 0.3);
+}
+
+/* Efecto de brillo animado en hover */
+.servicios-icon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 204, 0, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.servicios-item:hover .servicios-icon::before {
+  left: 100%;
+}
+
+/* ============================================
+   IMAGEN DEL ICONO
+   ============================================ */
+.servicios-icon img {
+  width: 60%;
+  height: auto;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Si quieres iconos blancos, descomenta la siguiente línea: */
+  /* filter: brightness(0) invert(1); */
+}
+
+/* Efecto sutil en la imagen al hacer hover */
+.servicios-item:hover .servicios-icon img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* ============================================
+   TÍTULO DEL SERVICIO
+   ============================================ */
+.servicios-title {
+  margin-top: 15px;
+  color: #131F2B;
+  font-size: 18px;
+  font-weight: 600;
+  max-width: 150px;
+  font-family: Arial, sans-serif;
+  transition: color 0.3s ease;
+}
+
+/* Cambio de color en hover */
+.servicios-item:hover .servicios-title {
+  color: #FFCC00;
+}
+
+/* ============================================
+   RESPONSIVE - TABLETS (768px y menores)
+   ============================================ */
+@media (max-width: 768px) {
+  .servicios-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .servicios-section .section-title {
+    font-size: 1.75rem;
+  }
+
+  .servicios-section .section-title::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 30px;
+    max-width: 85%;
+    padding: 20px;
+  }
+
+  .servicios-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .servicios-title {
+    font-size: 16px;
+    max-width: 140px;
+  }
+
+  /* Hover menos exagerado en tablets */
+  .servicios-item:hover {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES (480px y menores)
+   ============================================ */
+@media (max-width: 480px) {
+  .servicios-section {
+    padding: 2rem 0.5rem;
+  }
+
+  .servicios-section .section-title {
+    font-size: 1.5rem;
+  }
+
+  .servicios-section .section-title::after {
+    width: 60px;
+    height: 3px;
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 25px;
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .servicios-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .servicios-title {
+    font-size: 15px;
+    max-width: 120px;
+    margin-top: 12px;
+  }
+
+  /* Hover moderado en móviles */
+  .servicios-item:hover {
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  .servicios-item:hover .servicios-icon img {
+    transform: scale(1.05) rotate(3deg);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (320px y menores)
+   ============================================ */
+@media (max-width: 320px) {
+  .servicios-section {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    max-width: 98%;
+    padding: 10px;
+  }
+
+  .servicios-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .servicios-title {
+    font-size: 14px;
+    max-width: 110px;
+    margin-top: 10px;
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+/* Focus para navegación con teclado */
+.servicios-item:focus {
+  outline: 2px solid #FFCC00;
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+/* Screen Reader Only - Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   REDUCCIÓN DE MOVIMIENTO (Accesibilidad)
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .servicios-item,
+  .servicios-icon,
+  .servicios-icon img,
+  .servicios-title,
+  .servicios-icon::before {
+    transition: none;
+    animation: none;
+  }
+
+  .servicios-item:hover {
+    transform: none;
+  }
+
+  .servicios-item:hover .servicios-icon img {
+    transform: none;
+  }
+}
+
+/* ============================================
+   OPTIMIZACIÓN DE RENDIMIENTO
+   ============================================ */
+.servicios-item {
+  will-change: transform;
+}
+
+.servicios-icon img {
+  will-change: transform;
+}
+
+/* ============================================
+   DESKTOP WIDE (1200px y superior)
+   ============================================ */
+@media (min-width: 1200px) {
+  .servicios-grid {
+    max-width: 65%;
+  }
+
+  /* Hover más pronunciado en pantallas grandes */
+  .servicios-item:hover {
+    transform: translateY(-10px) scale(1.08);
+  }
+
+  .servicios-item:hover .servicios-icon img {
+    transform: scale(1.15) rotate(8deg);
+  }
+}

@@ -1,31 +1,34 @@
-// const mysql = require('mysql2');
-// require('dotenv').config();
+/* //Conexion
+const mysql = require('mysql2');
+require('dotenv').config();
 
-// // Crear el pool de conexiones
-// const pool = mysql.createPool({
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-//     database: process.env.DB_NAME,
-//     waitForConnections: true,
-//     connectionLimit: 10,
-//     queueLimit: 0
-// });
+// Crear el pool de conexiones
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
 
-// // Convertir a promesas para usar async/await
-// const promisePool = pool.promise();
+// Convertir a promesas para usar async/await
+const promisePool = pool.promise();
 
-// promisePool.getConnection()
-//   .then(conn => {
-//     console.log("✅ Conexión a la base de datos establecida correctamente");
-//     conn.release(); // liberamos la conexión
-//   })
-//   .catch(err => {
-//     console.error("❌ Error al conectar a la base de datos:", err.message);
-//   });
+promisePool.getConnection()
+  .then(conn => {
+    console.log("✅ Conexión a la base de datos establecida correctamente");
+    conn.release(); // liberamos la conexión
+  })
+  .catch(err => {
+    console.error("❌ Error al conectar a la base de datos:", err.message);
+  });
   
 
-// module.exports = promisePool;
+module.exports = promisePool; */
+
+// Conexion NUBE ---------------------------------------------------
 const mysql = require('mysql2');
 require('dotenv').config();
 

@@ -1,0 +1,247 @@
+#quienes,
+#servicios,
+#proyectos,
+#ubi,
+#contacto {
+  scroll-margin-top: 80px;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+.pi-navbar {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 10px 10% !important;
+  background-color: #131f2b !important;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+  width: 100% !important;
+}
+.pi-navbar-logo {
+  cursor: pointer;
+  width: 120px;
+  height: auto;
+  transition: width 0.3s ease;
+  object-fit: contain;
+}
+.pi-navbar-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.pi-navbar-links li {
+  display: inline-block;
+  padding: 0 20px;
+}
+.pi-navbar-links li a {
+  font-family: Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  display: block;
+}
+.pi-navbar-links li a:hover {
+  color: #ffcc00;
+}
+.pi-navbar-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffcc00;
+  transition: width 0.3s ease;
+}
+.pi-navbar-links li a:hover::after {
+  width: 100%;
+}
+.pi-navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10000;
+}
+.pi-navbar-hamburger span {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.pi-navbar-hamburger--active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+.pi-navbar-hamburger--active span:nth-child(2) {
+  opacity: 0;
+}
+.pi-navbar-hamburger--active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+.pi-navbar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+}
+.pi-navbar.scrolled {
+  background-color: rgba(19, 31, 43, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 8px 10%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.pi-navbar.scrolled .pi-navbar-logo {
+  width: 100px;
+}
+@media (max-width: 768px) {
+  #quienes,
+  #servicios,
+  #proyectos,
+  #ubi,
+  #contacto {
+    scroll-margin-top: 70px;
+  }
+  html {
+    scroll-padding-top: 70px;
+  }
+  .pi-navbar {
+    justify-content: space-between !important;
+    padding: 10px 5% !important;
+  }
+  .pi-navbar.scrolled {
+    padding: 8px 5%;
+  }
+  .pi-navbar-logo {
+    width: 100px;
+  }
+  .pi-navbar.scrolled .pi-navbar-logo {
+    width: 85px;
+  }
+  .pi-navbar-hamburger {
+    display: flex;
+  }
+  .pi-navbar-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, #131f2b 0%, #1a2b3a 100%);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 80px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+  }
+  .pi-navbar-links--active {
+    right: 0;
+  }
+  .pi-navbar-links li {
+    display: block;
+    padding: 15px 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .pi-navbar-links li:last-child {
+    border-bottom: none;
+  }
+  .pi-navbar-links li a {
+    display: block;
+    padding: 15px 20px;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 8px;
+    margin: 0 10px;
+  }
+  .pi-navbar-links li a:hover {
+    background-color: rgba(255, 204, 0, 0.15);
+    color: #ffcc00;
+  }
+  .pi-navbar-links li a::after {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  #quienes,
+  #servicios,
+  #proyectos,
+  #ubi,
+  #contacto {
+    scroll-margin-top: 65px;
+  }
+  html {
+    scroll-padding-top: 65px;
+  }
+  .pi-navbar {
+    padding: 8px 3% !important;
+  }
+  .pi-navbar.scrolled {
+    padding: 6px 3%;
+  }
+  .pi-navbar-logo {
+    width: 90px;
+  }
+  .pi-navbar.scrolled .pi-navbar-logo {
+    width: 75px;
+  }
+  .pi-navbar-links {
+    width: 100%;
+    padding-top: 70px;
+  }
+  .pi-navbar-links li a {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.pi-navbar-links--active {
+  animation: slideInRight 0.3s ease-out;
+}
+.pi-navbar-links li a:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+.pi-navbar-hamburger:focus {
+  outline: 2px solid #ffcc00;
+  outline-offset: 2px;
+}
+.pi-navbar-links li a.active {
+  color: #ffcc00;
+}
+.pi-navbar-links li a.active::after {
+  width: 100%;
+}
