@@ -203,9 +203,9 @@
   transform: scale(1.1);
 }
 
-.moltec-social-link:has(.whatsapp):hover {
-  background-color: rgba(37, 211, 102, 0.1); /* Verde WhatsApp transparente */
-}
+/* .moltec-social-link:has(.whatsapp):hover {
+  background-color: rgba(37, 211, 102, 0.1); /* Verde WhatsApp transparente 
+} */
 
 /* ============================================
    LÍNEA DIVISORIA

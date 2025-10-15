@@ -152,20 +152,20 @@ const crearHerramienta = async (req, res) => {
       });
     }
 
-    // Verificar si ya existe una herramienta con el mismo nombre
-    const checkQuery = `
-      SELECT COUNT(*) as count 
-      FROM ${TABLE_CONFIG.tableName} 
-      WHERE ${TABLE_CONFIG.fields.nombre} = ? AND inventario_status = 1
-    `;
-    const [existing] = await db.query(checkQuery, [nombre]);
+    // // Verificar si ya existe una herramienta con el mismo nombre
+    // const checkQuery = `
+    //   SELECT COUNT(*) as count 
+    //   FROM ${TABLE_CONFIG.tableName} 
+    //   WHERE ${TABLE_CONFIG.fields.nombre} = ? AND inventario_status = 1
+    // `;
+    // const [existing] = await db.query(checkQuery, [nombre]);
 
-    if (existing[0].count > 0) {
-      return res.status(409).json({
-        success: false,
-        error: "Ya existe una herramienta activa con ese nombre",
-      });
-    }
+    // if (existing[0].count > 0) {
+    //   return res.status(409).json({
+    //     success: false,
+    //     error: "Ya existe una herramienta activa con ese nombre",
+    //   });
+    // }
 
     // Insertar nueva herramienta (inventario_status será 1 por defecto)
     const insertQuery = `

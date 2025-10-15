@@ -190,20 +190,20 @@ const crearMaterial = async (req, res) => {
     }
 
     // Verificar si ya existe un material activo con el mismo nombre
-    const checkQuery = `
-      SELECT COUNT(*) as count 
-      FROM ${TABLE_CONFIG.tableName} 
-      WHERE ${TABLE_CONFIG.fields.nombre} = ? 
-      AND ${TABLE_CONFIG.statusField} = 1
-    `;
-    const [existing] = await db.query(checkQuery, [nombre.trim()]);
+    // const checkQuery = `
+    //   SELECT COUNT(*) as count 
+    //   FROM ${TABLE_CONFIG.tableName} 
+    //   WHERE ${TABLE_CONFIG.fields.nombre} = ? 
+    //   AND ${TABLE_CONFIG.statusField} = 1
+    // `;
+    // const [existing] = await db.query(checkQuery, [nombre.trim()]);
 
-    if (existing[0].count > 0) {
-      return res.status(409).json({
-        success: false,
-        error: "Ya existe un material activo con ese nombre",
-      });
-    }
+    // if (existing[0].count > 0) {
+    //   return res.status(409).json({
+    //     success: false,
+    //     error: "Ya existe un material activo con ese nombre",
+    //   });
+    // }
 
     // Insertar nuevo material
     const insertQuery = `

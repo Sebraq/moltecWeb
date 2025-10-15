@@ -12,24 +12,20 @@ import "./carrusel2.css";
    ============================================ */
 const images = [
   {
-    src: "/image1.jpg",
-    alt: "Proyecto MOLTEC 1 - Construcción residencial",
+    src: "/imagesCarrusel/carrusel1.png",
+    alt: "Proyecto MOLTEC 1",
   },
   {
-    src: "/image2.jpg",
-    alt: "Proyecto MOLTEC 2 - Remodelación comercial",
+    src: "/imagesCarrusel/carrusel2.png",
+    alt: "Proyecto MOLTEC 2 ",
   },
   {
-    src: "/Prueba.webp",
-    alt: "Proyecto MOLTEC 3 - Diseño arquitectónico",
+    src:"/imagesCarrusel/carrusel3.png",
+    alt: "Proyecto MOLTEC 3",
   },
   {
-    src: "/pruebba.jpg",
-    alt: "Proyecto MOLTEC 4 - Obra civil",
-  },
-  {
-    src: "/400px.jpg",
-    alt: "Proyecto MOLTEC 5 - Construcción industrial",
+    src: "/imagesCarrusel/carrusel4.png",
+    alt: "Proyecto MOLTEC 4",
   },
 ];
 
